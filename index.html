@@ -93,14 +93,14 @@
   /* Crisp monochrome fluid form — gradients provide depth without foggy blur. */
   .blob-stage {
     --pointer-x: 0px; --pointer-y: 0px; --tilt-x: 0deg; --tilt-y: 0deg;
-    position: relative; height: 460px; margin-top: 28px; overflow: hidden;
+    position: relative; height: 400px; margin-top: 12px; overflow: hidden;
     perspective: 1000px; isolation: isolate;
   }
   .hero-aura {
-    position: absolute; width: min(720px, 86vw); aspect-ratio: 1; left: 50%; top: 48%;
+    position: absolute; width: min(600px, 78vw); aspect-ratio: 1; left: 50%; top: 46%;
     translate: -50% -50%;
-    background: radial-gradient(circle, rgba(255,255,255,0.08), rgba(255,255,255,0.018) 42%, transparent 70%);
-    opacity: 0.7; pointer-events: none;
+    background: radial-gradient(circle, rgba(255,255,255,0.05), rgba(255,255,255,0.01) 40%, transparent 66%);
+    opacity: 0.45; pointer-events: none;
   }
   .hero-sculpture-wrap {
     position: absolute; inset: 0; display: grid; place-items: center;
@@ -122,9 +122,10 @@
   }
   .blob-stage::after {
     content: ""; position: absolute; inset: 0;
-    background: linear-gradient(to bottom, transparent 68%, var(--bg));
+    background: linear-gradient(to bottom, transparent 60%, var(--bg));
     pointer-events: none; z-index: 2;
   }
+  #portfolio { padding-top: 40px; }
 
   /* ---------- section scaffolding ---------- */
   section { padding: 110px 0; }
@@ -328,7 +329,7 @@
     <h1 class="reveal"><span class="dim">I build</span> small automations <span class="dim">that save you</span> hours every week</h1>
     <p class="sub reveal">Invoices chased, reports built, spreadsheets cleaned and follow-ups sent — the repetitive stuff. I'm a self-taught builder from South Africa, and everything on this page is based on practical systems I've built myself.</p>
     <div class="cta reveal">
-      <a class="btn" href="#contact">Tell me your boring task <span class="arr">↗</span></a>
+      <a class="btn contact-trigger" href="#contact" data-service="Automation project">Tell me your boring task <span class="arr">↗</span></a>
     </div>
   </div>
   <div class="blob-stage" id="heroVisual" aria-hidden="true">
@@ -348,7 +349,7 @@
       <p class="sub">No client logos to show yet — these are personal projects I built to solve my own problems. They run daily. Your project gets the same treatment.</p>
     </div>
     <div class="projects">
-      <a class="project reveal" href="#contact">
+      <a class="project reveal contact-trigger" href="#contact" data-service="Automated invoice reminders">
         <div class="shot">
           <div class="pipeflow">
             <div class="row"><span class="node">📄 invoice list</span><span class="a">→</span><span class="node">check due dates</span></div>
@@ -368,7 +369,7 @@
         </div>
         <div class="cap"><h3>Live data dashboard</h3><span class="year">personal project</span></div>
       </a>
-      <a class="project reveal" href="#contact">
+      <a class="project reveal contact-trigger" href="#contact" data-service="Automated report generator">
         <div class="shot">
           <div class="pipeflow">
             <div class="row"><span class="node">📊 list of items</span><span class="a">→</span><span class="node">fetch details</span></div>
@@ -377,14 +378,15 @@
         </div>
         <div class="cap"><h3>Automated report generator</h3><span class="year">personal project</span></div>
       </a>
-      <a class="project reveal" href="#contact">
+      <a class="project reveal contact-trigger" href="#contact" data-service="Appointment reminders">
         <div class="shot">
           <div class="pipeflow">
-            <div class="row"><span class="node">📅 content queue</span><span class="a">→</span><span class="node">per-platform metadata</span></div>
-            <div class="row"><span class="a">→</span><span class="node">staggered timing</span><span class="a">→</span><span class="node ok">auto-publish ✓</span></div>
+            <div class="row"><span class="node">📅 bookings list</span><span class="a">→</span><span class="node">check tomorrow</span></div>
+            <div class="row"><span class="a">→</span><span class="node">personalise message</span><span class="a">→</span><span class="node">send day before</span></div>
+            <div class="row"><span class="a">→</span><span class="node ok">fewer no-shows ✓</span></div>
           </div>
         </div>
-        <div class="cap"><h3>Social scheduling — posts itself</h3><span class="year">runs daily</span></div>
+        <div class="cap"><h3>Appointment reminders</h3><span class="year">workflow demo</span></div>
       </a>
     </div>
   </div>
@@ -416,7 +418,7 @@
 
     <div class="marquee-wrap reveal">
       <div class="marquee" id="marquee">
-        <span><b>Invoice Reminders</b></span><span>Weekly Reports</span><span><b>Spreadsheet Cleanup</b></span><span>Appointment Reminders</span><span><b>Quote Generation</b></span><span>Social Scheduling</span><span><b>Review Requests</b></span><span>Email Filing</span><span><b>Data Transfers</b></span><span>Data Entry</span>
+        <span><b>Invoice Reminders</b></span><span>Weekly Reports</span><span><b>Spreadsheet Cleanup</b></span><span>Appointment Reminders</span><span><b>Quote Generation</b></span><span>Booking Confirmations</span><span><b>Review Requests</b></span><span>Email Filing</span><span><b>Data Transfers</b></span><span>Data Entry</span>
       </div>
     </div>
   </div>
@@ -454,7 +456,7 @@
     <div class="sec-head reveal">
       <span class="pill">Services</span>
       <h2>What I can <span class="dim">build for</span> you</h2>
-      <p class="sub">Fixed prices, quoted before we start. These are starter rates — I'm building a reputation, and you get the deal. For small businesses, streamers, creators and podcasters, anywhere in the world.</p>
+      <p class="sub">Fixed prices, quoted before we start. These are starter rates — I'm building a reputation, and you get the deal. Built for small businesses and small teams, anywhere in the world.</p>
     </div>
     <div class="cards3">
       <a class="scard reveal contact-trigger" href="#contact" data-service="Admin automation">
@@ -543,7 +545,7 @@
     <label for="requestName">Your name</label><input id="requestName" autocomplete="name" placeholder="Your name">
     <label for="requestService">What do you need?</label><input id="requestService" placeholder="e.g. invoice reminders">
     <label for="requestDetails">A few details</label><textarea id="requestDetails" placeholder="What do you do manually now, and what should happen automatically?"></textarea>
-    <div class="dialog-actions"><button class="btn solid" type="button" id="copyRequest">Copy request</button><button class="btn" type="button" id="copyEmail">Copy email address</button></div>
+    <div class="dialog-actions"><button class="btn solid" type="button" id="openEmail">Open email</button><button class="btn" type="button" id="copyRequest">Copy request</button><button class="btn" type="button" id="copyEmail">Copy email</button></div>
     <p class="dialog-status" id="dialogStatus" aria-live="polite"></p>
   </div>
 </div>
@@ -553,7 +555,7 @@
     <div class="foot">
       <div>
         <a class="brand" href="#top"><span class="avatar"></span>Dana Theron</a>
-        <p class="tag">I automate repetitive work for creators and small businesses. Based in South Africa, working anywhere.</p>
+        <p class="tag">I automate repetitive admin for small businesses. Based in South Africa, working anywhere.</p>
         <a class="mail" href="mailto:therondana65@gmail.com">therondana65@gmail.com</a>
       </div>
       <div class="cols">
@@ -642,9 +644,24 @@
   dialog.querySelector('.dialog-close').addEventListener('click', closeDialog);
   dialog.addEventListener('click', event => { if (event.target === dialog) closeDialog(); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape') closeDialog(); });
+  const buildMessage = () => {
+    const name = document.getElementById('requestName').value.trim();
+    const service = serviceInput.value.trim() || 'Automation project';
+    const details = document.getElementById('requestDetails').value.trim();
+    return {
+      service,
+      body: `Hi Dana,\n\nName: ${name || 'Not provided'}\nProject: ${service}\n\n${details || 'I would like to discuss an automation project.'}`
+    };
+  };
+  document.getElementById('openEmail').addEventListener('click', () => {
+    const { service, body } = buildMessage();
+    const subject = `Automation enquiry: ${service}`;
+    window.location.href = `mailto:therondana65@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    status.textContent = 'Opening your email app… if nothing happens, use Copy request instead.';
+  });
   document.getElementById('copyEmail').addEventListener('click', async () => {
-    await navigator.clipboard.writeText('therondana65@gmail.com');
-    status.textContent = 'Email address copied.';
+    try { await navigator.clipboard.writeText('therondana65@gmail.com'); status.textContent = 'Email address copied.'; }
+    catch { status.textContent = 'Email: therondana65@gmail.com'; }
   });
   document.getElementById('copyRequest').addEventListener('click', async () => {
     const name = document.getElementById('requestName').value.trim();
