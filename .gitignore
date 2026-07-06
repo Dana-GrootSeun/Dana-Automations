@@ -7,3 +7,4 @@ __pycache__/
 .codex-work/
 outputs/
 *.inspect.ndjson
+.codex-chrome*/

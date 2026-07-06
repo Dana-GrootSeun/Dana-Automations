@@ -11,7 +11,7 @@ Invoices chased. Reports built. Spreadsheets cleaned. Follow-ups sent.
 [![Tests](https://img.shields.io/badge/TESTS-4_PASSING-16A34A?style=for-the-badge&logo=checkmarx&logoColor=white)](tests/)
 [![Cloudflare](https://img.shields.io/badge/DEPLOYED-CLOUDFLARE-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://workers.cloudflare.com/)
 
-[Website](https://dana-automates.therondana65.workers.dev) · [Automation Guide](automations/README.md) · [Excel Demo](examples/dana-automates-business-demo.xlsx) · [Source Code](automations/) · [Contact](mailto:therondana65@gmail.com)
+[Website](https://dana-automates.therondana65.workers.dev) · [Web Dashboard](dashboard.html) · [Automation Guide](automations/README.md) · [Source Code](automations/) · [Contact](mailto:therondana65@gmail.com)
 
 </div>
 
@@ -24,14 +24,14 @@ The goal is simple: **turn a task someone repeats every week into a reliable wor
 ## Showcase
 
 <p align="center">
-  <a href="examples/dana-automates-business-demo.xlsx">
-    <img src="assets/business-dashboard.png" alt="Dana Automates business dashboard" width="100%">
+  <a href="dashboard.html">
+    <img src="assets/dashboard-web.png" alt="Dana Automates responsive web business dashboard" width="100%">
   </a>
 </p>
 
-The Excel demo represents an honest starter business: **8 clients, 6 active clients and R10,800 in sample revenue**. Its formulas, charts, status controls and conditional highlighting update from the underlying invoice, customer and sales sheets.
+The responsive web dashboard represents an honest starter business: **8 clients, 6 active clients and R10,800 in sample revenue**. It includes period switching, client search, CSV export, accessible chart summaries, an invoice pipeline and recent automation activity.
 
-> **[Download the interactive Excel workbook →](examples/dana-automates-business-demo.xlsx)**
+> **[Open the professional web dashboard →](dashboard.html)**
 
 ## Why Dana Automates
 
@@ -117,10 +117,11 @@ Dana-Automations/
 │   ├── invoice_reminders.py
 │   ├── spreadsheet_cleanup.py
 │   └── weekly_report.py
-├── assets/                       # README showcase images
-├── examples/                     # Sample CSVs + interactive Excel workbook
+├── assets/                       # README and dashboard showcase images
+├── examples/                     # Safe sample data
 ├── tests/                        # Automated behaviour tests
 ├── index.html                    # Live portfolio website
+├── dashboard.html                # Responsive business dashboard
 ├── _headers                      # Cloudflare security headers
 └── README.md
 ```
