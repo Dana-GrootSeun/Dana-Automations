@@ -91,36 +91,39 @@
   .hero .cta { margin-top: 36px; }
 
   /* Crisp monochrome fluid form — gradients provide depth without foggy blur. */
-  .blob-stage { position: relative; height: 420px; margin-top: 40px; overflow: hidden; }
-  .blob {
-    position: absolute; left: 50%; top: 55%; transform: translate(-50%, -50%);
-    width: 640px; height: 640px; border-radius: 50%;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.13), transparent 45%),
-      radial-gradient(circle at 70% 60%, rgba(255,255,255,0.06), transparent 50%),
-      conic-gradient(from 120deg, #050505, #2e2e2e 25%, #090909 45%, #3a3a3a 70%, #050505);
-    filter: saturate(0) contrast(1.18);
-    animation: swirl 26s linear infinite;
+  .blob-stage {
+    --pointer-x: 0px; --pointer-y: 0px; --tilt-x: 0deg; --tilt-y: 0deg;
+    position: relative; height: 460px; margin-top: 28px; overflow: hidden;
+    perspective: 1000px; isolation: isolate;
   }
-  .blob.b2 {
-    width: 380px; height: 380px; filter: saturate(0) contrast(1.15);
-    background: conic-gradient(from 300deg, #000, #4a4a4a 30%, #000 55%, #333 80%, #000);
-    animation-duration: 18s; animation-direction: reverse; opacity: 0.55;
+  .hero-aura {
+    position: absolute; width: min(720px, 86vw); aspect-ratio: 1; left: 50%; top: 48%;
+    translate: -50% -50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08), rgba(255,255,255,0.018) 42%, transparent 70%);
+    opacity: 0.7; pointer-events: none;
   }
-  @keyframes swirl { to { transform: translate(-50%, -50%) rotate(360deg); } }
+  .hero-sculpture-wrap {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    transform: translate3d(var(--pointer-x), var(--pointer-y), 0) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    transform-style: preserve-3d; transition: transform 260ms cubic-bezier(.2,.8,.2,1); will-change: transform;
+  }
+  .hero-sculpture {
+    display: block; width: min(900px, 94vw); height: auto; object-fit: contain;
+    user-select: none; pointer-events: none; animation: sculpture-float 7s ease-in-out infinite;
+  }
+  .hero-specular {
+    position: absolute; inset: 14% 24%;
+    background: radial-gradient(circle at var(--shine-x, 58%) var(--shine-y, 38%), rgba(255,255,255,0.12), transparent 20%);
+    mix-blend-mode: screen; opacity: 0.55; pointer-events: none;
+  }
+  @keyframes sculpture-float {
+    0%, 100% { transform: translate3d(0, 3px, 0) scale(1); }
+    50% { transform: translate3d(0, -9px, 0) scale(1.012); }
+  }
   .blob-stage::after {
     content: ""; position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 60% 70% at 50% 50%, transparent 40%, rgba(0,0,0,0.55)),
-      linear-gradient(to bottom, transparent 50%, var(--bg));
-  }
-  .blob-stage {
-    background: url("assets/hero-sculpture.png") center / min(900px, 92vw) auto no-repeat;
-  }
-  .blob-stage .blob { display: none; }
-  .blob-stage::after {
     background: linear-gradient(to bottom, transparent 68%, var(--bg));
-    pointer-events: none;
+    pointer-events: none; z-index: 2;
   }
 
   /* ---------- section scaffolding ---------- */
@@ -295,8 +298,13 @@
     nav .links a:not(:last-child) { display: none; }
     section { padding: 80px 0; }
     .hero { padding-top: 80px; }
-    .blob-stage { height: 300px; }
-    .blob { width: 420px; height: 420px; }
+    .blob-stage { height: 320px; margin-top: 22px; }
+    .hero-sculpture { width: min(720px, 108vw); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero-sculpture { animation: none; }
+    .hero-sculpture-wrap { transform: none; transition: none; }
   }
 </style>
 </head>
@@ -323,9 +331,12 @@
       <a class="btn" href="#contact">Tell me your boring task <span class="arr">↗</span></a>
     </div>
   </div>
-  <div class="blob-stage">
-    <div class="blob"></div>
-    <div class="blob b2"></div>
+  <div class="blob-stage" id="heroVisual" aria-hidden="true">
+    <div class="hero-aura"></div>
+    <div class="hero-sculpture-wrap">
+      <img class="hero-sculpture" src="assets/hero-sculpture.png" alt="" width="1536" height="1024" decoding="async">
+      <div class="hero-specular"></div>
+    </div>
   </div>
 </header>
 
@@ -572,6 +583,34 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Metallic hero depth: gentle pointer parallax, disabled for touch and reduced motion.
+  const heroVisual = document.getElementById('heroVisual');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let heroFrame;
+  const resetHero = () => {
+    heroVisual.style.setProperty('--pointer-x', '0px');
+    heroVisual.style.setProperty('--pointer-y', '0px');
+    heroVisual.style.setProperty('--tilt-x', '0deg');
+    heroVisual.style.setProperty('--tilt-y', '0deg');
+  };
+  heroVisual.addEventListener('pointermove', event => {
+    if (reducedMotion.matches || event.pointerType === 'touch') return;
+    cancelAnimationFrame(heroFrame);
+    heroFrame = requestAnimationFrame(() => {
+      const rect = heroVisual.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      heroVisual.style.setProperty('--pointer-x', `${x * 14}px`);
+      heroVisual.style.setProperty('--pointer-y', `${y * 9}px`);
+      heroVisual.style.setProperty('--tilt-x', `${y * -2.2}deg`);
+      heroVisual.style.setProperty('--tilt-y', `${x * 2.8}deg`);
+      heroVisual.style.setProperty('--shine-x', `${50 + x * 22}%`);
+      heroVisual.style.setProperty('--shine-y', `${42 + y * 18}%`);
+    });
+  });
+  heroVisual.addEventListener('pointerleave', resetHero);
+  reducedMotion.addEventListener?.('change', resetHero);
 
   // duplicate marquee content for seamless loop
   const mq = document.getElementById('marquee');
