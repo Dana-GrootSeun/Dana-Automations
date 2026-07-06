@@ -273,7 +273,8 @@
   .contact-dialog input, .contact-dialog textarea { width: 100%; background: #090909; color: var(--white); border: 1px solid var(--border-strong); border-radius: 10px; padding: 12px 14px; font: inherit; }
   .contact-dialog textarea { min-height: 110px; resize: vertical; }
   .dialog-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-  .dialog-status { min-height: 22px; color: #3ddc84 !important; margin: 12px 0 0 !important; font-size: 13px; }
+  .dialog-status { min-height: 22px; color: #3ddc84; margin: 12px 0 0 !important; font-size: 13px; }
+  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
   /* ---------- footer ---------- */
   footer { border-top: 1px solid var(--border); padding: 64px 0 40px; }
@@ -543,9 +544,11 @@
     <div class="dialog-head"><h3 id="dialogTitle">Start a project</h3><button class="dialog-close" type="button" aria-label="Close">×</button></div>
     <p>Tell me what repetitive task you want off your plate.</p>
     <label for="requestName">Your name</label><input id="requestName" autocomplete="name" placeholder="Your name">
+    <label for="requestEmail">Your email</label><input id="requestEmail" type="email" autocomplete="email" placeholder="you@business.com">
     <label for="requestService">What do you need?</label><input id="requestService" placeholder="e.g. invoice reminders">
     <label for="requestDetails">A few details</label><textarea id="requestDetails" placeholder="What do you do manually now, and what should happen automatically?"></textarea>
-    <div class="dialog-actions"><button class="btn solid" type="button" id="openEmail">Open email</button><button class="btn" type="button" id="copyRequest">Copy request</button><button class="btn" type="button" id="copyEmail">Copy email</button></div>
+    <input id="requestCompany" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Company">
+    <div class="dialog-actions"><button class="btn solid" type="button" id="sendRequest">Send request</button><button class="btn" type="button" id="openEmail">Open email instead</button></div>
     <p class="dialog-status" id="dialogStatus" aria-live="polite"></p>
   </div>
 </div>
@@ -644,32 +647,47 @@
   dialog.querySelector('.dialog-close').addEventListener('click', closeDialog);
   dialog.addEventListener('click', event => { if (event.target === dialog) closeDialog(); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape') closeDialog(); });
-  const buildMessage = () => {
-    const name = document.getElementById('requestName').value.trim();
-    const service = serviceInput.value.trim() || 'Automation project';
-    const details = document.getElementById('requestDetails').value.trim();
-    return {
-      service,
-      body: `Hi Dana,\n\nName: ${name || 'Not provided'}\nProject: ${service}\n\n${details || 'I would like to discuss an automation project.'}`
-    };
-  };
+  const LEAD_ENDPOINT = 'https://kcgfunowuvfovknqkmuc.supabase.co/functions/v1/submit-lead';
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const fields = () => ({
+    name: document.getElementById('requestName').value.trim(),
+    email: document.getElementById('requestEmail').value.trim(),
+    service: serviceInput.value.trim() || 'Automation project',
+    details: document.getElementById('requestDetails').value.trim(),
+    company: document.getElementById('requestCompany').value.trim(), // honeypot
+  });
+  const setStatus = (msg, ok) => { status.style.color = ok === false ? '#ff8f8f' : (ok ? '#3ddc84' : ''); status.textContent = msg; };
+
+  const sendBtn = document.getElementById('sendRequest');
+  sendBtn.addEventListener('click', async () => {
+    const f = fields();
+    if (!EMAIL_RE.test(f.email)) { setStatus('Please enter a valid email so I can reply.', false); return; }
+    if (f.details.length < 5) { setStatus('Add a line or two about the task.', false); return; }
+    sendBtn.disabled = true; setStatus('Sending…');
+    try {
+      const res = await fetch(LEAD_ENDPOINT, {
+        method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(f),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        setStatus("Got it — I'll reply within 24 hours. Thanks!", true);
+        ['requestName', 'requestEmail', 'requestDetails'].forEach(id => { document.getElementById(id).value = ''; });
+      } else {
+        setStatus(data.error || 'Something went wrong. Try “Open email instead”.', false);
+      }
+    } catch {
+      setStatus('Network issue — please use “Open email instead”.', false);
+    } finally {
+      sendBtn.disabled = false;
+    }
+  });
+
   document.getElementById('openEmail').addEventListener('click', () => {
-    const { service, body } = buildMessage();
-    const subject = `Automation enquiry: ${service}`;
+    const f = fields();
+    const subject = `Automation enquiry: ${f.service}`;
+    const body = `Hi Dana,\n\nName: ${f.name || 'Not provided'}\nEmail: ${f.email || 'Not provided'}\nProject: ${f.service}\n\n${f.details || 'I would like to discuss an automation project.'}`;
     window.location.href = `mailto:therondana65@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    status.textContent = 'Opening your email app… if nothing happens, use Copy request instead.';
-  });
-  document.getElementById('copyEmail').addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText('therondana65@gmail.com'); status.textContent = 'Email address copied.'; }
-    catch { status.textContent = 'Email: therondana65@gmail.com'; }
-  });
-  document.getElementById('copyRequest').addEventListener('click', async () => {
-    const name = document.getElementById('requestName').value.trim();
-    const service = serviceInput.value.trim();
-    const details = document.getElementById('requestDetails').value.trim();
-    const message = `Hi Dana,\n\nName: ${name || 'Not provided'}\nProject: ${service || 'Automation project'}\n\n${details || 'I would like to discuss an automation project.'}`;
-    await navigator.clipboard.writeText(message);
-    status.textContent = 'Request copied — paste it into an email to therondana65@gmail.com';
+    setStatus('Opening your email app…');
   });
 </script>
 
