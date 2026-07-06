@@ -37,6 +37,18 @@ The website is intentionally lightweight: one fast, responsive page with no fram
 - Security headers for production hosting
 - Zero-build deployment on Cloudflare
 
+## Real automation code
+
+This repository includes three working Python examples—not just website mockups:
+
+| Automation | Business outcome | Code |
+|---|---|---|
+| Invoice reminders | Finds overdue unpaid invoices and prepares personalised messages | [`invoice_reminders.py`](automations/invoice_reminders.py) |
+| Spreadsheet cleanup | Cleans customer data and removes duplicate records | [`spreadsheet_cleanup.py`](automations/spreadsheet_cleanup.py) |
+| Weekly reporting | Calculates revenue, order volume, average value and top category | [`weekly_report.py`](automations/weekly_report.py) |
+
+Each example includes sample data and automated tests. See the **[automation guide](automations/README.md)** for commands, customization options and the production delivery approach.
+
 ## Technology
 
 | Area | Tools |
@@ -50,6 +62,9 @@ The website is intentionally lightweight: one fast, responsive page with no fram
 
 ```text
 .
+├── automations/ # Working Python automation examples
+├── examples/    # Safe sample CSV data
+├── tests/       # Automated behaviour tests
 ├── index.html   # Website, styling and interactions
 ├── _headers     # Cloudflare security and cache headers
 └── README.md    # Project documentation

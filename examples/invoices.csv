@@ -1,0 +1,4 @@
+customer,email,invoice,amount,due_date,status
+Mokoena Repairs,accounts@example.com,INV-1001,1250,2026-06-20,unpaid
+Northside Salon,owner@example.com,INV-1002,700,2026-08-01,unpaid
+Cape Fitness,admin@example.com,INV-1003,900,2026-06-15,paid
