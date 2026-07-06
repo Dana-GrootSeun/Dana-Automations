@@ -4,3 +4,6 @@ Thumbs.db
 output/
 __pycache__/
 *.pyc
+.codex-work/
+outputs/
+*.inspect.ndjson

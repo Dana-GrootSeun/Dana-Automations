@@ -41,6 +41,12 @@ The website is intentionally lightweight: one fast, responsive page with no fram
 
 This repository includes three working Python examples—not just website mockups:
 
+### Download the realistic business workbook
+
+[![Download Excel Demo](https://img.shields.io/badge/Excel-Business_Automation_Demo-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white)](examples/dana-automates-business-demo.xlsx)
+
+The workbook contains a formula-driven business dashboard, invoice tracker, customer CRM export and three-month sales log. It includes realistic sample businesses, editable statuses, conditional highlighting, KPI cards and charts.
+
 | Automation | Business outcome | Code |
 |---|---|---|
 | Invoice reminders | Finds overdue unpaid invoices and prepares personalised messages | [`invoice_reminders.py`](automations/invoice_reminders.py) |
@@ -63,7 +69,7 @@ Each example includes sample data and automated tests. See the **[automation gui
 ```text
 .
 ├── automations/ # Working Python automation examples
-├── examples/    # Safe sample CSV data
+├── examples/    # Safe sample CSV data and polished Excel demo
 ├── tests/       # Automated behaviour tests
 ├── index.html   # Website, styling and interactions
 ├── _headers     # Cloudflare security and cache headers
