@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dana Theron — I Automate Boring Work</title>
+<meta name="description" content="I build small automations that save small businesses real hours — invoice reminders, reports, spreadsheets and admin workflows. Based in South Africa, working anywhere.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000000;
+    --card: #101010;
+    --card-2: #161616;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.16);
+    --white: #f5f5f5;
+    --gray: #8a8a8a;
+    --gray-dim: #5c5c5c;
+    --mono: "Cascadia Code", Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  ::selection { background: rgba(255,255,255,0.2); }
+
+  /* ---------- reveal animation ---------- */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white); font-weight: 600; font-size: 15px; }
+  .brand .avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: conic-gradient(from 210deg, #2a2a2a, #666, #1a1a1a, #4a4a4a, #2a2a2a);
+    border: 1px solid var(--border-strong);
+  }
+  nav .links { display: flex; align-items: center; gap: 28px; }
+  nav .links a { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.25s; }
+  nav .links a:hover { color: var(--white); }
+
+  /* ---------- pill badge ---------- */
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #141414; border: 1px solid var(--border);
+    color: var(--white); font-size: 13px; font-weight: 500;
+    padding: 7px 16px; border-radius: 99px;
+  }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 8px #3ddc84; }
+
+  /* ---------- pill button ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--border-strong); border-radius: 99px;
+    color: var(--white); text-decoration: none;
+    font-size: 15px; font-weight: 500;
+    padding: 12px 26px;
+    transition: background 0.25s, border-color 0.25s, transform 0.25s;
+    background: rgba(255,255,255,0.02);
+  }
+  .btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); transform: translateY(-1px); }
+  .btn .arr { font-size: 13px; transition: transform 0.25s; }
+  .btn:hover .arr { transform: translate(2px, -2px); }
+  .btn.solid { background: var(--white); color: #000; border-color: var(--white); }
+  .btn.solid:hover { background: #ddd; }
+
+  /* ---------- two-tone headings ---------- */
+  h1, h2 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.12; }
+  .dim { color: var(--gray); }
+
+  /* ---------- hero ---------- */
+  .hero { text-align: center; padding: 110px 0 0; position: relative; }
+  .hero h1 { font-size: clamp(40px, 6.5vw, 72px); max-width: 900px; margin: 28px auto 0; }
+  .hero .sub { color: var(--gray); font-size: 17px; max-width: 560px; margin: 22px auto 0; }
+  .hero .cta { margin-top: 36px; }
+
+  /* CSS stand-in for Proxio's 3D render: blurred monochrome fluid blob */
+  .blob-stage { position: relative; height: 420px; margin-top: 40px; overflow: hidden; }
+  .blob {
+    position: absolute; left: 50%; top: 55%; transform: translate(-50%, -50%);
+    width: 640px; height: 640px; border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.13), transparent 45%),
+      radial-gradient(circle at 70% 60%, rgba(255,255,255,0.06), transparent 50%),
+      conic-gradient(from 120deg, #050505, #2e2e2e 25%, #090909 45%, #3a3a3a 70%, #050505);
+    filter: blur(36px) saturate(0);
+    animation: swirl 26s linear infinite;
+  }
+  .blob.b2 {
+    width: 380px; height: 380px; filter: blur(28px);
+    background: conic-gradient(from 300deg, #000, #4a4a4a 30%, #000 55%, #333 80%, #000);
+    animation-duration: 18s; animation-direction: reverse; opacity: 0.8;
+  }
+  @keyframes swirl { to { transform: translate(-50%, -50%) rotate(360deg); } }
+  .blob-stage::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 50% 50%, transparent 40%, rgba(0,0,0,0.55)),
+      linear-gradient(to bottom, transparent 50%, var(--bg));
+  }
+
+  /* ---------- section scaffolding ---------- */
+  section { padding: 110px 0; }
+  .sec-head { text-align: center; margin-bottom: 64px; }
+  .sec-head h2 { font-size: clamp(30px, 4.4vw, 48px); margin-top: 22px; }
+  .sec-head .sub { color: var(--gray); font-size: 16px; max-width: 520px; margin: 18px auto 0; }
+
+  /* ---------- portfolio cards ---------- */
+  .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 32px; }
+  .project { text-decoration: none; color: var(--white); display: block; }
+  .shot {
+    background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+    height: 320px; display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+    transition: transform 0.35s ease, border-color 0.35s;
+  }
+  .project:hover .shot { transform: translateY(-4px); border-color: var(--border-strong); }
+  .shot .pipeflow {
+    font-family: var(--mono); font-size: 13px; color: var(--gray);
+    display: flex; flex-direction: column; gap: 14px; align-items: flex-start; padding: 0 36px;
+  }
+  .pipeflow .row { display: flex; align-items: center; gap: 10px; }
+  .pipeflow .node {
+    background: var(--card-2); border: 1px solid var(--border);
+    padding: 6px 14px; border-radius: 8px; color: #cfcfcf; white-space: nowrap;
+  }
+  .pipeflow .a { color: var(--gray-dim); }
+  .pipeflow .ok { color: #3ddc84; }
+  .cap { display: flex; align-items: baseline; gap: 14px; margin-top: 18px; }
+  .cap h3 { font-size: 17px; font-weight: 600; }
+  .cap .year { color: var(--gray-dim); font-size: 14px; }
+
+  /* ---------- about ---------- */
+  .about { display: grid; grid-template-columns: 380px 1fr; gap: 64px; align-items: center; }
+  .portrait {
+    height: 440px; border-radius: 20px; border: 1px solid var(--border);
+    background:
+      radial-gradient(circle at 50% 30%, rgba(255,255,255,0.14), transparent 55%),
+      linear-gradient(160deg, #161616, #060606);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); color: var(--gray-dim); font-size: 13px;
+    position: relative; overflow: hidden;
+  }
+  .portrait .term {
+    background: rgba(0,0,0,0.55); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 22px; line-height: 2;
+    color: #aaa; background: rgba(0,0,0,0.82); border-color: rgba(255,255,255,0.16);
+  }
+  .portrait .term .p { color: #3ddc84; }
+  .about h2 { font-size: clamp(28px, 3.6vw, 42px); }
+  .about .bio { color: var(--gray); font-size: 15px; margin-top: 18px; max-width: 480px; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 24px; margin-top: 44px; }
+  .stat .lbl { color: var(--gray); font-size: 13px; }
+  .stat .num { font-size: clamp(34px, 4vw, 46px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; }
+
+  /* ---------- marquee ---------- */
+  .marquee-wrap {
+    border: 1px solid var(--border); border-radius: 99px;
+    overflow: hidden; padding: 18px 0; margin-top: 96px;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+  .marquee { display: flex; gap: 56px; width: max-content; animation: slide 28s linear infinite; }
+  .marquee span { color: var(--gray); font-size: 15px; font-weight: 500; white-space: nowrap; }
+  .marquee span b { color: var(--white); font-weight: 500; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* ---------- process rows (career style) ---------- */
+  .rows { border-top: 1px solid var(--border); }
+  .row2 {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px;
+    padding: 44px 0; border-bottom: 1px solid var(--border);
+  }
+  .row2 .left { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .row2 h3 { font-size: 19px; font-weight: 600; }
+  .row2 .when { color: var(--gray-dim); font-size: 14px; }
+  .row2 p { color: var(--gray); font-size: 15px; }
+
+  /* ---------- services cards ---------- */
+  .cards3 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .scard {
+    background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+    padding: 34px 30px; transition: transform 0.3s, border-color 0.3s;
+  }
+  .scard:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+  .scard { color: inherit; text-decoration: none; }
+  .scard:focus-visible, .btn:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+  .scard .ico {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: var(--card-2); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+    margin-bottom: 22px;
+  }
+  .scard h3 { font-size: 17px; font-weight: 600; margin-bottom: 10px; }
+  .scard p { color: var(--gray); font-size: 14px; }
+  .scard .price { font-family: var(--mono); font-size: 13px; color: var(--gray-dim); margin-top: 20px; }
+  .center-cta { text-align: center; margin-top: 56px; }
+
+  /* ---------- FAQ ---------- */
+  .faq { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .qa {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    overflow: hidden; transition: border-color 0.3s;
+  }
+  .qa:hover { border-color: var(--border-strong); }
+  .qa button {
+    width: 100%; background: none; border: none; color: var(--white);
+    font-family: inherit; font-size: 15px; font-weight: 600; text-align: left;
+    padding: 22px 24px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  .qa .chev { color: var(--gray); transition: transform 0.3s; flex-shrink: 0; }
+  .qa.open .chev { transform: rotate(180deg); }
+  .qa .ans { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .qa.open .ans { max-height: 260px; }
+  .qa .ans p { color: var(--gray); font-size: 14px; padding: 0 24px 22px; }
+
+  /* ---------- contact ---------- */
+  .contact { position: relative; text-align: center; padding: 150px 0; overflow: hidden; }
+  .contact .fluid {
+    position: absolute; inset: -20% -10%;
+    background:
+      radial-gradient(ellipse 60% 40% at 25% 40%, rgba(255,255,255,0.08), transparent),
+      radial-gradient(ellipse 50% 35% at 75% 60%, rgba(255,255,255,0.06), transparent),
+      radial-gradient(ellipse 70% 30% at 50% 50%, rgba(255,255,255,0.05), transparent);
+    filter: blur(2px);
+    animation: drift 20s ease-in-out infinite alternate;
+  }
+  @keyframes drift { to { transform: translateX(4%) scale(1.06); } }
+  .contact .inner { position: relative; }
+  .contact h2 { font-size: clamp(34px, 5vw, 56px); margin-top: 24px; }
+  .contact .sub { color: var(--gray); margin: 16px 0 36px; }
+  .contact .alt { margin-top: 26px; color: var(--gray); font-size: 14px; }
+  .contact .alt a { color: var(--white); }
+
+  /* ---------- contact dialog ---------- */
+  .dialog-backdrop { position: fixed; inset: 0; z-index: 100; display: none; place-items: center; padding: 20px; background: rgba(0,0,0,.82); }
+  .dialog-backdrop.open { display: grid; }
+  .contact-dialog { width: min(520px, 100%); background: #111; border: 1px solid var(--border-strong); border-radius: 22px; padding: 28px; box-shadow: 0 24px 90px #000; }
+  .dialog-head { display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+  .dialog-head h3 { font-size: 22px; }
+  .dialog-close { border: 1px solid var(--border); background: #191919; color: var(--white); width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 20px; }
+  .contact-dialog p { color: var(--gray); margin: 12px 0 22px; }
+  .contact-dialog label { display: block; color: var(--gray); font-size: 13px; margin: 14px 0 6px; }
+  .contact-dialog input, .contact-dialog textarea { width: 100%; background: #090909; color: var(--white); border: 1px solid var(--border-strong); border-radius: 10px; padding: 12px 14px; font: inherit; }
+  .contact-dialog textarea { min-height: 110px; resize: vertical; }
+  .dialog-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  .dialog-status { min-height: 22px; color: #3ddc84 !important; margin: 12px 0 0 !important; font-size: 13px; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--border); padding: 64px 0 40px; }
+  .foot { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+  .foot .tag { color: var(--gray); font-size: 14px; margin-top: 14px; max-width: 240px; }
+  .foot .mail { color: var(--gray); font-size: 14px; margin-top: 22px; display: block; text-decoration: none; }
+  .foot .mail:hover { color: var(--white); }
+  .foot .cols { display: flex; gap: 72px; }
+  .foot .col { display: flex; flex-direction: column; gap: 12px; }
+  .foot .col a { color: var(--gray); text-decoration: none; font-size: 14px; transition: color 0.25s; }
+  .foot .col a:hover { color: var(--white); }
+  .legal {
+    margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--border);
+    color: var(--gray-dim); font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px) {
+    .projects, .cards3 { grid-template-columns: 1fr; }
+    .about { grid-template-columns: 1fr; gap: 40px; }
+    .portrait { height: 340px; }
+    .row2 { grid-template-columns: 1fr; gap: 10px; padding: 34px 0; }
+    nav .links a:not(:last-child) { display: none; }
+    section { padding: 80px 0; }
+    .hero { padding-top: 80px; }
+    .blob-stage { height: 300px; }
+    .blob { width: 420px; height: 420px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="avatar"></span>Dana Theron</a>
+    <div class="links">
+      <a href="#portfolio">Portfolio</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="pill reveal"><span class="dot"></span>Hello, I'm Dana &nbsp;👋</span>
+    <h1 class="reveal"><span class="dim">I build</span> small automations <span class="dim">that save you</span> hours every week</h1>
+    <p class="sub reveal">Invoices chased, reports built, spreadsheets cleaned and follow-ups sent — the repetitive stuff. I'm a self-taught builder from South Africa, and everything on this page is based on practical systems I've built myself.</p>
+    <div class="cta reveal">
+      <a class="btn" href="#contact">Tell me your boring task <span class="arr">↗</span></a>
+    </div>
+  </div>
+  <div class="blob-stage">
+    <div class="blob"></div>
+    <div class="blob b2"></div>
+  </div>
+</header>
+
+<section id="portfolio">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill">Portfolio</span>
+      <h2><span class="dim">Things I've</span> Actually Built</h2>
+      <p class="sub">No client logos to show yet — these are personal projects I built to solve my own problems. They run daily. Your project gets the same treatment.</p>
+    </div>
+    <div class="projects">
+      <a class="project reveal" href="#contact">
+        <div class="shot">
+          <div class="pipeflow">
+            <div class="row"><span class="node">📄 invoice list</span><span class="a">→</span><span class="node">check due dates</span></div>
+            <div class="row"><span class="a">→</span><span class="node">find unpaid items</span><span class="a">→</span><span class="node">personalise email</span></div>
+            <div class="row"><span class="a">→</span><span class="node ok">reminders sent ✓</span></div>
+          </div>
+        </div>
+        <div class="cap"><h3>Automated invoice reminders</h3><span class="year">workflow demo</span></div>
+      </a>
+      <a class="project reveal" href="#contact">
+        <div class="shot">
+          <div class="pipeflow">
+            <div class="row"><span class="node">📈 data feed (API)</span><span class="a">→</span><span class="node">filter + score</span></div>
+            <div class="row"><span class="a">→</span><span class="node">save history</span><span class="a">→</span><span class="node">refresh on schedule</span></div>
+            <div class="row"><span class="a">→</span><span class="node ok">live web dashboard ✓</span></div>
+          </div>
+        </div>
+        <div class="cap"><h3>Live data dashboard</h3><span class="year">personal project</span></div>
+      </a>
+      <a class="project reveal" href="#contact">
+        <div class="shot">
+          <div class="pipeflow">
+            <div class="row"><span class="node">📊 list of items</span><span class="a">→</span><span class="node">fetch details</span></div>
+            <div class="row"><span class="a">→</span><span class="node">clean + rank</span><span class="a">→</span><span class="node ok">formatted report ✓</span></div>
+          </div>
+        </div>
+        <div class="cap"><h3>Automated report generator</h3><span class="year">personal project</span></div>
+      </a>
+      <a class="project reveal" href="#contact">
+        <div class="shot">
+          <div class="pipeflow">
+            <div class="row"><span class="node">📅 content queue</span><span class="a">→</span><span class="node">per-platform metadata</span></div>
+            <div class="row"><span class="a">→</span><span class="node">staggered timing</span><span class="a">→</span><span class="node ok">auto-publish ✓</span></div>
+          </div>
+        </div>
+        <div class="cap"><h3>Social scheduling — posts itself</h3><span class="year">runs daily</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about">
+      <div class="portrait reveal">
+        <div class="term">
+          <div><span class="p">dana@automation:~$</span> run workflow</div>
+          <div>checking due dates... done</div>
+          <div>building weekly report... done</div>
+          <div>sending reminders... done</div>
+          <div><span class="p">✓</span> 0 manual steps</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <h2><span class="dim">I automated</span> my own work first</h2>
+        <p class="bio">Honest version: I'm at the start of my freelance journey. I got here by building practical systems that handle repetitive work — collecting data, cleaning spreadsheets, generating reports and running scheduled tasks. That's what I offer: small, useful automation built around how you already work. Starter prices, fixed quotes, and you own the code. Based in South Africa, working with anyone anywhere.</p>
+        <div class="stats">
+          <div class="stat"><div class="lbl">Time automation can save every week</div><div class="num">4+ hrs</div></div>
+          <div class="stat"><div class="lbl">Tasks handled in a single workflow</div><div class="num">7–11</div></div>
+          <div class="stat"><div class="lbl">Personal projects running daily</div><div class="num">3</div></div>
+          <div class="stat"><div class="lbl">Clicks needed once it's set up</div><div class="num">0</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="marquee-wrap reveal">
+      <div class="marquee" id="marquee">
+        <span><b>Invoice Reminders</b></span><span>Weekly Reports</span><span><b>Spreadsheet Cleanup</b></span><span>Appointment Reminders</span><span><b>Quote Generation</b></span><span>Social Scheduling</span><span><b>Review Requests</b></span><span>Email Filing</span><span><b>Data Transfers</b></span><span>Data Entry</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill">Process</span>
+      <h2><span class="dim">And this is</span> How We Work</h2>
+    </div>
+    <div class="rows reveal">
+      <div class="row2">
+        <div class="left"><h3>Tell me the boring task</h3><span class="when">Step 01</span></div>
+        <p>Fifteen minutes — a call or a few messages. I map exactly what eats your time and confirm whether it's automatable. This part is always free.</p>
+      </div>
+      <div class="row2">
+        <div class="left"><h3>Fixed quote, fixed scope</h3><span class="when">Step 02</span></div>
+        <p>You get the price and delivery date up front, in writing. No hourly billing, no surprises. Scope changes get a new quote, not a bigger invoice.</p>
+      </div>
+      <div class="row2">
+        <div class="left"><h3>Build, then demo on your data</h3><span class="when">Step 03</span></div>
+        <p>I build the pipeline and show it running on your real files and accounts — not a slide deck. We adjust until it's right.</p>
+      </div>
+      <div class="row2">
+        <div class="left"><h3>Handover &amp; support</h3><span class="when">Step 04</span></div>
+        <p>You get the code, a plain-English setup guide, and two weeks of free fixes. It's yours — no lock-in, no subscription.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill">Services</span>
+      <h2>What I can <span class="dim">build for</span> you</h2>
+      <p class="sub">Fixed prices, quoted before we start. These are starter rates — I'm building a reputation, and you get the deal. For small businesses, streamers, creators and podcasters, anywhere in the world.</p>
+    </div>
+    <div class="cards3">
+      <a class="scard reveal contact-trigger" href="#contact" data-service="Admin automation">
+        <div class="ico">🗂️</div>
+        <h3>Admin Automation</h3>
+        <p>The office work that eats your evenings — unpaid invoices chased automatically, quotes generated from a template, appointment reminders sent before bookings, review requests after a job, emails and attachments filed where they belong.</p>
+        <div class="price">from R700 / $40</div>
+      </a>
+      <a class="scard reveal contact-trigger" href="#contact" data-service="Reports and spreadsheets">
+        <div class="ico">📊</div>
+        <h3>Reports &amp; Spreadsheets</h3>
+        <p>A weekly sales or stock report built automatically from your exports, waiting in your inbox Monday morning. Messy spreadsheets merged, cleaned and deduplicated. Or a simple live dashboard if you want it always fresh.</p>
+        <div class="price">from R700 / $40</div>
+      </a>
+      <a class="scard reveal contact-trigger" href="#contact" data-service="Schedules and follow-ups">
+        <div class="ico">📅</div>
+        <h3>Schedules &amp; Follow-ups</h3>
+        <p>Things that send themselves on time — social media posts, customer follow-ups, payment reminders, booking confirmations. Set the rules once, then stop thinking about it.</p>
+        <div class="price">from R700 / $40</div>
+      </a>
+      <a class="scard reveal contact-trigger" href="#contact" data-service="Data transfer and filing">
+        <div class="ico">↔</div>
+        <h3>Data Transfer &amp; Filing</h3>
+        <p>Move information between email, forms, spreadsheets and folders without copying and pasting. Attachments renamed and filed, customer lists updated, and clean exports prepared automatically.</p>
+        <div class="price">from R700 / $40</div>
+      </a>
+    </div>
+    <div class="center-cta reveal">
+      <a class="btn contact-trigger" href="#contact" data-service="Automation project">Start a project <span class="arr">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill">FAQ</span>
+      <h2><span class="dim">Frequently Asked</span> Questions</h2>
+    </div>
+    <div class="faq reveal">
+      <div class="qa">
+        <button>How experienced are you, honestly?<span class="chev">▾</span></button>
+        <div class="ans"><p>I'm new to freelancing — no client list yet. But the projects on this page are real, I built them myself, and they run every day. My prices reflect where I am, and I'd rather over-deliver for my first clients than oversell to them.</p></div>
+      </div>
+      <div class="qa">
+        <button>Can my task actually be automated?<span class="chev">▾</span></button>
+        <div class="ans"><p>If it happens on a computer and follows rules — even messy ones — probably yes. Send me a description or a screen recording and I'll tell you honestly, free. If I can't build it, I'll say so instead of taking your money.</p></div>
+      </div>
+      <div class="qa">
+        <button>How does pricing and payment work?<span class="chev">▾</span></button>
+        <div class="ans"><p>Fixed price, quoted before any work starts — in rand or dollars, whatever suits you. You approve the scope and the number; that's what you pay. South African clients can pay by EFT; international clients via PayPal or similar. Scope changes get a new quote, never a surprise invoice.</p></div>
+      </div>
+      <div class="qa">
+        <button>Do I own the code?<span class="chev">▾</span></button>
+        <div class="ans"><p>Yes, fully. You get the source, a one-click launcher, and a plain-English setup guide. No subscriptions, no lock-in — it runs on your machine or wherever you want it.</p></div>
+      </div>
+      <div class="qa">
+        <button>What if it breaks after delivery?<span class="chev">▾</span></button>
+        <div class="ans"><p>Two weeks of free fixes come with every build. After that, small fixes are cheap and quoted the same way as everything else — up front.</p></div>
+      </div>
+      <div class="qa">
+        <button>How fast can you deliver?<span class="chev">▾</span></button>
+        <div class="ans"><p>Small automations usually take a few days; bigger pipelines up to a week or two. You get a realistic date with the quote — I'd rather quote a week and deliver in five days than promise two days and miss it.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="fluid"></div>
+  <div class="wrap inner">
+    <span class="pill reveal">Contact</span>
+    <h2 class="reveal"><span class="dim">Got a task you're</span> sick of doing?</h2>
+    <p class="sub reveal">Describe it in one email — no forms, no sales call. Within 24 hours you'll know if I can build it, what it costs, and how long it'll take. If it's not a fit, I'll tell you that too.</p>
+    <div class="reveal">
+      <a class="btn solid contact-trigger" href="#contact" data-service="Automation project">Tell me the boring task <span class="arr">↗</span></a>
+    </div>
+    <p class="alt reveal">Or email <a href="mailto:therondana65@gmail.com">therondana65@gmail.com</a></p>
+  </div>
+</section>
+
+<div class="dialog-backdrop" id="contactDialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+  <div class="contact-dialog">
+    <div class="dialog-head"><h3 id="dialogTitle">Start a project</h3><button class="dialog-close" type="button" aria-label="Close">×</button></div>
+    <p>Tell me what repetitive task you want off your plate.</p>
+    <label for="requestName">Your name</label><input id="requestName" autocomplete="name" placeholder="Your name">
+    <label for="requestService">What do you need?</label><input id="requestService" placeholder="e.g. invoice reminders">
+    <label for="requestDetails">A few details</label><textarea id="requestDetails" placeholder="What do you do manually now, and what should happen automatically?"></textarea>
+    <div class="dialog-actions"><button class="btn solid" type="button" id="copyRequest">Copy request</button><button class="btn" type="button" id="copyEmail">Copy email address</button></div>
+    <p class="dialog-status" id="dialogStatus" aria-live="polite"></p>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#top"><span class="avatar"></span>Dana Theron</a>
+        <p class="tag">I automate repetitive work for creators and small businesses. Based in South Africa, working anywhere.</p>
+        <a class="mail" href="mailto:therondana65@gmail.com">therondana65@gmail.com</a>
+      </div>
+      <div class="cols">
+        <div class="col">
+          <a href="#portfolio">Portfolio</a>
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="col">
+          <a href="mailto:therondana65@gmail.com">Email</a>
+          <a href="mailto:therondana65@gmail.com?subject=Automation%20quote">Get a quote</a>
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Dana Theron</span>
+      <span>Built by hand. Runs itself.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // duplicate marquee content for seamless loop
+  const mq = document.getElementById('marquee');
+  mq.innerHTML += mq.innerHTML;
+
+  // FAQ accordion
+  document.querySelectorAll('.qa button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const qa = btn.parentElement;
+      const wasOpen = qa.classList.contains('open');
+      document.querySelectorAll('.qa.open').forEach(o => o.classList.remove('open'));
+      if (!wasOpen) qa.classList.add('open');
+    });
+  });
+
+  // Contact dialog works without relying on a desktop email app
+  const dialog = document.getElementById('contactDialog');
+  const serviceInput = document.getElementById('requestService');
+  const status = document.getElementById('dialogStatus');
+  const closeDialog = () => { dialog.classList.remove('open'); document.body.style.overflow = ''; };
+  document.querySelectorAll('.contact-trigger').forEach(link => link.addEventListener('click', event => {
+    event.preventDefault();
+    serviceInput.value = link.dataset.service || '';
+    status.textContent = '';
+    dialog.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('requestName').focus(), 0);
+  }));
+  dialog.querySelector('.dialog-close').addEventListener('click', closeDialog);
+  dialog.addEventListener('click', event => { if (event.target === dialog) closeDialog(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') closeDialog(); });
+  document.getElementById('copyEmail').addEventListener('click', async () => {
+    await navigator.clipboard.writeText('therondana65@gmail.com');
+    status.textContent = 'Email address copied.';
+  });
+  document.getElementById('copyRequest').addEventListener('click', async () => {
+    const name = document.getElementById('requestName').value.trim();
+    const service = serviceInput.value.trim();
+    const details = document.getElementById('requestDetails').value.trim();
+    const message = `Hi Dana,\n\nName: ${name || 'Not provided'}\nProject: ${service || 'Automation project'}\n\n${details || 'I would like to discuss an automation project.'}`;
+    await navigator.clipboard.writeText(message);
+    status.textContent = 'Request copied — paste it into an email to therondana65@gmail.com';
+  });
+</script>
+
+</body>
+</html>
