@@ -274,6 +274,11 @@
   .contact-dialog textarea { min-height: 110px; resize: vertical; }
   .dialog-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
   .dialog-status { min-height: 22px; color: #3ddc84; margin: 12px 0 0 !important; font-size: 13px; }
+  .email-chooser { margin-top: 14px; padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: #0a0a0a; }
+  .email-chooser[hidden] { display: none; }
+  .chooser-label { color: var(--gray); font-size: 13px; margin-bottom: 10px; }
+  .chooser-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chooser-btns .btn { padding: 8px 14px; font-size: 13px; flex: 1 1 auto; justify-content: center; }
   .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
   /* ---------- entry terms gate ---------- */
@@ -451,7 +456,7 @@
         <h2><span class="dim">I automated</span> my own work first</h2>
         <p class="bio">Honest version: I'm at the start of my freelance journey. I got here by building practical systems that handle repetitive work — collecting data, cleaning spreadsheets, generating reports and running scheduled tasks. That's what I offer: small, useful automation built around how you already work. Starter prices, fixed quotes, and you own the code. Based in South Africa, working with anyone anywhere.</p>
         <div class="stats">
-          <div class="stat"><div class="lbl">Time automation can save every week</div><div class="num">4+ hrs</div></div>
+          <div class="stat"><div class="lbl">Time automation can save every week</div><div class="num">12 hrs</div></div>
           <div class="stat"><div class="lbl">Tasks handled in a single workflow</div><div class="num">7–11</div></div>
           <div class="stat"><div class="lbl">Personal projects running daily</div><div class="num">3</div></div>
           <div class="stat"><div class="lbl">Clicks needed once it's set up</div><div class="num">0</div></div>
@@ -591,6 +596,15 @@
     <label for="requestDetails">A few details</label><textarea id="requestDetails" placeholder="What do you do manually now, and what should happen automatically?"></textarea>
     <input id="requestCompany" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Company">
     <div class="dialog-actions"><button class="btn solid" type="button" id="sendRequest">Send request</button><button class="btn" type="button" id="openEmail">Open email instead</button></div>
+    <div class="email-chooser" id="emailChooser" hidden>
+      <p class="chooser-label">Which email do you use?</p>
+      <div class="chooser-btns">
+        <button type="button" class="btn" data-provider="gmail">Gmail</button>
+        <button type="button" class="btn" data-provider="outlook">Outlook</button>
+        <button type="button" class="btn" data-provider="yahoo">Yahoo</button>
+        <button type="button" class="btn" data-provider="default">Other / mail app</button>
+      </div>
+    </div>
     <p class="dialog-status" id="dialogStatus" aria-live="polite"></p>
   </div>
 </div>
@@ -724,12 +738,35 @@
     }
   });
 
-  document.getElementById('openEmail').addEventListener('click', () => {
-    const f = fields();
+  // "Open email instead" — pick a provider and open its compose window prefilled.
+  // Reliable fallback for visitors with no desktop mail app (plain mailto opens nothing).
+  const chooser = document.getElementById('emailChooser');
+  function composeUrls(f) {
+    const to = 'therondana65@gmail.com';
     const subject = `Automation enquiry: ${f.service}`;
     const body = `Hi Dana,\n\nName: ${f.name || 'Not provided'}\nEmail: ${f.email || 'Not provided'}\nProject: ${f.service}\n\n${f.details || 'I would like to discuss an automation project.'}`;
-    window.location.href = `mailto:therondana65@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus('Opening your email app…');
+    const t = encodeURIComponent(to), s = encodeURIComponent(subject), b = encodeURIComponent(body);
+    return {
+      gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${t}&su=${s}&body=${b}`,
+      outlook: `https://outlook.live.com/mail/0/deeplink/compose?to=${t}&subject=${s}&body=${b}`,
+      yahoo: `https://compose.mail.yahoo.com/?to=${t}&subject=${s}&body=${b}`,
+      default: `mailto:${to}?subject=${s}&body=${b}`,
+    };
+  }
+  document.getElementById('openEmail').addEventListener('click', () => {
+    chooser.hidden = !chooser.hidden;
+    setStatus(chooser.hidden ? '' : 'Pick your email provider below.');
+  });
+  chooser.querySelectorAll('[data-provider]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const url = composeUrls(fields())[btn.dataset.provider];
+      if (btn.dataset.provider === 'default') {
+        window.location.href = url;
+      } else {
+        window.open(url, '_blank', 'noopener');
+      }
+      setStatus('Opening your email…');
+    });
   });
 
   // First-visit terms gate (remembered, so returning visitors aren't blocked)
