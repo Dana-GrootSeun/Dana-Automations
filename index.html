@@ -276,6 +276,22 @@
   .dialog-status { min-height: 22px; color: #3ddc84; margin: 12px 0 0 !important; font-size: 13px; }
   .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
+  /* ---------- entry terms gate ---------- */
+  .gate { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 20px; background: rgba(0,0,0,0.93); backdrop-filter: blur(6px); }
+  .gate.hidden { display: none; }
+  .gate-card { width: min(560px, 100%); max-height: 88vh; display: flex; flex-direction: column; background: #0d0d0d; border: 1px solid var(--border-strong); border-radius: 22px; padding: 30px; box-shadow: 0 24px 90px #000; }
+  .gate-card h2 { font-size: 24px; margin-bottom: 6px; }
+  .gate-card .g-sub { color: var(--gray); font-size: 14px; margin-bottom: 18px; }
+  .gate-terms { overflow-y: auto; border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; background: #080808; font-size: 13px; color: var(--gray); line-height: 1.7; }
+  .gate-terms h3 { color: var(--white); font-size: 13px; margin: 16px 0 6px; }
+  .gate-terms h3:first-child { margin-top: 0; }
+  .gate-terms p { margin-bottom: 8px; }
+  .gate-terms a { color: var(--white); }
+  .gate-actions { margin-top: 18px; display: flex; gap: 10px; align-items: center; }
+  .gate-actions .btn { flex: 1; justify-content: center; }
+  .gate-note { color: var(--gray-dim); font-size: 12px; margin-top: 12px; text-align: center; }
+  .legal a { color: inherit; text-decoration: underline; }
+
   /* ---------- footer ---------- */
   footer { border-top: 1px solid var(--border); padding: 64px 0 40px; }
   .foot { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
@@ -311,6 +327,32 @@
 </style>
 </head>
 <body>
+
+<div class="gate" id="termsGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <div class="gate-card">
+    <h2 id="gateTitle">Before you continue</h2>
+    <p class="g-sub">Please read and accept the terms &amp; privacy summary to use this site.</p>
+    <div class="gate-terms" tabindex="0">
+      <h3>Who this is</h3>
+      <p>This site belongs to Dana Theron, an independent automation freelancer based in South Africa. It shows services and lets you send an enquiry.</p>
+      <h3>Services &amp; quotes</h3>
+      <p>All work is quoted and agreed in writing before it starts. Prices shown are starting points, not final quotes. Nothing here is a binding offer or a guarantee of specific results.</p>
+      <h3>Your enquiry &amp; privacy</h3>
+      <p>If you send an enquiry, the name, email and details you provide — plus your IP address, used only to prevent spam — are stored securely and used solely to reply to you and discuss your project. Your information is never sold or shared with third parties. Email <a href="mailto:therondana65@gmail.com">therondana65@gmail.com</a> anytime to have your details removed.</p>
+      <h3>Ownership</h3>
+      <p>Any automation built for you is yours to keep once paid for, along with setup instructions. Demos and code samples on this site remain Dana's work.</p>
+      <h3>Liability</h3>
+      <p>This site and its content are provided "as is", without warranty. Dana is not liable for any loss arising from use of the site or reliance on its content.</p>
+      <h3>Governing law</h3>
+      <p>These terms are governed by the laws of South Africa.</p>
+    </div>
+    <div class="gate-actions">
+      <a class="btn" href="https://www.google.com" id="gateDecline">Leave</a>
+      <button class="btn solid" type="button" id="gateAccept">I agree &amp; enter</button>
+    </div>
+    <p class="gate-note">By entering you agree to these terms. Plain-language summary — not legal advice.</p>
+  </div>
+</div>
 
 <nav>
   <div class="wrap">
@@ -577,7 +619,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Dana Theron</span>
-      <span>Built by hand. Runs itself.</span>
+      <span><a href="#" id="openTerms">Terms &amp; Privacy</a> · Built by hand. Runs itself.</span>
     </div>
   </div>
 </footer>
@@ -689,6 +731,27 @@
     window.location.href = `mailto:therondana65@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setStatus('Opening your email app…');
   });
+
+  // First-visit terms gate (remembered, so returning visitors aren't blocked)
+  (function () {
+    const gate = document.getElementById('termsGate');
+    if (!gate) return;
+    const KEY = 'dana_terms_accepted_v1';
+    const show = () => { gate.classList.remove('hidden'); document.body.style.overflow = 'hidden'; gate.querySelector('.gate-terms').focus(); };
+    const hide = () => { gate.classList.add('hidden'); document.body.style.overflow = ''; };
+    let accepted = false;
+    try { accepted = !!localStorage.getItem(KEY); } catch (e) {}
+    if (accepted) { hide(); } else { show(); }
+    document.getElementById('gateAccept').addEventListener('click', () => {
+      try { localStorage.setItem(KEY, new Date().toISOString()); } catch (e) {}
+      hide();
+    });
+    document.getElementById('gateDecline').addEventListener('click', (e) => {
+      e.preventDefault(); window.location.href = 'https://www.google.com';
+    });
+    const reopen = document.getElementById('openTerms');
+    if (reopen) reopen.addEventListener('click', (e) => { e.preventDefault(); show(); window.scrollTo(0, 0); });
+  })();
 </script>
 
 </body>
