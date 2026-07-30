@@ -8,3 +8,8 @@ __pycache__/
 outputs/
 *.inspect.ndjson
 .codex-chrome*/
+
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
