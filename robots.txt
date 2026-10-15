@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dana-automates.therondana65.workers.dev/sitemap.xml

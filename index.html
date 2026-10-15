@@ -1,371 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-ZA">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dana Theron — I Automate Boring Work</title>
-<meta name="description" content="I build small automations that save small businesses real hours — invoice reminders, reports, spreadsheets and admin workflows. Based in South Africa, working anywhere.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #000000;
-    --card: #101010;
-    --card-2: #161616;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(255, 255, 255, 0.16);
-    --white: #f5f5f5;
-    --gray: #8a8a8a;
-    --gray-dim: #5c5c5c;
-    --mono: "Cascadia Code", Consolas, monospace;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: "Inter", system-ui, sans-serif;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
-  ::selection { background: rgba(255,255,255,0.2); }
-
-  /* ---------- reveal animation ---------- */
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .reveal.in { opacity: 1; transform: none; }
-
-  /* ---------- nav ---------- */
-  nav {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-  }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white); font-weight: 600; font-size: 15px; }
-  .brand .avatar {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: conic-gradient(from 210deg, #2a2a2a, #666, #1a1a1a, #4a4a4a, #2a2a2a);
-    border: 1px solid var(--border-strong);
-  }
-  nav .links { display: flex; align-items: center; gap: 28px; }
-  nav .links a { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.25s; }
-  nav .links a:hover { color: var(--white); }
-
-  /* ---------- pill badge ---------- */
-  .pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: #141414; border: 1px solid var(--border);
-    color: var(--white); font-size: 13px; font-weight: 500;
-    padding: 7px 16px; border-radius: 99px;
-  }
-  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 8px #3ddc84; }
-
-  /* ---------- pill button ---------- */
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    border: 1px solid var(--border-strong); border-radius: 99px;
-    color: var(--white); text-decoration: none;
-    font-size: 15px; font-weight: 500;
-    padding: 12px 26px;
-    transition: background 0.25s, border-color 0.25s, transform 0.25s;
-    background: rgba(255,255,255,0.02);
-  }
-  .btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); transform: translateY(-1px); }
-  .btn .arr { font-size: 13px; transition: transform 0.25s; }
-  .btn:hover .arr { transform: translate(2px, -2px); }
-  .btn.solid { background: var(--white); color: #000; border-color: var(--white); }
-  .btn.solid:hover { background: #ddd; }
-
-  /* ---------- two-tone headings ---------- */
-  h1, h2 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.12; }
-  .dim { color: var(--gray); }
-
-  /* ---------- hero ---------- */
-  .hero { text-align: center; padding: 110px 0 0; position: relative; }
-  .hero h1 { font-size: clamp(40px, 6.5vw, 72px); max-width: 900px; margin: 28px auto 0; }
-  .hero .sub { color: var(--gray); font-size: 17px; max-width: 560px; margin: 22px auto 0; }
-  .hero .cta { margin-top: 36px; }
-
-  /* Crisp monochrome fluid form — gradients provide depth without foggy blur. */
-  .blob-stage {
-    --pointer-x: 0px; --pointer-y: 0px; --tilt-x: 0deg; --tilt-y: 0deg;
-    position: relative; height: 400px; margin-top: 12px; overflow: hidden;
-    perspective: 1000px; isolation: isolate;
-  }
-  .hero-aura {
-    position: absolute; width: min(600px, 78vw); aspect-ratio: 1; left: 50%; top: 46%;
-    translate: -50% -50%;
-    background: radial-gradient(circle, rgba(255,255,255,0.05), rgba(255,255,255,0.01) 40%, transparent 66%);
-    opacity: 0.45; pointer-events: none;
-  }
-  .hero-sculpture-wrap {
-    position: absolute; inset: 0; display: grid; place-items: center;
-    transform: translate3d(var(--pointer-x), var(--pointer-y), 0) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
-    transform-style: preserve-3d; transition: transform 260ms cubic-bezier(.2,.8,.2,1); will-change: transform;
-  }
-  .hero-sculpture {
-    display: block; width: min(900px, 94vw); height: auto; object-fit: contain;
-    user-select: none; pointer-events: none; animation: sculpture-float 7s ease-in-out infinite;
-  }
-  .hero-specular {
-    position: absolute; inset: 14% 24%;
-    background: radial-gradient(circle at var(--shine-x, 58%) var(--shine-y, 38%), rgba(255,255,255,0.12), transparent 20%);
-    mix-blend-mode: screen; opacity: 0.55; pointer-events: none;
-  }
-  @keyframes sculpture-float {
-    0%, 100% { transform: translate3d(0, 3px, 0) scale(1); }
-    50% { transform: translate3d(0, -9px, 0) scale(1.012); }
-  }
-  .blob-stage::after {
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(to bottom, transparent 60%, var(--bg));
-    pointer-events: none; z-index: 2;
-  }
-  #portfolio { padding-top: 40px; }
-
-  /* ---------- section scaffolding ---------- */
-  section { padding: 110px 0; }
-  .sec-head { text-align: center; margin-bottom: 64px; }
-  .sec-head h2 { font-size: clamp(30px, 4.4vw, 48px); margin-top: 22px; }
-  .sec-head .sub { color: var(--gray); font-size: 16px; max-width: 520px; margin: 18px auto 0; }
-
-  /* ---------- portfolio cards ---------- */
-  .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 32px; }
-  .project { text-decoration: none; color: var(--white); display: block; }
-  .shot {
-    background: var(--card); border: 1px solid var(--border); border-radius: 20px;
-    height: 320px; display: flex; align-items: center; justify-content: center;
-    overflow: hidden; position: relative;
-    transition: transform 0.35s ease, border-color 0.35s;
-  }
-  .project:hover .shot { transform: translateY(-4px); border-color: var(--border-strong); }
-  .shot .pipeflow {
-    font-family: var(--mono); font-size: 13px; color: var(--gray);
-    display: flex; flex-direction: column; gap: 14px; align-items: flex-start; padding: 0 36px;
-  }
-  .pipeflow .row { display: flex; align-items: center; gap: 10px; }
-  .pipeflow .node {
-    background: var(--card-2); border: 1px solid var(--border);
-    padding: 6px 14px; border-radius: 8px; color: #cfcfcf; white-space: nowrap;
-  }
-  .pipeflow .a { color: var(--gray-dim); }
-  .pipeflow .ok { color: #3ddc84; }
-  .cap { display: flex; align-items: baseline; gap: 14px; margin-top: 18px; }
-  .cap h3 { font-size: 17px; font-weight: 600; }
-  .cap .year { color: var(--gray-dim); font-size: 14px; }
-
-  /* ---------- about ---------- */
-  .about { display: grid; grid-template-columns: 380px 1fr; gap: 64px; align-items: center; }
-  .portrait {
-    height: 440px; border-radius: 20px; border: 1px solid var(--border);
-    background:
-      radial-gradient(circle at 50% 30%, rgba(255,255,255,0.14), transparent 55%),
-      linear-gradient(160deg, #161616, #060606);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--mono); color: var(--gray-dim); font-size: 13px;
-    position: relative; overflow: hidden;
-  }
-  .portrait .term {
-    background: rgba(0,0,0,0.55); border: 1px solid var(--border);
-    border-radius: 12px; padding: 20px 22px; line-height: 2;
-    color: #aaa; background: rgba(0,0,0,0.82); border-color: rgba(255,255,255,0.16);
-  }
-  .portrait .term .p { color: #3ddc84; }
-  .about h2 { font-size: clamp(28px, 3.6vw, 42px); }
-  .about .bio { color: var(--gray); font-size: 15px; margin-top: 18px; max-width: 480px; }
-  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 24px; margin-top: 44px; }
-  .stat .lbl { color: var(--gray); font-size: 13px; }
-  .stat .num { font-size: clamp(34px, 4vw, 46px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; }
-
-  /* ---------- marquee ---------- */
-  .marquee-wrap {
-    border: 1px solid var(--border); border-radius: 99px;
-    overflow: hidden; padding: 18px 0; margin-top: 96px;
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-  }
-  .marquee { display: flex; gap: 56px; width: max-content; animation: slide 28s linear infinite; }
-  .marquee span { color: var(--gray); font-size: 15px; font-weight: 500; white-space: nowrap; }
-  .marquee span b { color: var(--white); font-weight: 500; }
-  @keyframes slide { to { transform: translateX(-50%); } }
-
-  /* ---------- process rows (career style) ---------- */
-  .rows { border-top: 1px solid var(--border); }
-  .row2 {
-    display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px;
-    padding: 44px 0; border-bottom: 1px solid var(--border);
-  }
-  .row2 .left { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
-  .row2 h3 { font-size: 19px; font-weight: 600; }
-  .row2 .when { color: var(--gray-dim); font-size: 14px; }
-  .row2 p { color: var(--gray); font-size: 15px; }
-
-  /* ---------- services cards ---------- */
-  .cards3 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .scard {
-    background: var(--card); border: 1px solid var(--border); border-radius: 20px;
-    padding: 34px 30px; transition: transform 0.3s, border-color 0.3s;
-  }
-  .scard:hover { transform: translateY(-4px); border-color: var(--border-strong); }
-  .scard { color: inherit; text-decoration: none; }
-  .scard:focus-visible, .btn:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
-  .scard .ico {
-    width: 40px; height: 40px; border-radius: 12px;
-    background: var(--card-2); border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center; font-size: 18px;
-    margin-bottom: 22px;
-  }
-  .scard h3 { font-size: 17px; font-weight: 600; margin-bottom: 10px; }
-  .scard p { color: var(--gray); font-size: 14px; }
-  .scard .price { font-family: var(--mono); font-size: 13px; color: var(--gray-dim); margin-top: 20px; }
-  .center-cta { text-align: center; margin-top: 56px; }
-
-  /* ---------- FAQ ---------- */
-  .faq { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
-  .qa {
-    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-    overflow: hidden; transition: border-color 0.3s;
-  }
-  .qa:hover { border-color: var(--border-strong); }
-  .qa button {
-    width: 100%; background: none; border: none; color: var(--white);
-    font-family: inherit; font-size: 15px; font-weight: 600; text-align: left;
-    padding: 22px 24px; cursor: pointer;
-    display: flex; justify-content: space-between; align-items: center; gap: 16px;
-  }
-  .qa .chev { color: var(--gray); transition: transform 0.3s; flex-shrink: 0; }
-  .qa.open .chev { transform: rotate(180deg); }
-  .qa .ans { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
-  .qa.open .ans { max-height: 260px; }
-  .qa .ans p { color: var(--gray); font-size: 14px; padding: 0 24px 22px; }
-
-  /* ---------- contact ---------- */
-  .contact { position: relative; text-align: center; padding: 150px 0; overflow: hidden; }
-  .contact .fluid {
-    position: absolute; inset: -20% -10%;
-    background:
-      radial-gradient(ellipse 60% 40% at 25% 40%, rgba(255,255,255,0.08), transparent),
-      radial-gradient(ellipse 50% 35% at 75% 60%, rgba(255,255,255,0.06), transparent),
-      radial-gradient(ellipse 70% 30% at 50% 50%, rgba(255,255,255,0.05), transparent);
-    filter: blur(2px);
-    animation: drift 20s ease-in-out infinite alternate;
-  }
-  @keyframes drift { to { transform: translateX(4%) scale(1.06); } }
-  .contact .inner { position: relative; }
-  .contact h2 { font-size: clamp(34px, 5vw, 56px); margin-top: 24px; }
-  .contact .sub { color: var(--gray); margin: 16px 0 36px; }
-  .contact .alt { margin-top: 26px; color: var(--gray); font-size: 14px; }
-  .contact .alt a { color: var(--white); }
-
-  /* ---------- contact dialog ---------- */
-  .dialog-backdrop { position: fixed; inset: 0; z-index: 100; display: none; place-items: center; padding: 20px; background: rgba(0,0,0,.82); }
-  .dialog-backdrop.open { display: grid; }
-  .contact-dialog { width: min(520px, 100%); background: #111; border: 1px solid var(--border-strong); border-radius: 22px; padding: 28px; box-shadow: 0 24px 90px #000; }
-  .dialog-head { display: flex; justify-content: space-between; gap: 20px; align-items: center; }
-  .dialog-head h3 { font-size: 22px; }
-  .dialog-close { border: 1px solid var(--border); background: #191919; color: var(--white); width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 20px; }
-  .contact-dialog p { color: var(--gray); margin: 12px 0 22px; }
-  .contact-dialog label { display: block; color: var(--gray); font-size: 13px; margin: 14px 0 6px; }
-  .contact-dialog input, .contact-dialog textarea { width: 100%; background: #090909; color: var(--white); border: 1px solid var(--border-strong); border-radius: 10px; padding: 12px 14px; font: inherit; }
-  .contact-dialog textarea { min-height: 110px; resize: vertical; }
-  .dialog-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-  .dialog-status { min-height: 22px; color: #3ddc84; margin: 12px 0 0 !important; font-size: 13px; }
-  .email-chooser { margin-top: 14px; padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: #0a0a0a; }
-  .email-chooser[hidden] { display: none; }
-  .chooser-label { color: var(--gray); font-size: 13px; margin-bottom: 10px; }
-  .chooser-btns { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chooser-btns .btn { padding: 8px 14px; font-size: 13px; flex: 1 1 auto; justify-content: center; }
-  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-
-  /* ---------- entry terms gate ---------- */
-  .gate { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 20px; background: rgba(0,0,0,0.93); backdrop-filter: blur(6px); }
-  .gate.hidden { display: none; }
-  .gate-card { width: min(560px, 100%); max-height: 88vh; display: flex; flex-direction: column; background: #0d0d0d; border: 1px solid var(--border-strong); border-radius: 22px; padding: 30px; box-shadow: 0 24px 90px #000; }
-  .gate-card h2 { font-size: 24px; margin-bottom: 6px; }
-  .gate-card .g-sub { color: var(--gray); font-size: 14px; margin-bottom: 18px; }
-  .gate-terms { overflow-y: auto; border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; background: #080808; font-size: 13px; color: var(--gray); line-height: 1.7; }
-  .gate-terms h3 { color: var(--white); font-size: 13px; margin: 16px 0 6px; }
-  .gate-terms h3:first-child { margin-top: 0; }
-  .gate-terms p { margin-bottom: 8px; }
-  .gate-terms a { color: var(--white); }
-  .gate-actions { margin-top: 18px; display: flex; gap: 10px; align-items: center; }
-  .gate-actions .btn { flex: 1; justify-content: center; }
-  .gate-note { color: var(--gray-dim); font-size: 12px; margin-top: 12px; text-align: center; }
-  .legal a { color: inherit; text-decoration: underline; }
-
-  /* ---------- footer ---------- */
-  footer { border-top: 1px solid var(--border); padding: 64px 0 40px; }
-  .foot { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
-  .foot .tag { color: var(--gray); font-size: 14px; margin-top: 14px; max-width: 240px; }
-  .foot .mail { color: var(--gray); font-size: 14px; margin-top: 22px; display: block; text-decoration: none; }
-  .foot .mail:hover { color: var(--white); }
-  .foot .cols { display: flex; gap: 72px; }
-  .foot .col { display: flex; flex-direction: column; gap: 12px; }
-  .foot .col a { color: var(--gray); text-decoration: none; font-size: 14px; transition: color 0.25s; }
-  .foot .col a:hover { color: var(--white); }
-  .legal {
-    margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--border);
-    color: var(--gray-dim); font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
-  }
-
-  /* ---------- responsive ---------- */
-  @media (max-width: 860px) {
-    .projects, .cards3 { grid-template-columns: 1fr; }
-    .about { grid-template-columns: 1fr; gap: 40px; }
-    .portrait { height: 340px; }
-    .row2 { grid-template-columns: 1fr; gap: 10px; padding: 34px 0; }
-    nav .links a:not(:last-child) { display: none; }
-    section { padding: 80px 0; }
-    .hero { padding-top: 80px; }
-    .blob-stage { height: 320px; margin-top: 22px; }
-    .hero-sculpture { width: min(720px, 108vw); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .hero-sculpture { animation: none; }
-    .hero-sculpture-wrap { transform: none; transition: none; }
-  }
-</style>
+<title>Dana Automates — Admin automation &amp; promo videos for small businesses</title>
+<meta name="description" content="I automate repetitive admin (invoice reminders, reports, spreadsheets, follow-ups) and make promo videos for small businesses. Based in South Africa, working anywhere.">
+<link rel="canonical" href="https://dana-automates.therondana65.workers.dev/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dana Automates">
+<meta property="og:title" content="Dana Automates — Admin automation & promo videos">
+<meta property="og:description" content="Small automations that save hours every week, and promo videos that get small businesses noticed.">
+<meta property="og:url" content="https://dana-automates.therondana65.workers.dev/">
+<meta property="og:image" content="https://dana-automates.therondana65.workers.dev/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="assets/hero-orb.webp" fetchpriority="high">
+<link rel="stylesheet" href="styles.css">
+<script src="main.js" defer></script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<div class="gate" id="termsGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
-  <div class="gate-card">
-    <h2 id="gateTitle">Before you continue</h2>
-    <p class="g-sub">Please read and accept the terms &amp; privacy summary to use this site.</p>
-    <div class="gate-terms" tabindex="0">
-      <h3>Who this is</h3>
-      <p>This site belongs to Dana Theron, an independent automation freelancer based in South Africa. It shows services and lets you send an enquiry.</p>
-      <h3>Services &amp; quotes</h3>
-      <p>All work is quoted and agreed in writing before it starts. Prices shown are starting points, not final quotes. Nothing here is a binding offer or a guarantee of specific results.</p>
-      <h3>Your enquiry &amp; privacy</h3>
-      <p>If you send an enquiry, the name, email and details you provide — plus your IP address, used only to prevent spam — are stored securely and used solely to reply to you and discuss your project. Your information is never sold or shared with third parties. Email <a href="mailto:therondana65@gmail.com">therondana65@gmail.com</a> anytime to have your details removed.</p>
-      <h3>Ownership</h3>
-      <p>Any automation built for you is yours to keep once paid for, along with setup instructions. Demos and code samples on this site remain Dana's work.</p>
-      <h3>Liability</h3>
-      <p>This site and its content are provided "as is", without warranty. Dana is not liable for any loss arising from use of the site or reliance on its content.</p>
-      <h3>Governing law</h3>
-      <p>These terms are governed by the laws of South Africa.</p>
-    </div>
-    <div class="gate-actions">
-      <a class="btn" href="https://www.google.com" id="gateDecline">Leave</a>
-      <button class="btn solid" type="button" id="gateAccept">I agree &amp; enter</button>
-    </div>
-    <p class="gate-note">By entering you agree to these terms. Plain-language summary — not legal advice.</p>
-  </div>
-</div>
-
-<nav>
+<nav aria-label="Main">
   <div class="wrap">
-    <a class="brand" href="#top"><span class="avatar"></span>Dana Theron</a>
+    <a class="brand" href="#top"><span class="avatar" aria-hidden="true"></span>Dana Theron</a>
     <div class="links">
-      <a href="#portfolio">Portfolio</a>
+      <a href="#work">Work</a>
+      <a href="#videos">Videos</a>
       <a href="#services">Services</a>
-      <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -373,69 +38,97 @@
 
 <header class="hero" id="top">
   <div class="wrap">
-    <span class="pill reveal"><span class="dot"></span>Hello, I'm Dana &nbsp;👋</span>
-    <h1 class="reveal"><span class="dim">I build</span> small automations <span class="dim">that save you</span> hours every week</h1>
-    <p class="sub reveal">Invoices chased, reports built, spreadsheets cleaned and follow-ups sent — the repetitive stuff. I'm a self-taught builder from South Africa, and everything on this page is based on practical systems I've built myself.</p>
-    <div class="cta reveal">
-      <a class="btn contact-trigger" href="#contact" data-service="Automation project">Tell me your boring task <span class="arr">↗</span></a>
+    <span class="pill"><span class="dot" aria-hidden="true"></span>Hello, I'm Dana &nbsp;👋</span>
+    <h1><span class="dim">I automate</span> the boring admin <span class="dim">and make</span> videos that sell</h1>
+    <p class="sub">Invoices chased, reports built, spreadsheets cleaned — plus promo videos for your brand's socials and launches. Self-taught builder from South Africa; everything on this page is work I've actually done.</p>
+    <div class="cta">
+      <a class="btn solid" href="#contact" data-enquiry="Automation project">Tell me your boring task <span class="arr" aria-hidden="true">↗</span></a>
+      <a class="btn" href="#videos">See my videos</a>
     </div>
   </div>
   <div class="blob-stage" id="heroVisual" aria-hidden="true">
-    <div class="hero-aura"></div>
-    <div class="hero-sculpture-wrap">
-      <img class="hero-sculpture" src="assets/hero-sculpture.png" alt="" width="1536" height="1024" decoding="async">
-      <div class="hero-specular"></div>
+    <div class="orb-tilt">
+      <div class="orb-scroll">
+        <img class="orb" src="assets/hero-orb.webp" alt="" width="870" height="870" fetchpriority="high" decoding="async">
+      </div>
     </div>
   </div>
 </header>
 
-<section id="portfolio">
+<main id="main">
+
+<section id="work">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="pill">Portfolio</span>
+      <span class="pill">Automation</span>
       <h2><span class="dim">Things I've</span> Actually Built</h2>
-      <p class="sub">No client logos to show yet — these are personal projects I built to solve my own problems. They run daily. Your project gets the same treatment.</p>
+      <p class="sub">No client logos yet — these are working examples with real code you can read. Your project gets the same treatment, on your own data.</p>
     </div>
     <div class="projects">
-      <a class="project reveal contact-trigger" href="#contact" data-service="Automated invoice reminders">
+      <a class="project reveal" href="https://github.com/Dana-GrootSeun/Dana-Automations/blob/main/automations/invoice_reminders.py" target="_blank" rel="noopener">
         <div class="shot">
-          <div class="pipeflow">
+          <div class="pipeflow" aria-hidden="true">
             <div class="row"><span class="node">📄 invoice list</span><span class="a">→</span><span class="node">check due dates</span></div>
-            <div class="row"><span class="a">→</span><span class="node">find unpaid items</span><span class="a">→</span><span class="node">personalise email</span></div>
-            <div class="row"><span class="a">→</span><span class="node ok">reminders sent ✓</span></div>
+            <div class="row"><span class="a">→</span><span class="node">find unpaid</span><span class="a">→</span><span class="node">personalise email</span></div>
+            <div class="row"><span class="a">→</span><span class="node ok">reminders drafted ✓</span></div>
           </div>
         </div>
-        <div class="cap"><h3>Automated invoice reminders</h3><span class="year">workflow demo</span></div>
+        <div class="cap"><h3>Invoice reminders</h3><span class="tag">View code ↗</span></div>
       </a>
-      <a class="project reveal" href="dashboard.html" aria-label="Open the live data dashboard demo">
+      <a class="project reveal" href="https://github.com/Dana-GrootSeun/Dana-Automations/blob/main/automations/spreadsheet_cleanup.py" target="_blank" rel="noopener">
         <div class="shot">
-          <div class="pipeflow">
-            <div class="row"><span class="node">📈 data feed (API)</span><span class="a">→</span><span class="node">filter + score</span></div>
-            <div class="row"><span class="a">→</span><span class="node">save history</span><span class="a">→</span><span class="node">refresh on schedule</span></div>
-            <div class="row"><span class="a">→</span><span class="node ok">live web dashboard ✓</span></div>
+          <div class="pipeflow" aria-hidden="true">
+            <div class="row"><span class="node">🧾 messy customer list</span><span class="a">→</span><span class="node">fix formats</span></div>
+            <div class="row"><span class="a">→</span><span class="node">remove duplicates</span><span class="a">→</span><span class="node ok">clean sheet ✓</span></div>
           </div>
         </div>
-        <div class="cap"><h3>Live data dashboard</h3><span class="year">personal project</span></div>
+        <div class="cap"><h3>Spreadsheet cleanup</h3><span class="tag">View code ↗</span></div>
       </a>
-      <a class="project reveal contact-trigger" href="#contact" data-service="Automated report generator">
+      <a class="project reveal" href="https://github.com/Dana-GrootSeun/Dana-Automations/blob/main/automations/weekly_report.py" target="_blank" rel="noopener">
         <div class="shot">
-          <div class="pipeflow">
-            <div class="row"><span class="node">📊 list of items</span><span class="a">→</span><span class="node">fetch details</span></div>
-            <div class="row"><span class="a">→</span><span class="node">clean + rank</span><span class="a">→</span><span class="node ok">formatted report ✓</span></div>
+          <div class="pipeflow" aria-hidden="true">
+            <div class="row"><span class="node">📊 sales export</span><span class="a">→</span><span class="node">totals + averages</span></div>
+            <div class="row"><span class="a">→</span><span class="node">top category</span><span class="a">→</span><span class="node ok">weekly summary ✓</span></div>
           </div>
         </div>
-        <div class="cap"><h3>Automated report generator</h3><span class="year">personal project</span></div>
+        <div class="cap"><h3>Weekly sales report</h3><span class="tag">View code ↗</span></div>
       </a>
-      <a class="project reveal contact-trigger" href="#contact" data-service="Appointment reminders">
-        <div class="shot">
-          <div class="pipeflow">
-            <div class="row"><span class="node">📅 bookings list</span><span class="a">→</span><span class="node">check tomorrow</span></div>
-            <div class="row"><span class="a">→</span><span class="node">personalise message</span><span class="a">→</span><span class="node">send day before</span></div>
-            <div class="row"><span class="a">→</span><span class="node ok">fewer no-shows ✓</span></div>
-          </div>
-        </div>
-        <div class="cap"><h3>Appointment reminders</h3><span class="year">workflow demo</span></div>
-      </a>
+    </div>
+  </div>
+</section>
+
+<section id="videos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill">Promo videos</span>
+      <h2><span class="dim">Videos I've made</span> for brands</h2>
+      <p class="sub">Product launches and social ads in every format — square, widescreen and vertical. Press play (with sound).</p>
+    </div>
+    <div class="reel">
+      <div class="clip reveal">
+        <figure>
+          <video controls playsinline preload="none" poster="assets/video/opti-orbit-poster.webp" width="720" height="720">
+            <source src="assets/video/opti-orbit.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>Opti — launch film</strong><span>Square 1:1 · 30s</span></figcaption>
+        </figure>
+      </div>
+      <div class="clip reveal">
+        <figure>
+          <video controls playsinline preload="none" poster="assets/video/opti-nutrients-poster.webp" width="1280" height="720">
+            <source src="assets/video/opti-nutrients.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>OptiGo — nutrients ad</strong><span>Widescreen 16:9 · 30s</span></figcaption>
+        </figure>
+      </div>
+      <div class="clip tall reveal">
+        <figure>
+          <video controls playsinline preload="none" poster="assets/video/opti-vertical-poster.webp" width="720" height="1280">
+            <source src="assets/video/opti-vertical.mp4" type="video/mp4">
+          </video>
+          <figcaption><strong>Opti — social ad</strong><span>Vertical 9:16 · 27s</span></figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -443,30 +136,31 @@
 <section id="about">
   <div class="wrap">
     <div class="about">
-      <div class="portrait reveal">
+      <div class="portrait reveal" aria-hidden="true">
         <div class="term">
           <div><span class="p">dana@automation:~$</span> run workflow</div>
           <div>checking due dates... done</div>
           <div>building weekly report... done</div>
-          <div>sending reminders... done</div>
+          <div>drafting reminders... done</div>
           <div><span class="p">✓</span> 0 manual steps</div>
         </div>
       </div>
       <div class="reveal">
         <h2><span class="dim">I automated</span> my own work first</h2>
-        <p class="bio">Honest version: I'm at the start of my freelance journey. I got here by building practical systems that handle repetitive work — collecting data, cleaning spreadsheets, generating reports and running scheduled tasks. That's what I offer: small, useful automation built around how you already work. Starter prices, fixed quotes, and you own the code. Based in South Africa, working with anyone anywhere.</p>
+        <p class="bio">Honest version: I'm at the start of my freelance journey. I got here by building practical systems that handle repetitive work — cleaning spreadsheets, generating reports, running scheduled tasks — and by making promo videos for brands. Starter prices, fixed quotes, and you own what I build. Based in South Africa, working with anyone anywhere.</p>
         <div class="stats">
-          <div class="stat"><div class="lbl">Time automation can save every week</div><div class="num">12 hrs</div></div>
-          <div class="stat"><div class="lbl">Tasks handled in a single workflow</div><div class="num">7–11</div></div>
-          <div class="stat"><div class="lbl">Personal projects running daily</div><div class="num">3</div></div>
+          <div class="stat"><div class="lbl">Admin time automation can save weekly*</div><div class="num"><small>up to</small> 12 hrs</div></div>
+          <div class="stat"><div class="lbl">Video formats delivered</div><div class="num">1:1 · 16:9 · 9:16</div></div>
+          <div class="stat"><div class="lbl">Working automation examples</div><div class="num">3</div></div>
           <div class="stat"><div class="lbl">Clicks needed once it's set up</div><div class="num">0</div></div>
         </div>
+        <p class="footnote">*Example only — depends on how much repetitive admin you do now. I'll estimate it for your business before you pay anything.</p>
       </div>
     </div>
 
     <div class="marquee-wrap reveal">
       <div class="marquee" id="marquee">
-        <span><b>Invoice Reminders</b></span><span>Weekly Reports</span><span><b>Spreadsheet Cleanup</b></span><span>Appointment Reminders</span><span><b>Quote Generation</b></span><span>Booking Confirmations</span><span><b>Review Requests</b></span><span>Email Filing</span><span><b>Data Transfers</b></span><span>Data Entry</span>
+        <span><b>Invoice Reminders</b></span><span>Weekly Reports</span><span><b>Promo Videos</b></span><span>Spreadsheet Cleanup</span><span><b>Social Ads</b></span><span>Appointment Reminders</span><span><b>Quote Generation</b></span><span>Product Launch Films</span><span><b>Data Transfers</b></span><span>Email Filing</span>
       </div>
     </div>
   </div>
@@ -480,20 +174,20 @@
     </div>
     <div class="rows reveal">
       <div class="row2">
-        <div class="left"><h3>Tell me the boring task</h3><span class="when">Step 01</span></div>
-        <p>Fifteen minutes — a call or a few messages. I map exactly what eats your time and confirm whether it's automatable. This part is always free.</p>
+        <div class="left"><h3>Tell me what you need</h3><span class="when">Step 01</span></div>
+        <p>A few messages or a quick call. For automation I map what eats your time; for videos, what you're promoting and where it'll run. This part is always free.</p>
       </div>
       <div class="row2">
         <div class="left"><h3>Fixed quote, fixed scope</h3><span class="when">Step 02</span></div>
         <p>You get the price and delivery date up front, in writing. No hourly billing, no surprises. Scope changes get a new quote, not a bigger invoice.</p>
       </div>
       <div class="row2">
-        <div class="left"><h3>Build, then demo on your data</h3><span class="when">Step 03</span></div>
-        <p>I build the pipeline and show it running on your real files and accounts — not a slide deck. We adjust until it's right.</p>
+        <div class="left"><h3>Build, then show you</h3><span class="when">Step 03</span></div>
+        <p>Automations get demoed running on your real files. Videos get a draft cut for your feedback. We adjust until it's right.</p>
       </div>
       <div class="row2">
         <div class="left"><h3>Handover &amp; support</h3><span class="when">Step 04</span></div>
-        <p>You get the code, a plain-English setup guide, and two weeks of free fixes. It's yours — no lock-in, no subscription.</p>
+        <p>You get the code and a plain-English guide, or the final video files in every format you need — plus two weeks of free fixes.</p>
       </div>
     </div>
   </div>
@@ -503,37 +197,43 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="pill">Services</span>
-      <h2>What I can <span class="dim">build for</span> you</h2>
-      <p class="sub">Fixed prices, quoted before we start. These are starter rates — I'm building a reputation, and you get the deal. Built for small businesses and small teams, anywhere in the world.</p>
+      <h2>What I can <span class="dim">make for</span> you</h2>
+      <p class="sub">Fixed prices, quoted before we start. Starter rates — I'm building a reputation, and you get the deal. For small businesses and small teams, anywhere.</p>
     </div>
-    <div class="cards3">
-      <a class="scard reveal contact-trigger" href="#contact" data-service="Admin automation">
-        <div class="ico">🗂️</div>
+    <div class="cards">
+      <a class="scard featured reveal" href="#contact" data-enquiry="Promo video">
+        <div class="ico" aria-hidden="true">🎬</div>
+        <h3>Promo Videos</h3>
+        <p>Short promo videos for your product, launch or social pages — square, widescreen and vertical cuts for Instagram, TikTok, YouTube and your website.</p>
+        <div class="price">quoted per project</div>
+      </a>
+      <a class="scard reveal" href="#contact" data-enquiry="Admin automation">
+        <div class="ico" aria-hidden="true">🗂️</div>
         <h3>Admin Automation</h3>
-        <p>The office work that eats your evenings — unpaid invoices chased automatically, quotes generated from a template, appointment reminders sent before bookings, review requests after a job, emails and attachments filed where they belong.</p>
+        <p>Unpaid invoices chased, quotes generated from a template, appointment reminders before bookings, review requests after a job, attachments filed where they belong.</p>
         <div class="price">from R1,200</div>
       </a>
-      <a class="scard reveal contact-trigger" href="#contact" data-service="Reports and spreadsheets">
-        <div class="ico">📊</div>
+      <a class="scard reveal" href="#contact" data-enquiry="Reports and spreadsheets">
+        <div class="ico" aria-hidden="true">📊</div>
         <h3>Reports &amp; Spreadsheets</h3>
-        <p>A weekly sales or stock report built automatically from your exports, waiting in your inbox Monday morning. Messy spreadsheets merged, cleaned and deduplicated. Or a simple live dashboard if you want it always fresh.</p>
+        <p>A weekly sales or stock report built from your exports, waiting in your inbox on Monday. Messy spreadsheets merged, cleaned and deduplicated.</p>
         <div class="price">from R1,200</div>
       </a>
-      <a class="scard reveal contact-trigger" href="#contact" data-service="Schedules and follow-ups">
-        <div class="ico">📅</div>
+      <a class="scard reveal" href="#contact" data-enquiry="Schedules and follow-ups">
+        <div class="ico" aria-hidden="true">📅</div>
         <h3>Schedules &amp; Follow-ups</h3>
-        <p>Things that send themselves on time — social media posts, customer follow-ups, payment reminders, booking confirmations. Set the rules once, then stop thinking about it.</p>
+        <p>Customer follow-ups, payment reminders and booking confirmations that go out on time. Set the rules once, then stop thinking about it.</p>
         <div class="price">from R1,000</div>
       </a>
-      <a class="scard reveal contact-trigger" href="#contact" data-service="Data transfer and filing">
-        <div class="ico">↔</div>
+      <a class="scard reveal" href="#contact" data-enquiry="Data transfer and filing">
+        <div class="ico" aria-hidden="true">↔</div>
         <h3>Data Transfer &amp; Filing</h3>
-        <p>Move information between email, forms, spreadsheets and folders without copying and pasting. Attachments renamed and filed, customer lists updated, and clean exports prepared automatically.</p>
+        <p>Move information between email, forms, spreadsheets and folders without copy-pasting. Customer lists updated and clean exports prepared.</p>
         <div class="price">from R750</div>
       </a>
     </div>
     <div class="center-cta reveal">
-      <a class="btn contact-trigger" href="#contact" data-service="Automation project">Start a project <span class="arr">↗</span></a>
+      <a class="btn" href="#contact" data-enquiry="Project enquiry">Start a project <span class="arr" aria-hidden="true">↗</span></a>
     </div>
   </div>
 </section>
@@ -546,250 +246,110 @@
     </div>
     <div class="faq reveal">
       <div class="qa">
-        <button>How experienced are you, honestly?<span class="chev">▾</span></button>
-        <div class="ans"><p>I'm new to freelancing — no client list yet. But the projects on this page are real, I built them myself, and they run every day. My prices reflect where I am, and I'd rather over-deliver for my first clients than oversell to them.</p></div>
+        <button type="button" aria-expanded="false" aria-controls="faq1">How experienced are you, honestly?<span class="chev" aria-hidden="true">▾</span></button>
+        <div class="ans" id="faq1" hidden><p>I'm new to freelancing. The automation examples on this page are real code you can read, and the videos are work I made for a real brand. My prices reflect where I am, and I'd rather over-deliver for my first clients than oversell to them.</p></div>
       </div>
       <div class="qa">
-        <button>Can my task actually be automated?<span class="chev">▾</span></button>
-        <div class="ans"><p>If it happens on a computer and follows rules — even messy ones — probably yes. Send me a description or a screen recording and I'll tell you honestly, free. If I can't build it, I'll say so instead of taking your money.</p></div>
+        <button type="button" aria-expanded="false" aria-controls="faq2">Can my task actually be automated?<span class="chev" aria-hidden="true">▾</span></button>
+        <div class="ans" id="faq2" hidden><p>If it happens on a computer and follows rules — even messy ones — probably yes. Describe it or send a screen recording and I'll tell you honestly, free. If I can't build it, I'll say so instead of taking your money.</p></div>
       </div>
       <div class="qa">
-        <button>How does pricing and payment work?<span class="chev">▾</span></button>
-        <div class="ans"><p>Fixed price, quoted before any work starts — in rand or dollars, whatever suits you. You approve the scope and the number; that's what you pay. South African clients can pay by EFT; international clients via PayPal or similar. Scope changes get a new quote, never a surprise invoice.</p></div>
+        <button type="button" aria-expanded="false" aria-controls="faq3">What does a promo video cost?<span class="chev" aria-hidden="true">▾</span></button>
+        <div class="ans" id="faq3" hidden><p>It depends on length, formats and whether you supply footage, so every video is quoted up front after a short chat. You'll know the exact price before any work starts.</p></div>
       </div>
       <div class="qa">
-        <button>Do I own the code?<span class="chev">▾</span></button>
-        <div class="ans"><p>Yes, fully. You get the source, a one-click launcher, and a plain-English setup guide. No subscriptions, no lock-in — it runs on your machine or wherever you want it.</p></div>
+        <button type="button" aria-expanded="false" aria-controls="faq4">How does pricing and payment work?<span class="chev" aria-hidden="true">▾</span></button>
+        <div class="ans" id="faq4" hidden><p>Fixed price, quoted before any work starts. You approve the scope and the number; that's what you pay. South African clients can pay by EFT; international clients via PayPal or similar.</p></div>
       </div>
       <div class="qa">
-        <button>What if it breaks after delivery?<span class="chev">▾</span></button>
-        <div class="ans"><p>Two weeks of free fixes come with every build. After that, small fixes are cheap and quoted the same way as everything else — up front.</p></div>
+        <button type="button" aria-expanded="false" aria-controls="faq5">Do I own what you make?<span class="chev" aria-hidden="true">▾</span></button>
+        <div class="ans" id="faq5" hidden><p>Yes. Automations come with the source code and a plain-English setup guide. Videos come as final files you can use anywhere. No subscriptions, no lock-in.</p></div>
       </div>
       <div class="qa">
-        <button>How fast can you deliver?<span class="chev">▾</span></button>
-        <div class="ans"><p>Small automations usually take a few days; bigger pipelines up to a week or two. You get a realistic date with the quote — I'd rather quote a week and deliver in five days than promise two days and miss it.</p></div>
+        <button type="button" aria-expanded="false" aria-controls="faq6">How fast can you deliver?<span class="chev" aria-hidden="true">▾</span></button>
+        <div class="ans" id="faq6" hidden><p>Small automations and short videos usually take a few days; bigger projects up to a week or two. You get a realistic date with the quote.</p></div>
       </div>
     </div>
   </div>
 </section>
 
 <section class="contact" id="contact">
-  <div class="fluid"></div>
+  <div class="fluid" aria-hidden="true"></div>
   <div class="wrap inner">
     <span class="pill reveal">Contact</span>
-    <h2 class="reveal"><span class="dim">Got a task you're</span> sick of doing?</h2>
-    <p class="sub reveal">Describe it in one email — no forms, no sales call. Within 24 hours you'll know if I can build it, what it costs, and how long it'll take. If it's not a fit, I'll tell you that too.</p>
+    <h2 class="reveal"><span class="dim">Got a task or a product</span> to promote?</h2>
+    <p class="sub reveal">Describe it in a few lines — no sales call needed. Within 24 hours you'll know if I can do it, what it costs, and how long it'll take. If it's not a fit, I'll tell you that too.</p>
     <div class="reveal">
-      <a class="btn solid contact-trigger" href="#contact" data-service="Automation project">Tell me the boring task <span class="arr">↗</span></a>
+      <a class="btn solid" href="mailto:dana.automates@gmail.com" data-enquiry="Project enquiry">Send me the details <span class="arr" aria-hidden="true">↗</span></a>
     </div>
-    <p class="alt reveal">Or email <a href="mailto:therondana65@gmail.com">therondana65@gmail.com</a></p>
+    <p class="alt reveal">Or email <a href="mailto:dana.automates@gmail.com">dana.automates@gmail.com</a> · WhatsApp <a href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%27d%20like%20to%20chat%20about%20a%20project." target="_blank" rel="noopener">076 560 6016</a></p>
   </div>
 </section>
 
-<div class="dialog-backdrop" id="contactDialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
-  <div class="contact-dialog">
-    <div class="dialog-head"><h3 id="dialogTitle">Start a project</h3><button class="dialog-close" type="button" aria-label="Close">×</button></div>
-    <p>Tell me what repetitive task you want off your plate.</p>
-    <label for="requestName">Your name</label><input id="requestName" autocomplete="name" placeholder="Your name">
-    <label for="requestEmail">Your email</label><input id="requestEmail" type="email" autocomplete="email" placeholder="you@business.com">
-    <label for="requestService">What do you need?</label><input id="requestService" placeholder="e.g. invoice reminders">
-    <label for="requestDetails">A few details</label><textarea id="requestDetails" placeholder="What do you do manually now, and what should happen automatically?"></textarea>
-    <input id="requestCompany" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Company">
-    <div class="dialog-actions"><button class="btn solid" type="button" id="sendRequest">Send request</button><button class="btn" type="button" id="openEmail">Open email instead</button></div>
-    <div class="email-chooser" id="emailChooser" hidden>
-      <p class="chooser-label">Which email do you use?</p>
-      <div class="chooser-btns">
-        <button type="button" class="btn" data-provider="gmail">Gmail</button>
-        <button type="button" class="btn" data-provider="outlook">Outlook</button>
-        <button type="button" class="btn" data-provider="yahoo">Yahoo</button>
-        <button type="button" class="btn" data-provider="default">Other / mail app</button>
-      </div>
+</main>
+
+<dialog class="enquiry" id="enquiry" aria-labelledby="dialogTitle">
+  <div class="dialog-head"><h2 id="dialogTitle">Start a project</h2><button class="dialog-close" type="button" aria-label="Close">×</button></div>
+  <p class="intro">Tell me what you want off your plate — or what you want to promote.</p>
+  <form id="leadForm">
+    <label for="f-name">Your name</label>
+    <input id="f-name" name="name" autocomplete="name" maxlength="120" required>
+    <label for="f-email">Your email</label>
+    <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" placeholder="you@business.com" required>
+    <label for="f-service">What do you need?</label>
+    <input id="f-service" name="service" maxlength="160" placeholder="e.g. invoice reminders, a promo video">
+    <label for="f-details">A few details</label>
+    <textarea id="f-details" name="details" minlength="5" maxlength="4000" required placeholder="What do you do manually now, or what are you promoting?"></textarea>
+    <input class="hp-field" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <p class="consent">By sending, you agree to the <a href="privacy.html">Privacy Notice</a>.</p>
+    <div class="dialog-actions">
+      <button class="btn solid" type="submit">Send request</button>
+      <button class="btn" type="button" id="openEmail" aria-expanded="false" aria-controls="emailChooser">Email me instead</button>
     </div>
-    <p class="dialog-status" id="dialogStatus" aria-live="polite"></p>
+  </form>
+  <div class="email-chooser" id="emailChooser" hidden>
+    <p class="chooser-label">Which email do you use?</p>
+    <div class="chooser-btns">
+      <button type="button" class="btn" data-provider="gmail">Gmail</button>
+      <button type="button" class="btn" data-provider="outlook">Outlook</button>
+      <button type="button" class="btn" data-provider="yahoo">Yahoo</button>
+      <button type="button" class="btn" data-provider="default">Other / mail app</button>
+    </div>
   </div>
-</div>
+  <p class="dialog-status" id="dialogStatus" role="status"></p>
+</dialog>
 
 <footer>
   <div class="wrap">
     <div class="foot">
       <div>
-        <a class="brand" href="#top"><span class="avatar"></span>Dana Theron</a>
-        <p class="tag">I automate repetitive admin for small businesses. Based in South Africa, working anywhere.</p>
-        <a class="mail" href="mailto:therondana65@gmail.com">therondana65@gmail.com</a>
+        <a class="brand" href="#top"><span class="avatar" aria-hidden="true"></span>Dana Theron</a>
+        <p class="tag">Admin automation and promo videos for small businesses. Based in South Africa, working anywhere.</p>
+        <a class="mail" href="mailto:dana.automates@gmail.com">dana.automates@gmail.com</a>
       </div>
       <div class="cols">
         <div class="col">
-          <a href="#portfolio">Portfolio</a>
+          <a href="#work">Work</a>
+          <a href="#videos">Videos</a>
           <a href="#services">Services</a>
-          <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </div>
         <div class="col">
-          <a href="mailto:therondana65@gmail.com">Email</a>
-          <a href="mailto:therondana65@gmail.com?subject=Automation%20quote">Get a quote</a>
+          <a href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%27d%20like%20to%20chat%20about%20a%20project." target="_blank" rel="noopener">WhatsApp</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="privacy.html#terms">Terms</a>
           <a href="#top">Back to top</a>
         </div>
       </div>
     </div>
     <div class="legal">
       <span>© 2026 Dana Theron</span>
-      <span><a href="#" id="openTerms">Terms &amp; Privacy</a> · Built by hand. Runs itself.</span>
+      <span>Built by hand. Runs itself.</span>
     </div>
   </div>
 </footer>
 
-<script>
-  // scroll reveal
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  // Metallic hero depth: gentle pointer parallax, disabled for touch and reduced motion.
-  const heroVisual = document.getElementById('heroVisual');
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let heroFrame;
-  const resetHero = () => {
-    heroVisual.style.setProperty('--pointer-x', '0px');
-    heroVisual.style.setProperty('--pointer-y', '0px');
-    heroVisual.style.setProperty('--tilt-x', '0deg');
-    heroVisual.style.setProperty('--tilt-y', '0deg');
-  };
-  heroVisual.addEventListener('pointermove', event => {
-    if (reducedMotion.matches || event.pointerType === 'touch') return;
-    cancelAnimationFrame(heroFrame);
-    heroFrame = requestAnimationFrame(() => {
-      const rect = heroVisual.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      heroVisual.style.setProperty('--pointer-x', `${x * 14}px`);
-      heroVisual.style.setProperty('--pointer-y', `${y * 9}px`);
-      heroVisual.style.setProperty('--tilt-x', `${y * -2.2}deg`);
-      heroVisual.style.setProperty('--tilt-y', `${x * 2.8}deg`);
-      heroVisual.style.setProperty('--shine-x', `${50 + x * 22}%`);
-      heroVisual.style.setProperty('--shine-y', `${42 + y * 18}%`);
-    });
-  });
-  heroVisual.addEventListener('pointerleave', resetHero);
-  reducedMotion.addEventListener?.('change', resetHero);
-
-  // duplicate marquee content for seamless loop
-  const mq = document.getElementById('marquee');
-  mq.innerHTML += mq.innerHTML;
-
-  // FAQ accordion
-  document.querySelectorAll('.qa button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const qa = btn.parentElement;
-      const wasOpen = qa.classList.contains('open');
-      document.querySelectorAll('.qa.open').forEach(o => o.classList.remove('open'));
-      if (!wasOpen) qa.classList.add('open');
-    });
-  });
-
-  // Contact dialog works without relying on a desktop email app
-  const dialog = document.getElementById('contactDialog');
-  const serviceInput = document.getElementById('requestService');
-  const status = document.getElementById('dialogStatus');
-  const closeDialog = () => { dialog.classList.remove('open'); document.body.style.overflow = ''; };
-  document.querySelectorAll('.contact-trigger').forEach(link => link.addEventListener('click', event => {
-    event.preventDefault();
-    serviceInput.value = link.dataset.service || '';
-    status.textContent = '';
-    dialog.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('requestName').focus(), 0);
-  }));
-  dialog.querySelector('.dialog-close').addEventListener('click', closeDialog);
-  dialog.addEventListener('click', event => { if (event.target === dialog) closeDialog(); });
-  document.addEventListener('keydown', event => { if (event.key === 'Escape') closeDialog(); });
-  const LEAD_ENDPOINT = 'https://kcgfunowuvfovknqkmuc.supabase.co/functions/v1/submit-lead';
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const fields = () => ({
-    name: document.getElementById('requestName').value.trim(),
-    email: document.getElementById('requestEmail').value.trim(),
-    service: serviceInput.value.trim() || 'Automation project',
-    details: document.getElementById('requestDetails').value.trim(),
-    company: document.getElementById('requestCompany').value.trim(), // honeypot
-  });
-  const setStatus = (msg, ok) => { status.style.color = ok === false ? '#ff8f8f' : (ok ? '#3ddc84' : ''); status.textContent = msg; };
-
-  const sendBtn = document.getElementById('sendRequest');
-  sendBtn.addEventListener('click', async () => {
-    const f = fields();
-    if (!EMAIL_RE.test(f.email)) { setStatus('Please enter a valid email so I can reply.', false); return; }
-    if (f.details.length < 5) { setStatus('Add a line or two about the task.', false); return; }
-    sendBtn.disabled = true; setStatus('Sending…');
-    try {
-      const res = await fetch(LEAD_ENDPOINT, {
-        method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(f),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (res.ok && data.ok) {
-        setStatus("Got it — I'll reply within 24 hours. Thanks!", true);
-        ['requestName', 'requestEmail', 'requestDetails'].forEach(id => { document.getElementById(id).value = ''; });
-      } else {
-        setStatus(data.error || 'Something went wrong. Try “Open email instead”.', false);
-      }
-    } catch {
-      setStatus('Network issue — please use “Open email instead”.', false);
-    } finally {
-      sendBtn.disabled = false;
-    }
-  });
-
-  // "Open email instead" — pick a provider and open its compose window prefilled.
-  // Reliable fallback for visitors with no desktop mail app (plain mailto opens nothing).
-  const chooser = document.getElementById('emailChooser');
-  function composeUrls(f) {
-    const to = 'therondana65@gmail.com';
-    const subject = `Automation enquiry: ${f.service}`;
-    const body = `Hi Dana,\n\nName: ${f.name || 'Not provided'}\nEmail: ${f.email || 'Not provided'}\nProject: ${f.service}\n\n${f.details || 'I would like to discuss an automation project.'}`;
-    const t = encodeURIComponent(to), s = encodeURIComponent(subject), b = encodeURIComponent(body);
-    return {
-      gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${t}&su=${s}&body=${b}`,
-      outlook: `https://outlook.live.com/mail/0/deeplink/compose?to=${t}&subject=${s}&body=${b}`,
-      yahoo: `https://compose.mail.yahoo.com/?to=${t}&subject=${s}&body=${b}`,
-      default: `mailto:${to}?subject=${s}&body=${b}`,
-    };
-  }
-  document.getElementById('openEmail').addEventListener('click', () => {
-    chooser.hidden = !chooser.hidden;
-    setStatus(chooser.hidden ? '' : 'Pick your email provider below.');
-  });
-  chooser.querySelectorAll('[data-provider]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const url = composeUrls(fields())[btn.dataset.provider];
-      if (btn.dataset.provider === 'default') {
-        window.location.href = url;
-      } else {
-        window.open(url, '_blank', 'noopener');
-      }
-      setStatus('Opening your email…');
-    });
-  });
-
-  // First-visit terms gate (remembered, so returning visitors aren't blocked)
-  (function () {
-    const gate = document.getElementById('termsGate');
-    if (!gate) return;
-    const KEY = 'dana_terms_accepted_v1';
-    const show = () => { gate.classList.remove('hidden'); document.body.style.overflow = 'hidden'; gate.querySelector('.gate-terms').focus(); };
-    const hide = () => { gate.classList.add('hidden'); document.body.style.overflow = ''; };
-    let accepted = false;
-    try { accepted = !!localStorage.getItem(KEY); } catch (e) {}
-    if (accepted) { hide(); } else { show(); }
-    document.getElementById('gateAccept').addEventListener('click', () => {
-      try { localStorage.setItem(KEY, new Date().toISOString()); } catch (e) {}
-      hide();
-    });
-    document.getElementById('gateDecline').addEventListener('click', (e) => {
-      e.preventDefault(); window.location.href = 'https://www.google.com';
-    });
-    const reopen = document.getElementById('openTerms');
-    if (reopen) reopen.addEventListener('click', (e) => { e.preventDefault(); show(); window.scrollTo(0, 0); });
-  })();
-</script>
+<a class="wa-float" href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%27d%20like%20to%20chat%20about%20a%20project." target="_blank" rel="noopener" aria-label="Chat with Dana on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg><span>WhatsApp me</span></a>
 
 </body>
 </html>

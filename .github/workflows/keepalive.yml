@@ -1,0 +1,20 @@
+# Supabase free tier pauses after ~7 days without activity, which silently breaks the contact form.
+# This pings the database twice a week with the public (publishable) key. RLS still denies reading
+# anything — the "permission denied" (42501) reply proves the request reached Postgres.
+name: Supabase keep-alive
+
+on:
+  schedule:
+    - cron: "0 6 * * 1,4"   # Mon + Thu, 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping database
+        run: |
+          body=$(curl -s "https://kcgfunowuvfovknqkmuc.supabase.co/rest/v1/leads?select=id&limit=1" \
+            -H "apikey: sb_publishable_Kna0k2GyBtFZ2ZQnpQscIA_FZ9bAof_")
+          echo "$body"
+          echo "$body" | grep -q '42501' || { echo "::error::Supabase did not answer from Postgres - project may be paused"; exit 1; }

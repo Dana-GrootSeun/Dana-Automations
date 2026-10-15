@@ -11,7 +11,7 @@ Invoices chased. Reports built. Spreadsheets cleaned. Follow-ups sent.
 [![Tests](https://img.shields.io/badge/TESTS-4_PASSING-16A34A?style=for-the-badge&logo=checkmarx&logoColor=white)](tests/)
 [![Cloudflare](https://img.shields.io/badge/DEPLOYED-CLOUDFLARE-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://workers.cloudflare.com/)
 
-[Website](https://dana-automates.therondana65.workers.dev) · [Web Dashboard](dashboard.html) · [Automation Guide](automations/README.md) · [Source Code](automations/) · [Contact](mailto:therondana65@gmail.com)
+[Website](https://dana-automates.therondana65.workers.dev) · [Automation Guide](automations/README.md) · [Source Code](automations/) · [Contact](mailto:dana.automates@gmail.com)
 
 </div>
 
@@ -24,14 +24,12 @@ The goal is simple: **turn a task someone repeats every week into a reliable wor
 ## Showcase
 
 <p align="center">
-  <a href="dashboard.html">
-    <img src="assets/dashboard-web.png" alt="Dana Automates responsive web business dashboard" width="100%">
+  <a href="https://dana-automates.therondana65.workers.dev">
+    <img src="assets/og-image.png" alt="Dana Automates — admin automation and promo videos for small businesses" width="100%">
   </a>
 </p>
 
-The responsive web dashboard represents an honest starter business: **8 clients, 6 active clients and R10,800 in sample revenue**. It includes period switching, client search, CSV export, accessible chart summaries, an invoice pipeline and recent automation activity.
-
-> **[Open the professional web dashboard →](dashboard.html)**
+> **[Visit the live website →](https://dana-automates.therondana65.workers.dev)**
 
 ## Why Dana Automates
 
@@ -117,11 +115,10 @@ Dana-Automations/
 │   ├── invoice_reminders.py
 │   ├── spreadsheet_cleanup.py
 │   └── weekly_report.py
-├── assets/                       # README and dashboard showcase images
+├── assets/                       # Images, share image and promo video previews
 ├── examples/                     # Safe sample data
 ├── tests/                        # Automated behaviour tests
 ├── index.html                    # Live portfolio website
-├── dashboard.html                # Responsive business dashboard
 ├── _headers                      # Cloudflare security headers
 └── README.md
 ```
@@ -144,7 +141,8 @@ Dana-Automations/
 - [x] Customer spreadsheet cleanup
 - [x] Weekly sales summary
 - [x] Interactive Excel business dashboard
-- [ ] Real enquiry delivery from the website contact form
+- [x] Real enquiry delivery from the website contact form (Supabase + email alert)
+- [x] Promo video service with portfolio previews
 - [ ] Outlook/Gmail adapter with approval step
 - [ ] Scheduled weekly report delivery
 - [ ] First anonymised client case study
@@ -157,7 +155,7 @@ Sample names, email addresses and business records in this repository are fictio
 
 Have a repetitive task that should run itself?
 
-**[Visit the website](https://dana-automates.therondana65.workers.dev)** · **[Email Dana](mailto:therondana65@gmail.com)**
+**[Visit the website](https://dana-automates.therondana65.workers.dev)** · **[Email Dana](mailto:dana.automates@gmail.com)**
 
 ---
 
