@@ -19,3 +19,10 @@ __pycache__
 *.pyc
 wrangler.jsonc
 wrangler.toml
+.env*
+.dev.vars*
+.npmrc
+.nvmrc
+.nvm
+*.pem
+*.key
