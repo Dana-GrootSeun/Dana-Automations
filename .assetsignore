@@ -1,0 +1,21 @@
+# Cloudflare serves this folder as the website. Only the site files should be public;
+# everything below stays in the repo but is never served.
+.git
+.github
+.gitignore
+.assetsignore
+.codex*
+.wrangler
+AGENTS.md
+README.md
+automations
+examples
+outputs
+output
+tests
+node_modules
+__pycache__
+*.py
+*.pyc
+wrangler.jsonc
+wrangler.toml
