@@ -14,7 +14,8 @@ if (reducedMotion.matches || !('IntersectionObserver' in window)) {
   reveals.forEach((el) => io.observe(el));
 }
 
-// Hero: gentle pointer parallax (mouse only, off for reduced motion)
+// Hero: gentle pointer parallax (mouse only, off for reduced motion).
+// The scroll turn is pure CSS (scroll timeline) so it stays smooth on phones.
 const heroVisual = document.getElementById('heroVisual');
 if (heroVisual) {
   let frame;
@@ -35,17 +36,6 @@ if (heroVisual) {
     ['--pointer-x', '--pointer-y'].forEach((p) => heroVisual.style.setProperty(p, '0px'));
     ['--tilt-x', '--tilt-y'].forEach((p) => heroVisual.style.setProperty(p, '0deg'));
   });
-
-  // The orb turns as you scroll (on top of its own slow spin)
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (reducedMotion.matches || ticking || window.scrollY > 1400) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      heroVisual.style.setProperty('--scroll-rot', `${window.scrollY * 0.15}deg`);
-      ticking = false;
-    });
-  }, { passive: true });
 }
 
 // Automation cards: number each step so they light up one after another

@@ -87,16 +87,19 @@ h1, h2 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.12; }
 .hero .wrap > :nth-child(4) { animation-delay: 0.24s; }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
 
-/* hero orb: tilts with the mouse, turns as you scroll, spins on its own and floats */
+/* hero orb: spins and floats on its own, turns as you scroll, tilts with a mouse.
+   Every moving layer runs on the GPU compositor (no per-frame JS) so phones don't stutter. */
 .blob-stage {
-  --pointer-x: 0px; --pointer-y: 0px; --tilt-x: 0deg; --tilt-y: 0deg; --scroll-rot: 0deg;
-  position: relative; display: grid; place-items: center; overflow: hidden;
-  padding: 28px 0 0; perspective: 1000px;
+  --pointer-x: 0px; --pointer-y: 0px; --tilt-x: 0deg; --tilt-y: 0deg;
+  position: relative; display: grid; place-items: center;
+  overflow: hidden; overflow: clip; /* the spinning square's corners would widen the page */
+  padding: 28px 0 0;
 }
 .blob-stage::before { /* soft breathing glow behind the orb */
   content: ""; position: absolute; width: min(560px, 90vw); aspect-ratio: 1; border-radius: 50%;
   background: radial-gradient(circle, rgba(120,150,255,0.16), rgba(120,150,255,0.04) 45%, transparent 70%);
   animation: breathe 6s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 @keyframes breathe { 50% { transform: scale(1.12); opacity: 0.6; } }
 .blob-stage::after {
@@ -104,20 +107,36 @@ h1, h2 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.12; }
   background: linear-gradient(to bottom, transparent 62%, var(--bg));
   pointer-events: none;
 }
-.orb-tilt {
-  transform: translate3d(var(--pointer-x), var(--pointer-y), 0) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
-  transition: transform 260ms cubic-bezier(.2,.8,.2,1);
-  animation: orb-in 1.4s 0.2s cubic-bezier(.2,.8,.2,1) both;
-}
+.orb-tilt { animation: orb-in 1.4s 0.2s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes orb-in { from { opacity: 0; scale: 0.85; } }
-.orb-scroll { transform: rotate(var(--scroll-rot)); animation: float 7s ease-in-out infinite; }
+.orb-scroll { animation: float 7s ease-in-out infinite; will-change: translate; }
 @keyframes float { 50% { translate: 0 -12px; } }
 .orb {
   display: block; width: min(460px, 78vw); height: auto;
   user-select: none; pointer-events: none;
   animation: spin 60s linear infinite;
+  will-change: rotate; backface-visibility: hidden;
 }
 @keyframes spin { to { rotate: 360deg; } }
+/* scroll turn: driven by the browser's own scroll timeline, so it tracks the finger exactly.
+   Browsers without scroll timelines simply keep the slow spin. */
+@supports (animation-timeline: scroll()) {
+  .orb-scroll {
+    animation: float 7s ease-in-out infinite, scroll-turn linear both;
+    animation-timeline: auto, scroll(root block);
+    animation-range: normal, 0px 1400px;
+    will-change: translate, rotate;
+  }
+}
+@keyframes scroll-turn { to { rotate: 210deg; } }
+/* 3D mouse tilt: only on devices with a real mouse (3D layers flicker on some phones) */
+@media (hover: hover) and (pointer: fine) {
+  .blob-stage { perspective: 1000px; }
+  .orb-tilt {
+    transform: translate3d(var(--pointer-x), var(--pointer-y), 0) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    transition: transform 260ms cubic-bezier(.2,.8,.2,1);
+  }
+}
 
 /* sections */
 section { padding: 110px 0; scroll-margin-top: 72px; }
