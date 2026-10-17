@@ -25,6 +25,7 @@ a { color: inherit; }
 .mint { --accent: var(--mint); }
 .coral { --accent: var(--coral); }
 .blue { --accent: var(--blue); }
+.white { --accent: var(--white); }
 
 .squares { display: flex; gap: 6px; margin-bottom: 18px; }
 .squares i { width: 14px; height: 14px; display: block; background: var(--accent); }
@@ -72,5 +73,3 @@ h2 { font-size: 13px; font-family: var(--mono); letter-spacing: 0.08em; text-tra
 
 .creds { border-top: 1px solid var(--border); padding-top: 20px; color: var(--gray); font-size: 13.5px; display: grid; gap: 6px; }
 .creds b { color: var(--white); font-weight: 600; }
-footer { margin-top: 28px; font-size: 13px; color: var(--gray); }
-footer a { color: var(--white); }
