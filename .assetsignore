@@ -26,3 +26,5 @@ wrangler.toml
 .nvm
 *.pem
 *.key
+worker
+tools

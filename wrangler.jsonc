@@ -1,0 +1,12 @@
+{
+  // Static site served from the repo root. Only .mp4 requests run the Worker first,
+  // so it can answer Range requests: Safari/iPhone won't play video without 206 responses.
+  "name": "dana-automates",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": ["/*.mp4"]
+  }
+}
