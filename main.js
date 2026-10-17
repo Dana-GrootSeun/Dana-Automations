@@ -14,8 +14,14 @@ if (reducedMotion.matches || !('IntersectionObserver' in window)) {
   reveals.forEach((el) => io.observe(el));
 }
 
+// Hero orb video: hold the still frame for people who prefer reduced motion.
+const heroOrb = document.getElementById('heroOrb');
+if (heroOrb && reducedMotion.matches) {
+  heroOrb.removeAttribute('autoplay');
+  heroOrb.pause();
+}
+
 // Hero: gentle pointer parallax (mouse only, off for reduced motion).
-// The scroll turn is pure CSS (scroll timeline) so it stays smooth on phones.
 const heroVisual = document.getElementById('heroVisual');
 if (heroVisual) {
   let frame;

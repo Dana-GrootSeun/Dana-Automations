@@ -87,55 +87,41 @@ h1, h2 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.12; }
 .hero .wrap > :nth-child(4) { animation-delay: 0.24s; }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
 
-/* hero orb: spins and floats on its own, turns as you scroll, tilts with a mouse.
-   Every moving layer runs on the GPU compositor (no per-frame JS) so phones don't stutter. */
+/* hero orb: the spin, float and breathing glow are baked into one looping video
+   (tools/render_hero_orb.py). Phones decode video in hardware, so scrolling stays smooth;
+   stacked CSS animations under the blurred nav glitched in iPhone Safari. */
 .blob-stage {
   --pointer-x: 0px; --pointer-y: 0px; --tilt-x: 0deg; --tilt-y: 0deg;
   position: relative; display: grid; place-items: center;
-  overflow: hidden; overflow: clip; /* the spinning square's corners would widen the page */
+  overflow: hidden; overflow: clip;
   padding: 28px 0 0;
 }
-.blob-stage::before { /* soft breathing glow behind the orb */
-  content: ""; position: absolute; width: min(560px, 90vw); aspect-ratio: 1; border-radius: 50%;
-  background: radial-gradient(circle, rgba(120,150,255,0.16), rgba(120,150,255,0.04) 45%, transparent 70%);
-  animation: breathe 6s ease-in-out infinite;
-  will-change: transform, opacity;
-}
-@keyframes breathe { 50% { transform: scale(1.12); opacity: 0.6; } }
 .blob-stage::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(to bottom, transparent 62%, var(--bg));
   pointer-events: none;
 }
 .orb-tilt { animation: orb-in 1.4s 0.2s cubic-bezier(.2,.8,.2,1) both; }
-@keyframes orb-in { from { opacity: 0; scale: 0.85; } }
-.orb-scroll { animation: float 7s ease-in-out infinite; will-change: translate; }
-@keyframes float { 50% { translate: 0 -12px; } }
+@keyframes orb-in { from { opacity: 0; } }
 .orb {
-  display: block; width: min(460px, 78vw); height: auto;
-  user-select: none; pointer-events: none;
-  animation: spin 60s linear infinite;
-  will-change: rotate; backface-visibility: hidden;
+  display: block; width: min(560px, 90vw); height: auto; aspect-ratio: 1;
+  background: var(--bg); user-select: none; pointer-events: none;
 }
-@keyframes spin { to { rotate: 360deg; } }
-/* scroll turn: driven by the browser's own scroll timeline, so it tracks the finger exactly.
-   Browsers without scroll timelines simply keep the slow spin. */
-@supports (animation-timeline: scroll()) {
-  .orb-scroll {
-    animation: float 7s ease-in-out infinite, scroll-turn linear both;
-    animation-timeline: auto, scroll(root block);
-    animation-range: normal, 0px 1400px;
-    will-change: translate, rotate;
-  }
-}
-@keyframes scroll-turn { to { rotate: 210deg; } }
-/* 3D mouse tilt: only on devices with a real mouse (3D layers flicker on some phones) */
+/* mouse devices only: the orb also turns as you scroll and tilts toward the pointer */
 @media (hover: hover) and (pointer: fine) {
+  @supports (animation-timeline: scroll()) {
+    .orb-scroll { animation: scroll-turn linear both; animation-timeline: scroll(root block); animation-range: 0px 1400px; }
+  }
   .blob-stage { perspective: 1000px; }
   .orb-tilt {
     transform: translate3d(var(--pointer-x), var(--pointer-y), 0) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
     transition: transform 260ms cubic-bezier(.2,.8,.2,1);
   }
+}
+@keyframes scroll-turn { to { rotate: 210deg; } }
+/* touch screens: a live blur over moving video is expensive in iPhone Safari, so use a solid bar */
+@media (hover: none) {
+  nav { background: rgba(0,0,0,0.94); backdrop-filter: none; -webkit-backdrop-filter: none; }
 }
 
 /* sections */
@@ -353,7 +339,7 @@ footer { border-top: 1px solid var(--border); padding: 64px 0 40px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero .wrap > *, .blob-stage::before, .orb-tilt, .orb-scroll, .orb,
+  .hero .wrap > *, .orb-tilt, .orb-scroll,
   .pipeflow .node, .marquee, .contact .fluid { animation: none; }
   .orb-tilt { transform: none; transition: none; }
   .js .reveal { opacity: 1; transform: none; transition: none; }

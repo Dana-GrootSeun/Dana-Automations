@@ -17,7 +17,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" as="image" href="assets/hero-orb.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/hero-orb-poster.webp" fetchpriority="high">
 <link rel="stylesheet" href="styles.css">
 <script src="main.js" defer></script>
 </head>
@@ -49,7 +49,9 @@
   <div class="blob-stage" id="heroVisual" aria-hidden="true">
     <div class="orb-tilt">
       <div class="orb-scroll">
-        <img class="orb" src="assets/hero-orb.webp" alt="" width="870" height="870" fetchpriority="high" decoding="async">
+        <video class="orb" id="heroOrb" autoplay muted loop playsinline disablepictureinpicture preload="auto" poster="assets/hero-orb-poster.webp" width="720" height="720">
+          <source src="assets/hero-orb.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </div>
