@@ -59,6 +59,9 @@ h1 { font-size: clamp(30px, 8.5vw, 42px); line-height: 1.08; font-weight: 800; l
   border: 1px solid var(--border-strong); background: var(--card); border-radius: 12px;
 }
 .btn.full { grid-column: 1 / -1; }
+.btn svg { width: 18px; height: 18px; flex: 0 0 18px; }
+.btn svg.wa { color: #25d366; }
+.sprite { display: none; }
 .btn.primary { background: var(--white); color: #000; border-color: var(--white); font-size: 16px; }
 .btn:active { transform: scale(0.98); }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
