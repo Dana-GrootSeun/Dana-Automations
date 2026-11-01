@@ -47,6 +47,9 @@ h1 { font-size: clamp(30px, 8.5vw, 42px); line-height: 1.08; font-weight: 800; l
   border: 1px solid var(--border-strong); background: rgba(0, 0, 0, 0.7); color: var(--white);
   font: 600 12px var(--sans); padding: 7px 11px; border-radius: 999px; cursor: pointer;
 }
+.sound.pulse { animation: pulse 1.8s ease-in-out infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 6px rgba(111, 211, 160, 0.35); border-color: var(--mint); } }
+@media (prefers-reduced-motion: reduce) { .sound.pulse { animation: none; border-color: var(--mint); } }
 .caption { font-family: var(--mono); font-size: 12px; color: var(--gray); margin-top: -8px; }
 
 .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 22px 0 36px; }
@@ -58,6 +61,12 @@ h1 { font-size: clamp(30px, 8.5vw, 42px); line-height: 1.08; font-weight: 800; l
 .btn.full { grid-column: 1 / -1; }
 .btn.primary { background: var(--white); color: #000; border-color: var(--white); font-size: 16px; }
 .btn:active { transform: scale(0.98); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
+
+.cta { border: 1px solid var(--border-strong); border-radius: 14px; padding: 20px 18px 0; margin-bottom: 36px; }
+.cta h2 { margin-bottom: 6px; }
+.cta p { color: #c9c9c9; font-size: 15px; }
+.cta .actions { margin: 16px 0 18px; }
 
 h2 { font-size: 13px; font-family: var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); font-weight: 500; margin-bottom: 14px; }
 .proof { display: grid; gap: 12px; margin-bottom: 36px; }
