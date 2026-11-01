@@ -27,6 +27,7 @@ a { color: inherit; }
 .coral { --accent: var(--coral); }
 .blue { --accent: var(--blue); }
 .white { --accent: var(--white); }
+.pink { --accent: var(--pink); }
 
 .squares { display: flex; gap: 6px; margin-bottom: 18px; }
 .squares i { width: 14px; height: 14px; display: block; background: var(--accent); }
