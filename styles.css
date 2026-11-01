@@ -184,9 +184,11 @@ section { padding: 110px 0; scroll-margin-top: 72px; }
 .portrait .term .p { color: var(--green); }
 .about h2 { font-size: clamp(28px, 3.6vw, 42px); }
 .about .bio { color: var(--gray); font-size: 15px; margin-top: 18px; max-width: 480px; }
-.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 24px; margin-top: 44px; }
+/* 200px min = widest number ("1:1 · 16:9 · 9:16") on one line; narrower drops to 1 column */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 36px 24px; margin-top: 44px; }
+.stat { display: flex; flex-direction: column; }
 .stat .lbl { color: var(--gray); font-size: 13px; }
-.stat .num { font-size: clamp(34px, 4vw, 46px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; }
+.stat .num { margin-top: auto; /* numbers line up even when labels wrap differently */ font-size: clamp(34px, 4vw, 46px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; }
 .stat .num small { font-size: 0.45em; font-weight: 500; color: var(--gray); letter-spacing: 0; }
 .footnote { color: var(--gray-dim); font-size: 12px; margin-top: 18px; }
 
