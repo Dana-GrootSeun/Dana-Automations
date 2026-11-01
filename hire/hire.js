@@ -24,7 +24,7 @@ reel.play().then(show).catch(() => {
   reel.play();
   show();
   const firstTap = (event) => {
-    if (event.target.closest("a, button")) return; // links and the sound button handle themselves
+    if (event.target.closest("a, button, video")) return; // links, buttons and the Opti film handle themselves
     document.removeEventListener("click", firstTap);
     if (reel.muted) unmute();
   };
