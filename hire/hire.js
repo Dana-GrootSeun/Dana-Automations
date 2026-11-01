@@ -1,6 +1,6 @@
 const reel = document.getElementById("reel");
 const sound = document.getElementById("sound");
-const opti = document.querySelector(".film video");
+const films = [...document.querySelectorAll(".film video")];
 
 function show() {
   sound.textContent = reel.muted ? "Tap for sound" : "Mute";
@@ -8,10 +8,10 @@ function show() {
   sound.classList.toggle("pulse", reel.muted);
 }
 
-// Only one video makes sound at a time: the showreel's sound pauses the Opti film,
-// and playing the Opti film mutes the showreel (it keeps playing silently).
+// Only one video makes sound at a time: the showreel's sound pauses the films,
+// and playing a film mutes the showreel (it keeps playing silently) and pauses the other films.
 function unmute() {
-  opti.pause();
+  films.forEach((f) => f.pause());
   reel.muted = false;
   reel.currentTime = 0;
   reel.play().catch(() => { reel.muted = true; reel.play(); show(); });
@@ -28,16 +28,17 @@ reel.play().then(show).catch(() => {
   reel.play();
   show();
   const firstTap = (event) => {
-    if (event.target.closest("a, button, video")) return; // links, buttons and the Opti film handle themselves
+    if (event.target.closest("a, button, video")) return; // links, buttons and the films handle themselves
     document.removeEventListener("click", firstTap);
-    if (reel.muted && opti.paused) unmute(); // don't interrupt someone watching the Opti film
+    if (reel.muted && films.every((f) => f.paused)) unmute(); // don't interrupt someone watching a film
   };
   document.addEventListener("click", firstTap);
 });
 
-opti.addEventListener("play", () => {
+films.forEach((film) => film.addEventListener("play", () => {
+  films.forEach((f) => { if (f !== film) f.pause(); });
   if (!reel.muted) { reel.muted = true; show(); }
-});
+}));
 
 sound.addEventListener("click", () => {
   if (reel.muted) unmute();
