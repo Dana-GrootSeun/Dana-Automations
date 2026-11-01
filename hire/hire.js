@@ -1,5 +1,6 @@
 const reel = document.getElementById("reel");
 const sound = document.getElementById("sound");
+const opti = document.querySelector(".film video");
 
 function show() {
   sound.textContent = reel.muted ? "Tap for sound" : "Mute";
@@ -7,7 +8,10 @@ function show() {
   sound.classList.toggle("pulse", reel.muted);
 }
 
+// Only one video makes sound at a time: the showreel's sound pauses the Opti film,
+// and playing the Opti film mutes the showreel (it keeps playing silently).
 function unmute() {
+  opti.pause();
   reel.muted = false;
   reel.currentTime = 0;
   reel.play().catch(() => { reel.muted = true; reel.play(); show(); });
@@ -26,9 +30,13 @@ reel.play().then(show).catch(() => {
   const firstTap = (event) => {
     if (event.target.closest("a, button, video")) return; // links, buttons and the Opti film handle themselves
     document.removeEventListener("click", firstTap);
-    if (reel.muted) unmute();
+    if (reel.muted && opti.paused) unmute(); // don't interrupt someone watching the Opti film
   };
   document.addEventListener("click", firstTap);
+});
+
+opti.addEventListener("play", () => {
+  if (!reel.muted) { reel.muted = true; show(); }
 });
 
 sound.addEventListener("click", () => {
