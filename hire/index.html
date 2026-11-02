@@ -21,89 +21,125 @@
 <!-- Icons: Simple Icons (CC0) for WhatsApp/LinkedIn, Lucide (ISC) for the rest. -->
 <svg class="sprite" aria-hidden="true">
   <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
-  <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
-  <symbol id="i-add" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></symbol>
   <symbol id="i-dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></symbol>
 </svg>
 
-<main class="wrap">
+<header class="bar">
+  <a class="wordmark" href="/">Dana Theron</a>
+  <nav aria-label="Page">
+    <a href="#work">Work</a>
+    <a href="Dana-Theron-CV.pdf" download>CV</a>
+    <a class="bar-action" href="mailto:therondana65@gmail.com?subject=Hi%20Dana">Email me</a>
+  </nav>
+</header>
 
-  <div class="squares" aria-hidden="true"><i class="mint"></i><i class="coral"></i><i class="blue"></i></div>
-  <p class="eyebrow">Dana Theron · AI / Creative / Digital</p>
-  <h1>I build AI tools and make content people actually watch.</h1>
-  <p class="lede">Looking for a full-time role where I can automate the busywork and make the content. Proof below.</p>
-  <span class="avail">Available from January 2027 · Cape Town or remote · Open to startups &amp; creative teams</span>
+<main>
 
-  <div class="reel">
-    <video id="reel" src="showreel.mp4" poster="poster.jpg" muted loop playsinline preload="metadata" aria-label="Showreel by Dana Theron"></video>
-    <button class="sound" id="sound" type="button" aria-pressed="false">Tap for sound</button>
-  </div>
-  <p class="caption">// Short showreel. Made 100% in code with AI, no video editor.</p>
-
-  <div class="actions">
-    <a class="btn primary full" href="dana-theron.vcf" download><svg aria-hidden="true"><use href="#i-add"/></svg>Save my contact</a>
-    <a class="btn" href="mailto:therondana65@gmail.com?subject=Hi%20Dana"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email me</a>
-    <a class="btn" href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%20saw%20your%20hire%20page." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
-    <a class="btn" href="https://www.linkedin.com/in/danatheron" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
-    <a class="btn" href="Dana-Theron-CV.pdf" download><svg aria-hidden="true"><use href="#i-dl"/></svg>Download CV</a>
-  </div>
-
-  <h2>Proof, not promises</h2>
-  <div class="proof">
-    <article class="card pink">
-      <div class="num">Promo videos</div>
-      <h3>Launch films and ads for businesses</h3>
-      <p>Short promotional videos made in code with AI: the story, motion, product shots and sound. Like this 30-second launch film for Opti's health &amp; fitness range.</p>
-      <figure class="film">
-        <video src="opti-launch-film.mp4" poster="opti-poster.jpg" controls playsinline preload="none" aria-label="30-second launch film for Opti"></video>
-        <figcaption>// Launch film for Opti · 30s · made in code</figcaption>
-      </figure>
-    </article>
-    <article class="card mint">
-      <div class="num">Stock system</div>
-      <h3>A stock management app I designed and built</h3>
-      <p>Spotted a stock-tracking problem at Virgin Active Lourensford and built a stock management system for it: barcode search, shift stock counts, a manager logbook, PDF reports, price history and backups.</p>
-    </article>
-    <article class="card coral">
-      <div class="num">Short-form content</div>
-      <h3>Clips and videos for streamers</h3>
-      <p>I turn long streams into short-form clips for TikTok, Reels and Shorts, using an AI pipeline I set up: it finds the best moments, reframes them to vertical and adds word-by-word captions.</p>
-    </article>
-    <article class="card blue">
-      <div class="num">IBM AI certified</div>
-      <h3>AI Engineering Professional Certificate</h3>
-      <p>Machine learning, deep learning and Python, plus Google AI Essentials. I use AI every day to build real software, like the stock system above and the videos on this page.</p>
-      <a href="https://github.com/Dana-GrootSeun/Dana-Automations" target="_blank" rel="noopener">See my code on GitHub →</a>
-    </article>
-    <article class="card white">
-      <div class="num">Live website</div>
-      <h3>Dana Automates, a site I designed and built</h3>
-      <p>My own small-business automation site: hand-coded, with a working contact form, promo videos and security headers, deployed on Cloudflare.</p>
-      <a href="/">Visit the site →</a>
-    </article>
-  </div>
-
-  <h2>What I'd do for your team</h2>
-  <ul class="do">
-    <li class="mint">Find the repetitive admin and automate it.</li>
-    <li class="coral">Build simple internal tools: stock, reports, dashboards.</li>
-    <li class="blue">Make clear content and promo videos about what you do.</li>
-  </ul>
-
-  <section class="cta">
-    <h2>Let's talk</h2>
-    <p>Got a role, or a team drowning in admin? Send me a message.</p>
-    <div class="actions">
-      <a class="btn primary" href="mailto:therondana65@gmail.com?subject=Hi%20Dana"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email me</a>
-      <a class="btn" href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%20saw%20your%20hire%20page." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+  <section class="hero">
+    <div class="wrap">
+      <h1 class="rise">Dana Theron. AI tools and videos.</h1>
+      <div class="hero-text">
+        <p class="lede rise">Looking for a full-time role where I can automate the busywork and make the content. Proof below.</p>
+        <p class="avail rise">Available from January 2027 · Cape Town or remote · Open to startups &amp; creative teams</p>
+      </div>
+    </div>
+    <div class="reel rise">
+      <video id="reel" src="showreel.mp4" poster="poster.jpg" muted loop playsinline preload="metadata" aria-label="Showreel by Dana Theron"></video>
+      <button class="sound" id="sound" type="button" aria-pressed="false">Tap for sound</button>
+    </div>
+    <div class="wrap">
+      <p class="caption">Short showreel. Made 100% in code with AI, no video editor.</p>
+      <div class="actions rise">
+        <a class="btn primary" href="mailto:therondana65@gmail.com?subject=Hi%20Dana"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email me</a>
+        <a class="btn" href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%20saw%20your%20hire%20page." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+        <a class="btn" href="Dana-Theron-CV.pdf" download><svg aria-hidden="true"><use href="#i-dl"/></svg>Download CV</a>
+      </div>
+      <p class="more rise">
+        <span class="addr">therondana65@gmail.com</span>
+        <a href="https://www.linkedin.com/in/danatheron" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="dana-theron.vcf" download>Save my contact</a>
+      </p>
     </div>
   </section>
 
-  <div class="creds">
-    <div><b>Studying:</b> Sports Management degree (2nd year) · English &amp; Afrikaans</div>
-  </div>
+  <section class="work" id="work">
+    <div class="wrap">
+      <h2 class="rise">Work</h2>
+
+      <article class="promo">
+        <div class="promo-text">
+          <h3 class="rise">Promo videos</h3>
+          <p class="rise">Launch films and ads for businesses: the story, motion, product shots and sound, made in code with AI. Like these for Opti's health &amp; fitness range.</p>
+        </div>
+        <figure class="film square rise">
+          <video src="opti-launch-film.mp4" poster="opti-poster.jpg" controls playsinline preload="none" aria-label="30-second launch film for Opti"></video>
+          <figcaption>Opti launch film · square · 30s</figcaption>
+        </figure>
+        <figure class="film wide rise">
+          <video src="../assets/video/opti-nutrients.mp4" poster="../assets/video/opti-nutrients-poster.webp" controls playsinline preload="none" aria-label="30-second OptiGo nutrients ad"></video>
+          <figcaption>OptiGo nutrients ad · widescreen · 30s</figcaption>
+        </figure>
+        <figure class="film tall rise">
+          <video src="../assets/video/opti-vertical.mp4" poster="../assets/video/opti-vertical-poster.webp" controls playsinline preload="none" aria-label="27-second vertical Opti social ad"></video>
+          <figcaption>Opti social ad · vertical · 27s</figcaption>
+        </figure>
+      </article>
+
+      <div class="items">
+        <article class="item">
+          <h3 class="rise">Stock system</h3>
+          <p class="rise">A stock management app I designed and built. I spotted a stock-tracking problem at Virgin Active Lourensford and built a system for it: barcode search, shift stock counts, a manager logbook, PDF reports, price history and backups.</p>
+        </article>
+        <article class="item">
+          <h3 class="rise">Short-form content</h3>
+          <p class="rise">Clips and videos for streamers. I turn long streams into short-form clips for TikTok, Reels and Shorts with an AI pipeline I set up: it finds the best moments, reframes them to vertical and adds word-by-word captions.</p>
+        </article>
+        <article class="item">
+          <h3 class="rise">IBM AI certified</h3>
+          <p class="rise">AI Engineering Professional Certificate: machine learning, deep learning and Python, plus Google AI Essentials. I use AI every day to build real software, like the stock system and the videos on this page.</p>
+          <a class="rise" href="https://github.com/Dana-GrootSeun/Dana-Automations" target="_blank" rel="noopener">See my code on GitHub →</a>
+        </article>
+        <article class="item site">
+          <h3 class="rise">Live website</h3>
+          <p class="rise">Dana Automates, a site I designed and built: my own small-business automation site, hand-coded, with a working contact form, promo videos and security headers, deployed on Cloudflare.</p>
+          <a class="rise" href="/">Visit the site →</a>
+          <a class="shot rise" href="/" tabindex="-1" aria-hidden="true"><img src="../assets/hero-orb-poster.webp" alt="" width="640" height="640" loading="lazy"></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="offer">
+    <div class="wrap">
+      <h2 class="rise">What I'd do for your team</h2>
+      <ul>
+        <li class="rise">Find the repetitive admin and automate it.</li>
+        <li class="rise">Build simple internal tools: stock, reports, dashboards.</li>
+        <li class="rise">Make clear content and promo videos about what you do.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2 class="rise">Let's talk</h2>
+      <p class="rise">Got a role, or a team drowning in admin? Send me a message.</p>
+      <div class="actions rise">
+        <a class="btn primary" href="mailto:therondana65@gmail.com?subject=Hi%20Dana"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email me</a>
+        <a class="btn" href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%20saw%20your%20hire%20page." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+      </div>
+      <p class="addr">therondana65@gmail.com</p>
+    </div>
+  </section>
 
 </main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-name">Dana Theron</p>
+    <p>Studying a Sports Management degree (2nd year) · English &amp; Afrikaans</p>
+  </div>
+</footer>
 </body>
 </html>
