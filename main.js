@@ -22,8 +22,10 @@ if (heroOrb && reducedMotion.matches) {
 }
 
 // Hero: gentle pointer parallax (mouse only, off for reduced motion).
+// The transform goes straight onto the orb: CSS variables on the parent would restyle every child per move.
 const heroVisual = document.getElementById('heroVisual');
-if (heroVisual) {
+const orbTilt = heroVisual && heroVisual.querySelector('.orb-tilt');
+if (orbTilt) {
   let frame;
   heroVisual.addEventListener('pointermove', (event) => {
     if (reducedMotion.matches || event.pointerType !== 'mouse') return;
@@ -32,15 +34,13 @@ if (heroVisual) {
       const r = heroVisual.getBoundingClientRect();
       const x = (event.clientX - r.left) / r.width - 0.5;
       const y = (event.clientY - r.top) / r.height - 0.5;
-      heroVisual.style.setProperty('--pointer-x', `${x * 14}px`);
-      heroVisual.style.setProperty('--pointer-y', `${y * 9}px`);
-      heroVisual.style.setProperty('--tilt-x', `${y * -2.2}deg`);
-      heroVisual.style.setProperty('--tilt-y', `${x * 2.8}deg`);
+      orbTilt.style.transform =
+        `translate3d(${x * 14}px, ${y * 9}px, 0) rotateX(${y * -2.2}deg) rotateY(${x * 2.8}deg)`;
     });
   });
   heroVisual.addEventListener('pointerleave', () => {
-    ['--pointer-x', '--pointer-y'].forEach((p) => heroVisual.style.setProperty(p, '0px'));
-    ['--tilt-x', '--tilt-y'].forEach((p) => heroVisual.style.setProperty(p, '0deg'));
+    cancelAnimationFrame(frame);
+    orbTilt.style.transform = '';
   });
 }
 

@@ -30,7 +30,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .skip:focus { left: 16px; z-index: 300; background: #fff; color: #000; padding: 8px 14px; border-radius: 8px; }
 
 /* reveal: content stays visible if JS never runs (main.js adds .js) */
-.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.js .reveal { opacity: 0; transform: translateY(8px); transition: opacity 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1); }
 .js .reveal.in { opacity: 1; transform: none; }
 
 /* nav */
@@ -63,15 +63,19 @@ nav .links a:hover { color: var(--white); }
   border: 1px solid var(--border-strong); border-radius: 99px;
   color: var(--white); text-decoration: none; font: inherit;
   font-size: 15px; font-weight: 500; padding: 12px 26px;
-  transition: background 0.25s, border-color 0.25s, transform 0.25s;
+  transition: background 0.25s, border-color 0.25s, transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
   background: rgba(255,255,255,0.02);
 }
-.btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); transform: translateY(-1px); }
 .btn:disabled { opacity: 0.6; cursor: progress; }
-.btn .arr { font-size: 13px; transition: transform 0.25s; }
-.btn:hover .arr { transform: translate(2px, -2px); }
+.btn .arr { font-size: 13px; transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
 .btn.solid { background: var(--white); color: #000; border-color: var(--white); }
-.btn.solid:hover { background: #ddd; }
+.btn:active:not(:disabled) { transform: scale(0.97); }
+/* hover motion for mouse only: a tap on a phone fires :hover and leaves it stuck */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); }
+  .btn:hover .arr { transform: translate(2px, -2px); }
+  .btn.solid:hover { background: #ddd; }
+}
 
 h1, h2 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.12; }
 .dim { color: var(--gray); }
@@ -81,11 +85,11 @@ h1, h2 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.12; }
 .hero h1 { font-size: clamp(40px, 6.5vw, 72px); max-width: 920px; margin: 28px auto 0; }
 .hero .sub { color: var(--gray); font-size: 17px; max-width: 580px; margin: 22px auto 0; }
 .hero .cta { margin-top: 36px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.hero .wrap > * { animation: rise 0.9s cubic-bezier(.2,.8,.2,1) both; }
+.hero .wrap > * { animation: rise 500ms cubic-bezier(0.23, 1, 0.32, 1) both; }
 .hero .wrap > :nth-child(2) { animation-delay: 0.08s; }
 .hero .wrap > :nth-child(3) { animation-delay: 0.16s; }
 .hero .wrap > :nth-child(4) { animation-delay: 0.24s; }
-@keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } }
 
 /* hero orb: the spin, float and breathing glow are baked into one looping video
    (tools/render_hero_orb.py). Phones decode video in hardware, so scrolling stays smooth;
@@ -101,7 +105,7 @@ h1, h2 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.12; }
   background: linear-gradient(to bottom, transparent 62%, var(--bg));
   pointer-events: none;
 }
-.orb-tilt { animation: orb-in 1.4s 0.2s cubic-bezier(.2,.8,.2,1) both; }
+.orb-tilt { animation: orb-in 600ms cubic-bezier(0.23, 1, 0.32, 1) both; }
 @keyframes orb-in { from { opacity: 0; } }
 .orb {
   display: block; width: min(560px, 90vw); height: auto; aspect-ratio: 1;
@@ -113,10 +117,7 @@ h1, h2 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.12; }
     .orb-scroll { animation: scroll-turn linear both; animation-timeline: scroll(root block); animation-range: 0px 1400px; }
   }
   .blob-stage { perspective: 1000px; }
-  .orb-tilt {
-    transform: translate3d(var(--pointer-x), var(--pointer-y), 0) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
-    transition: transform 260ms cubic-bezier(.2,.8,.2,1);
-  }
+  .orb-tilt { transition: transform 260ms cubic-bezier(0.23, 1, 0.32, 1); } /* main.js sets the transform */
 }
 @keyframes scroll-turn { to { rotate: 210deg; } }
 /* touch screens: a live blur over moving video is expensive in iPhone Safari, so use a solid bar */
@@ -137,10 +138,10 @@ section { padding: 110px 0; scroll-margin-top: 72px; }
 .shot {
   background: var(--card); border: 1px solid var(--border); border-radius: 20px;
   height: 300px; display: flex; align-items: center; justify-content: center;
-  overflow: hidden; transition: transform 0.35s ease, border-color 0.35s;
+  overflow: hidden; transition: border-color 200ms ease-out;
 }
 .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
-.project:hover .shot { transform: translateY(-4px); border-color: var(--border-strong); }
+@media (hover: hover) and (pointer: fine) { .project:hover .shot { border-color: var(--border-strong); } }
 .pipeflow { /* steps stacked top-to-bottom; the glow running down them shows the flow */
   font-family: var(--mono); font-size: 13px; color: var(--gray);
   display: flex; flex-direction: column; gap: 10px; align-items: center; padding: 0 20px;
@@ -149,12 +150,18 @@ section { padding: 110px 0; scroll-margin-top: 72px; }
 .pipeflow .a { display: none; }
 .pipeflow .node {
   background: var(--card-2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; color: #d4d4d4; white-space: nowrap;
-  animation: step 4s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 0.5s);
+  position: relative;
 }
-/* each step lights up in turn, like the workflow is running */
+/* each step lights up in turn, like the workflow is running.
+   The glow is drawn once on ::after and only its opacity animates (no repaint per frame). */
+.pipeflow .node::after {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
+  border: 1px solid rgba(61,220,132,0.65); box-shadow: 0 0 16px rgba(61,220,132,0.22);
+  opacity: 0; animation: step 4s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 0.5s);
+}
 @keyframes step {
-  0%, 30%, 100% { border-color: var(--border); box-shadow: none; }
-  8%, 18% { border-color: rgba(61,220,132,0.65); box-shadow: 0 0 16px rgba(61,220,132,0.22); }
+  0%, 30%, 100% { opacity: 0; }
+  8%, 18% { opacity: 1; }
 }
 .pipeflow .ok { color: var(--green); }
 .cap { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-top: 18px; }
@@ -216,9 +223,9 @@ section { padding: 110px 0; scroll-margin-top: 72px; }
 .scard {
   display: block; color: inherit; text-decoration: none;
   background: var(--card); border: 1px solid var(--border); border-radius: 20px;
-  padding: 34px 30px; transition: transform 0.3s, border-color 0.3s;
+  padding: 34px 30px; transition: border-color 200ms ease-out;
 }
-.scard:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+@media (hover: hover) and (pointer: fine) { .scard:hover { border-color: var(--border-strong); } }
 .scard.featured { border-color: rgba(61,220,132,0.35); }
 .scard .ico { width: 40px; height: 40px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 22px; }
 .scard h3 { font-size: 17px; font-weight: 600; margin-bottom: 10px; }
@@ -236,7 +243,7 @@ section { padding: 110px 0; scroll-margin-top: 72px; }
   padding: 22px 24px; cursor: pointer;
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
 }
-.qa .chev { color: var(--gray); transition: transform 0.3s; flex-shrink: 0; }
+.qa .chev { color: var(--gray); transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1); flex-shrink: 0; }
 .qa button[aria-expanded="true"] .chev { transform: rotate(180deg); }
 .qa .ans p { color: var(--gray); font-size: 14px; padding: 0 24px 22px; }
 
@@ -290,9 +297,10 @@ html:has(dialog[open]) { overflow: hidden; }
   display: flex; align-items: center; gap: 8px;
   background: #25d366; color: #052e16; text-decoration: none;
   font-weight: 600; font-size: 15px; padding: 12px 18px 12px 14px; border-radius: 99px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.55); transition: transform 0.25s;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.55); transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
 }
-.wa-float:hover { transform: translateY(-2px); }
+.wa-float:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .wa-float:hover { transform: translateY(-2px); } }
 .wa-float svg { width: 22px; height: 22px; }
 
 /* footer */
@@ -344,6 +352,6 @@ footer { border-top: 1px solid var(--border); padding: 64px 0 40px; }
   .hero .wrap > *, .orb-tilt, .orb-scroll,
   .pipeflow .node, .marquee, .contact .fluid { animation: none; }
   .orb-tilt { transform: none; transition: none; }
-  .js .reveal { opacity: 1; transform: none; transition: none; }
-  .btn, .shot, .scard { transition: none; }
+  .js .reveal { transform: none; transition: opacity 200ms ease-out; } /* keep a gentle fade, drop the movement */
+  .btn:active, .wa-float:active, .wa-float:hover { transform: none; }
 }
