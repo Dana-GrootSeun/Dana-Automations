@@ -1,19 +1,3 @@
-// Entrance: each section's parts rise in turn as it scrolls in, once.
-// Content stays visible if this script never runs (.rise only hides under .js).
-document.documentElement.classList.add("js");
-const parts = [...document.querySelectorAll(".rise")];
-document.querySelectorAll("section, footer").forEach((sec) => {
-  sec.querySelectorAll(".rise").forEach((el, i) => el.style.setProperty("--d", `${Math.min(i, 6) * 70}ms`));
-});
-if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
-  parts.forEach((el) => el.classList.add("in"));
-} else {
-  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
-    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-  }), { rootMargin: "0px 0px -8% 0px" });
-  parts.forEach((el) => io.observe(el));
-}
-
 const reel = document.getElementById("reel");
 const sound = document.getElementById("sound");
 const films = [...document.querySelectorAll(".film video")];
