@@ -5,6 +5,7 @@
 .gitignore
 .assetsignore
 .codex*
+.claude
 .wrangler
 AGENTS.md
 README.md
