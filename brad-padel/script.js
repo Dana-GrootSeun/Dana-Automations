@@ -27,6 +27,7 @@ bookingForm?.addEventListener("submit", (event) => {
 
   if (!bookingForm.reportValidity()) return;
   const data = new FormData(bookingForm);
+  const childAge = String(data.get("childAge") || "").trim();
   const request = [
     "Hi Brad, I'd like to enquire about a padel coaching session.",
     "",
@@ -34,6 +35,7 @@ bookingForm?.addEventListener("submit", (event) => {
     `Preferred days: ${selectedDays.join(", ")}`,
     `Preferred time of day: ${data.get("timeOfDay")}`,
     `Session: ${data.get("session")}`,
+    ...(childAge ? [`Child's age: ${childAge}`] : []),
     `Playing level: ${data.get("level")}`,
     `Focus: ${data.get("focus") || "Not supplied"}`,
     "Venue: Virgin Active Padel Club Lourensford",
