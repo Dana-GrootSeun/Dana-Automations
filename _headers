@@ -23,3 +23,7 @@
 /hire/dana-theron.vcf
   Content-Type: text/vcard; charset=utf-8
   Content-Disposition: attachment; filename="Dana-Theron.vcf"
+
+/brad-padel/*
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; img-src 'self' data:; media-src 'self'; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'
