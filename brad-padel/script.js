@@ -20,7 +20,7 @@ bookingForm?.addEventListener("submit", (event) => {
   const selectedDays = [...bookingForm.querySelectorAll('input[name="days"]:checked')].map((input) => input.value);
 
   if (!selectedDays.length) {
-    formStatus.textContent = "Please choose at least one preferred weekday.";
+    formStatus.textContent = "Please choose at least one preferred day.";
     bookingForm.querySelector("[data-day-fieldset]")?.scrollIntoView({ behavior: "smooth", block: "center" });
     return;
   }
