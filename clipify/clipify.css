@@ -106,7 +106,7 @@ nav.top {
 .stage {
   --loop: 12s;
   position: relative; max-width: 1040px; margin: 48px auto 0; padding: 30px 36px 40px; border-radius: 20px; overflow: hidden;
-  background: linear-gradient(180deg, #1c1c1e, #111112); border: 1px solid var(--line);
+  background: #141415; border: 1px solid var(--line);
 }
 .bar {
   position: relative; z-index: 2; display: flex; align-items: center; gap: 10px; width: min(500px, 100%); margin: 0 auto;
@@ -126,33 +126,34 @@ nav.top {
 .player { width: min(620px, 100%); margin: 26px auto 0; }
 .screen {
   position: relative; aspect-ratio: 16 / 7; border-radius: 14px; overflow: hidden; border: 1px solid var(--line-2);
-  background: radial-gradient(ellipse 60% 70% at 42% 60%, #3a2350, transparent 70%), linear-gradient(160deg, #1a1430, #0d0b18);
+  background: #1a1a1f;
 }
-.screen::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 26%; background: linear-gradient(180deg, transparent, #2a1d14 40%, #1d140e); }
+.screen::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 24%; background: #232329; border-top: 1px solid #2c2c33; }
 .live, .viewers, .dur { position: absolute; z-index: 1; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 6px; }
 .live { top: 10px; left: 10px; background: #c62a2f; }
 .live::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; background: #fff; vertical-align: 1px; animation: blink 1.4s infinite; }
 .viewers { top: 10px; left: 62px; background: rgba(0, 0, 0, 0.6); font-weight: 600; }
 .dur { bottom: 10px; right: 10px; background: rgba(0, 0, 0, 0.7); font-weight: 600; }
 .tcard {
-  display: block; aspect-ratio: 5 / 7; border-radius: 6px; border: 2px solid #e8d36a;
-  background: linear-gradient(115deg, #7d5cff, #3fd1ff 30%, #b4ff7a 48%, #ffd84a 62%, #ff6fb1 80%, #7d5cff) 0 0 / 300% 100%;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45); animation: holo 3s linear infinite;
+  position: relative; display: block; aspect-ratio: 5 / 7; border-radius: 6px; background: #f1efe8; border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35); overflow: hidden;
 }
-.tcard.big { position: absolute; z-index: 1; left: 36%; top: 16%; height: 62%; transform: rotate(-6deg); animation: holo 3s linear infinite, lift 6s var(--ease-io) infinite; }
+.tcard::before { content: ""; position: absolute; left: 9%; right: 9%; top: 10%; height: 46%; border-radius: 3px; background: #2f3542; }
+.tcard::after { content: ""; position: absolute; left: 9%; right: 30%; top: 64%; height: 6%; border-radius: 2px; background: #c9c5b9; box-shadow: 0 9px 0 #dcd8cc, 0 18px 0 #dcd8cc; }
+.tcard.big { position: absolute; z-index: 1; left: 38%; top: 14%; height: 64%; transform: rotate(-4deg); animation: lift 6s var(--ease-io) infinite; }
 .chat { position: absolute; right: 12px; top: 40px; bottom: 34px; width: 26%; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; }
 .chat i { height: 7px; border-radius: 4px; background: rgba(255, 255, 255, 0.22); animation: chat 2.4s var(--ease-out) infinite; }
 .chat i:nth-child(1) { width: 70%; animation-delay: -2s; }
 .chat i:nth-child(2) { width: 90%; animation-delay: -1.6s; }
-.chat i:nth-child(3) { width: 55%; animation-delay: -1.2s; background: rgba(209, 255, 5, 0.45); }
+.chat i:nth-child(3) { width: 55%; animation-delay: -1.2s; background: rgba(255, 255, 255, 0.4); }
 .chat i:nth-child(4) { width: 80%; animation-delay: -0.8s; }
 .chat i:nth-child(5) { width: 62%; animation-delay: -0.4s; }
 
 .tl { position: relative; height: 34px; margin-top: 12px; }
 .wave { display: block; width: 100%; height: 100%; fill: rgba(255, 255, 255, 0.22); }
-.scanhead { position: absolute; top: -4px; bottom: -4px; left: 0; width: 2px; background: var(--lime); box-shadow: 0 0 0 3px rgba(209, 255, 5, 0.18); animation: scan var(--loop) linear infinite; }
+.scanhead { position: absolute; top: -4px; bottom: -4px; left: 0; width: 2px; background: var(--lime); animation: scan var(--loop) linear infinite; }
 .marks { position: absolute; inset: 0; animation: reveal var(--loop) linear infinite; }
-.m { position: absolute; top: -2px; bottom: -2px; width: 4%; margin-left: -2%; border-radius: 4px; background: rgba(209, 255, 5, 0.22); border: 1px solid var(--lime); }
+.m { position: absolute; top: -2px; bottom: -2px; width: 4%; margin-left: -2%; border-radius: 4px; background: rgba(209, 255, 5, 0.14); border: 1px solid rgba(209, 255, 5, 0.8); }
 .m1 { left: 9%; } .m2 { left: 24%; } .m3 { left: 39%; } .m4 { left: 56%; } .m5 { left: 72%; } .m6 { left: 88%; }
 .status { position: relative; height: 20px; margin-top: 10px; font-size: 13px; color: var(--muted); }
 .status span { position: absolute; inset: 0; text-align: center; }
@@ -164,27 +165,24 @@ nav.top {
 .clip {
   position: relative; flex: 0 1 138px; aspect-ratio: 9 / 16; border-radius: 12px; overflow: visible;
   display: flex; flex-direction: column; align-items: center; border: 1px solid rgba(255, 255, 255, 0.14);
-  animation: rise var(--loop) var(--ease-pop) infinite both;
+  animation: rise var(--loop) var(--ease-out) infinite both;
 }
-.clip .cam { position: relative; width: 100%; height: 46%; display: flex; align-items: center; justify-content: center; border-radius: 11px 11px 0 0; background: radial-gradient(ellipse 70% 80% at 50% 70%, rgba(255, 255, 255, 0.08), transparent 70%), #17121f; }
+.clip .cam { position: relative; width: 100%; height: 46%; display: flex; align-items: center; justify-content: center; border-radius: 11px 11px 0 0; background: #1a1a1f; border-bottom: 1px solid #2a2a30; }
 .clip .cam .tcard { height: 76%; transform: rotate(-4deg); }
-.c1 { background: linear-gradient(180deg, #1d3b5c, #12253a); animation-delay: 0s; }
-.c2 { background: linear-gradient(180deg, #4b2a5c, #2a1638); animation-delay: 0.12s; }
-.c3 { background: linear-gradient(180deg, #5c4316, #33240b); animation-delay: 0.24s; }
-.c4 { background: linear-gradient(180deg, #15475a, #0c2a36); animation-delay: 0.36s; }
-.c5 { background: linear-gradient(180deg, #5a2219, #33120d); animation-delay: 0.48s; }
-.c6 { background: linear-gradient(180deg, #23472a, #122a17); animation-delay: 0.6s; }
-.c2 .cam .tcard { transform: rotate(5deg); } .c4 .cam .tcard { transform: rotate(3deg) scale(0.9); } .c6 .cam .tcard { transform: rotate(-8deg); }
+.clip { background: #202024; }
+.c1 { animation-delay: 0s; } .c2 { animation-delay: 0.08s; } .c3 { animation-delay: 0.16s; }
+.c4 { animation-delay: 0.24s; } .c5 { animation-delay: 0.32s; } .c6 { animation-delay: 0.4s; }
+.c2 .cam .tcard { transform: rotate(3deg); } .c4 .cam .tcard { transform: rotate(2deg); } .c6 .cam .tcard { transform: rotate(-5deg); }
 .plat {
   position: absolute; z-index: 1; top: -14px; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; border-radius: 50%;
   background: #1b1b1b; border: 1px solid rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; font-size: 17px;
 }
 .cap { position: relative; padding: 0 8px; font-family: "Arial Black", Arial, sans-serif; font-weight: 900; font-size: 12px; line-height: 1.15; text-align: center; color: #fff; paint-order: stroke fill; -webkit-text-stroke: 3px #000; margin-top: 16%; } /* impeccable-disable-line overused-font -- mirrors the real Clipify caption font */
-.cap em { display: inline-block; font-style: normal; color: #fff; animation: word var(--loop) var(--ease-pop) infinite both; animation-delay: inherit; }
+.cap em { font-style: normal; color: #fff; animation: word var(--loop) linear infinite both; animation-delay: inherit; }
 .score {
   position: absolute; left: 8px; bottom: 8px; display: flex; flex-direction: column; align-items: center;
   background: rgba(0, 0, 0, 0.72); color: var(--lime); font-size: 16px; font-weight: 700; line-height: 1; padding: 6px 8px; border-radius: 7px;
-  animation: badge var(--loop) var(--ease-pop) infinite both; animation-delay: inherit;
+  animation: badge var(--loop) var(--ease-out) infinite both; animation-delay: inherit;
 }
 .score small { font-size: 7px; letter-spacing: 0.06em; color: rgba(255, 255, 255, 0.75); margin-bottom: 2px; }
 .score b { font-weight: 700; counter-reset: n var(--n); animation: count var(--loop) var(--ease-out) infinite both; animation-delay: inherit; }
@@ -198,7 +196,7 @@ nav.top {
   97%, 100% { clip-path: inset(0 100% 0 0); }
 }
 @keyframes pointer {
-  0%, 16% { transform: translate(140px, 90px); opacity: 0; }
+  0%, 14% { transform: translate(140px, 90px); opacity: 0; }
   18% { opacity: 1; }
   21% { transform: translate(0, 0); }
   22.5% { transform: translate(0, 0) scale(0.8); }
@@ -215,22 +213,19 @@ nav.top {
 @keyframes st1 { 0%, 24% { opacity: 0; } 26%, 56% { opacity: 1; } 58%, 100% { opacity: 0; } }
 @keyframes st2 { 0%, 58% { opacity: 0; transform: translateY(4px); } 61%, 92% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; } }
 @keyframes rise {
-  0%, 58% { opacity: 0; transform: translateY(-46px) scale(0.55); }
-  65% { opacity: 1; transform: translateY(0) scale(1.05); }
-  69%, 92% { opacity: 1; transform: none; }
-  97%, 100% { opacity: 0; transform: translateY(8px) scale(0.94); }
+  0%, 58% { opacity: 0; transform: translateY(-24px); }
+  66%, 92% { opacity: 1; transform: none; }
+  97%, 100% { opacity: 0; transform: none; }
 }
-@keyframes word { 0%, 68% { color: #fff; transform: none; } 71% { color: #ffd400; transform: scale(1.18); } 74%, 100% { color: #ffd400; transform: none; } }
+@keyframes word { 0%, 68% { color: #fff; } 72%, 100% { color: #ffd400; } }
 @keyframes badge {
-  0%, 66% { opacity: 0; transform: rotate(-12deg) scale(0.6); }
-  70% { opacity: 1; transform: rotate(2deg) scale(1.06); }
-  73%, 92% { opacity: 1; transform: none; }
+  0%, 66% { opacity: 0; transform: translateY(4px); }
+  71%, 92% { opacity: 1; transform: none; }
   97%, 100% { opacity: 0; }
 }
 @keyframes count { 0%, 67% { --n: 0; } 76%, 100% { --n: var(--to); } }
 @keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes holo { to { background-position: 300% 0; } }
-@keyframes lift { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+@keyframes lift { 0%, 100% { translate: 0 0; } 50% { translate: 0 -4px; } }
 @keyframes chat { 0% { transform: translateY(12px); opacity: 0; } 20%, 80% { transform: none; opacity: 1; } 100% { transform: translateY(-12px); opacity: 0; } }
 @keyframes blink { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
 
