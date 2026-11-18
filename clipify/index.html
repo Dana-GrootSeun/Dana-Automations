@@ -71,21 +71,21 @@
     <label class="drop-input">
       <svg class="ico" aria-hidden="true"><use href="#i-link"/></svg>
       <span class="sr">Your channel link</span>
-      <input id="channel" name="channel" type="text" inputmode="url" autocomplete="url" placeholder="Your channel link" maxlength="200">
+      <input id="channel" name="channel" type="text" inputmode="url" autocomplete="url" placeholder="youtube.com/@yourchannel" maxlength="200" spellcheck="false" autocapitalize="off">
       <button class="btn-white" type="submit">Get started</button>
     </label>
     <span class="or">or</span>
     <a class="btn-outline" href="#pricing">See pricing</a>
   </form>
 
-  <div class="stage reveal" aria-hidden="true">
-    <div class="bar">
+  <div class="stage reveal">
+    <div class="bar" aria-hidden="true">
       <svg class="ico"><use href="#i-link"/></svg>
       <span class="typed"><span>youtube.com/live/saturday-stream</span></span>
       <span class="get">Get clips</span>
       <span class="pointer"></span>
     </div>
-    <div class="studio">
+    <div class="studio" aria-hidden="true">
       <div class="editor">
         <div class="ed-head"><span class="live">LIVE</span><b>Saturday stream</b><span class="meta">5:42:10 &middot; 1.2K watching</span></div>
         <div class="transcript"><p class="ln l1 hot"><span class="ts">00:48</span>no way… no WAY, he actually pulled it</p><p class="ln l2"><span class="ts">01:52</span>okay chat, last pack before the giveaway</p><p class="ln l3 hot"><span class="ts">03:10</span>wait for it… WAIT FOR IT</p><p class="ln l4 hot"><span class="ts">05:21</span>chat is going absolutely crazy right now</p></div>
@@ -122,10 +122,11 @@
       </figure>
       </div>
     </div>
-    <span class="progress"></span>
+    <span class="progress" aria-hidden="true"></span>
+    <button class="stage-toggle" id="motionToggle" type="button">Pause animations</button>
   </div>
 
-  <ul class="chips" aria-label="What's included">
+  <ul class="chips" aria-label="What’s included">
     <li><svg aria-hidden="true"><use href="#i-scissors"/></svg>Moment picking</li>
     <li><svg aria-hidden="true"><use href="#i-cc"/></svg>Animated captions</li>
     <li><svg aria-hidden="true"><use href="#i-crop"/></svg>9:16 reframe</li>
@@ -276,15 +277,15 @@
     </div>
     <div class="qa">
       <button type="button" aria-expanded="false" aria-controls="cf2">Do you post the clips for me?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
-      <div class="ans" id="cf2" hidden><p>By default you post them, using the titles and hashtags I supply. If you'd rather I upload them, you can give me Editor access to your YouTube channel and we'll agree a schedule.</p></div>
+      <div class="ans" id="cf2" hidden><p>By default you post them, using the titles and hashtags I supply. If you’d rather I upload them, you can give me Editor access to your YouTube channel and we’ll agree a schedule.</p></div>
     </div>
     <div class="qa">
-      <button type="button" aria-expanded="false" aria-controls="cf3">What if I don't like a clip?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
-      <div class="ans" id="cf3" hidden><p>Tell me which one and why. I'll re-cut it or swap it, and save the note to your preferences so the next batch gets it right.</p></div>
+      <button type="button" aria-expanded="false" aria-controls="cf3">What if I don’t like a clip?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
+      <div class="ans" id="cf3" hidden><p>Tell me which one and why. I’ll re-cut it or swap it, and save the note to your preferences so the next batch gets it right.</p></div>
     </div>
     <div class="qa">
       <button type="button" aria-expanded="false" aria-controls="cf4">Can I cancel?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
-      <div class="ans" id="cf4" hidden><p>Yes. It's month-to-month: tell me before your next billing date and that month is your last.</p></div>
+      <div class="ans" id="cf4" hidden><p>Yes. It’s month-to-month: tell me before your next billing date and that month is your last.</p></div>
     </div>
     <div class="qa">
       <button type="button" aria-expanded="false" aria-controls="cf5">Which platforms and games work?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
@@ -295,7 +296,7 @@
 
 <section class="final" id="contact">
   <h2>Your next stream could be clipped by tomorrow morning.</h2>
-  <p class="lede">Tell me where you stream and how often. Within 24 hours you'll get a reply with a start date.</p>
+  <p class="lede">Tell me where you stream and how often. Within 24 hours you’ll get a reply with a start date.</p>
   <div class="final-cta">
     <a class="btn-white" href="mailto:dana.automates@gmail.com" data-enquiry="Clipify">Get started</a>
     <a class="btn-outline" href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%27d%20like%20to%20try%20Clipify." target="_blank" rel="noopener">WhatsApp me</a>
@@ -311,7 +312,7 @@
     <label for="f-name">Your name</label>
     <input id="f-name" name="name" autocomplete="name" maxlength="120" required>
     <label for="f-email">Your email</label>
-    <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" placeholder="you@channel.com" required>
+    <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" placeholder="you@channel.com" spellcheck="false" autocapitalize="off" required>
     <label for="f-service">What do you need?</label>
     <input id="f-service" name="service" maxlength="160" placeholder="e.g. Clipify">
     <label for="f-details">Channel link and streaming schedule</label>

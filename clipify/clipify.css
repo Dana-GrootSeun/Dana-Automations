@@ -162,7 +162,13 @@ nav.top {
   position: relative; aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden; padding: 12px 10px;
   display: flex; flex-direction: column; border: 1px solid rgba(255, 255, 255, 0.12);
 }
-.ph1 .scr { background: #16223d; } .ph2 .scr { background: #2a1838; } .ph3 .scr { background: #33210f; }
+/* platform colours: YouTube red, TikTok black with cyan/pink, Instagram brand blend */
+.ph1 .scr { background: #b3141b; border-color: rgba(255, 255, 255, 0.18); }
+.ph2 .scr { background: #0b0b0d; border-color: rgba(37, 244, 238, 0.35); box-shadow: -3px 0 0 #25f4ee, 3px 0 0 #fe2c55; }
+.ph3 .scr { background: linear-gradient(160deg, #6a2bc2 0%, #c8247a 55%, #f0782f 100%); border-color: rgba(255, 255, 255, 0.2); }
+.ph2 .rail i:nth-child(1) { background: #fe2c55; } .ph2 .rail i:nth-child(2) { background: #25f4ee; }
+.ph2 .bar-prog i { background: #fe2c55; }
+.ph1 .plat, .ph3 .plat { background: rgba(0, 0, 0, 0.3); }
 .scr::before { content: ""; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.09'/%3E%3C/svg%3E"); pointer-events: none; }
 .ph-top { position: relative; display: flex; align-items: center; justify-content: space-between; }
 .plat { width: 26px; height: 26px; border-radius: 50%; background: rgba(0, 0, 0, 0.45); display: flex; align-items: center; justify-content: center; font-size: 15px; }
@@ -444,7 +450,13 @@ dialog.enquiry::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur
   background: rgba(0, 0, 0, 0.6); border: 1px solid var(--line-2); border-radius: 999px; transition: color 200ms, border-color 200ms;
 }
 .stage-toggle:hover { color: #fff; border-color: #fff; }
-.motion-off :is(.stage, .marquee, .visual, .connector) :is(*, *::before), .stage.offscreen :is(*, *::before) { animation-play-state: paused !important; }
+@media (max-width: 760px) { .stage-toggle { position: static; display: block; margin: 14px 0 0 auto; } } /* no free corner on phones: sit under the clips */
+/* paused = the same finished frame reduced motion shows */
+.motion-off :is(.stage, .marquee, .visual, .connector) :is(*, *::before) { animation: none !important; }
+.motion-off .sc b { --n: var(--to); }
+.motion-off .w { opacity: 1; }
+.motion-off :is(.s1, .scanhead, .progress, .pointer) { display: none; }
+.stage.offscreen :is(*, *::before) { animation-play-state: paused !important; }
 
 /* scroll reveal (main.js adds .js and .in) */
 .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); }

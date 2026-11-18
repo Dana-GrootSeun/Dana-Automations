@@ -12,3 +12,14 @@ if (pilotForm && enquiry) {
     lead.elements.name.focus();
   });
 }
+
+// Pause/play for the looping animations (WCAG 2.2.2), and pause the hero loop while it's off-screen.
+const motionToggle = document.getElementById('motionToggle');
+motionToggle?.addEventListener('click', () => {
+  const off = document.documentElement.classList.toggle('motion-off');
+  motionToggle.textContent = off ? 'Play animations' : 'Pause animations';
+});
+const stage = document.querySelector('.stage');
+if (stage && 'IntersectionObserver' in window) {
+  new IntersectionObserver(([e]) => stage.classList.toggle('offscreen', !e.isIntersecting)).observe(stage);
+}
