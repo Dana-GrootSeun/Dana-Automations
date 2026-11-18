@@ -150,15 +150,16 @@ nav.top {
 .tiles { grid-column: 5 / 13; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 10px; }
 .tile-wide { grid-column: span 2; }
 .tiles > li:nth-child(2) { order: -1; }
-.tile-face { aspect-ratio: 4 / 5; display: grid; place-items: center; overflow: hidden; }
-.tile-wide .tile-face { aspect-ratio: 8 / 5; }
+.tile-face { aspect-ratio: 4 / 5; display: grid; place-items: center; overflow: hidden; padding: 12%; }
+.tile-face > .frag { max-height: 100%; }
+.tile-wide .tile-face { aspect-ratio: 8 / 5; padding: 6% 12%; }
 .tone-pale { background: var(--dawn); color: #000; }
 .tone-dark { background: var(--dusk); }
 .tone-mid { background: #8f9588; color: #000; }
 .tile h3 { margin-top: 16px; font-size: var(--t-b); letter-spacing: -0.01em; line-height: 1.3; }
 .tile p { margin-top: 4px; font-size: var(--t-s); color: var(--soft-d); max-width: 40ch; }
 
-.frag-transcript { width: 86%; background: #fff; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
+.frag-transcript { width: min(100%, 460px); background: #fff; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
 .frag-transcript p { display: flex; gap: 12px; font-size: var(--t-s); color: var(--soft-l); padding: 6px 10px; border-radius: 6px; }
 .frag-transcript p span { flex: none; font-variant-numeric: tabular-nums; }
 .frag-transcript .hot { background: var(--lime); color: #000; font-weight: 600; animation: hot 4s var(--ease) infinite; }
@@ -166,7 +167,7 @@ nav.top {
 .fr-checks { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
 .fr-checks span { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 5px 10px; border-radius: 6px; background: var(--dawn); color: #000; }
 
-.frag-stack { height: 78%; aspect-ratio: 9 / 16; background: var(--deep); border-radius: 12px; padding: 6px; display: flex; flex-direction: column; gap: 6px; }
+.frag-stack { height: 100%; aspect-ratio: 9 / 16; background: var(--deep); border-radius: 12px; padding: 6px; display: flex; flex-direction: column; gap: 6px; }
 .z { display: flex; align-items: flex-start; padding: 8px 10px; border-radius: 7px; font-size: 13px; font-weight: 600; }
 .frag-stack .z-cam { flex: 0 0 34%; background: var(--lime); color: #000; animation: zone 4s var(--ease) infinite; }
 .frag-stack .z-game { flex: 1; background: #3a3d42; color: #fff; animation: zone 4s var(--ease) -2s infinite; }
@@ -178,7 +179,7 @@ nav.top {
 .frag-caption em { font-style: normal; color: #ffd400; }
 @keyframes word { 0% { opacity: 0; transform: scale(0.7); } 10%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
 
-.frag-meter { position: relative; height: 54%; width: 72%; display: flex; align-items: flex-end; gap: 6px; }
+.frag-meter { position: relative; height: 62%; width: 100%; margin-top: 15%; display: flex; align-items: flex-end; gap: 6px; }
 .frag-meter i { flex: 1; background: var(--dusk); border-radius: 3px; transform-origin: bottom; animation: level 1.6s ease-in-out infinite alternate; }
 .frag-meter i:nth-child(odd) { animation-delay: -0.4s; } .frag-meter i:nth-child(3n) { animation-delay: -0.9s; }
 .frag-meter i:nth-child(1) { height: 40%; } .frag-meter i:nth-child(2) { height: 72%; } .frag-meter i:nth-child(3) { height: 55%; }
@@ -188,7 +189,7 @@ nav.top {
 .frag-meter b { position: absolute; top: -40px; left: 0; font-size: var(--t-s); font-weight: 700; }
 @keyframes level { from { transform: scaleY(0.82); } to { transform: scaleY(1); } }
 
-.frag-review { width: 78%; display: flex; flex-direction: column; gap: 10px; }
+.frag-review { width: 100%; display: flex; flex-direction: column; gap: 10px; }
 .rv { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 8px; background: var(--night); font-size: var(--t-s); font-weight: 600; animation: rise 600ms var(--ease) both; }
 .rv:nth-child(2) { animation-delay: 120ms; } .rv:nth-child(3) { animation-delay: 240ms; }
 .rv svg { color: var(--lime); flex: none; }
@@ -259,6 +260,8 @@ html:not(.js) .st-body { display: grid; padding: 32px; gap: 16px; grid-template-
 /* why a service: statement, table pushed right */
 .compare { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap); }
 .compare h2 { grid-column: 1 / 13; max-width: 14ch; }
+.cmp-side { grid-column: 1 / 5; margin-top: 72px; display: flex; flex-direction: column; gap: 24px; }
+.cmp-verdict { font-size: var(--t-m); font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; }
 .cmp-wrap { grid-column: 5 / 13; margin-top: 72px; overflow-x: auto; }
 .cmp { width: 100%; border-collapse: collapse; font-size: var(--t-s); text-align: left; }
 .cmp th, .cmp td { padding: 18px 16px; vertical-align: top; border-bottom: 1px solid rgba(255, 255, 255, 0.16); }
@@ -267,7 +270,7 @@ html:not(.js) .st-body { display: grid; padding: 32px; gap: 16px; grid-template-
 .cmp td { color: var(--soft-d); }
 .cmp .us { background: #1f2410; color: #fff; font-weight: 600; }
 .cmp thead .us { color: var(--lime); }
-.cmp-note { margin-top: 20px; font-size: var(--t-s); color: var(--soft-d); }
+.cmp-note { font-size: var(--t-s); color: var(--soft-d); max-width: 32ch; }
 
 /* framed for your setup: sticky frame, active list */
 .streams { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap); align-items: start; }
@@ -422,7 +425,6 @@ dialog.enquiry::backdrop { background: rgba(0, 0, 0, 0.75); }
   .tiles { grid-template-columns: 1fr 1fr; gap: 28px 8px; }
   .tile-wide { grid-column: 1 / -1; }
   .tiles > li:nth-child(2) { order: 0; }
-  .frag-review { width: 88%; }
   .night-intro h2, .night-intro p { grid-column: 1 / -1; }
   .stages { flex-direction: column; height: auto; }
   .st, .st.is-open { flex: none; }
@@ -430,7 +432,9 @@ dialog.enquiry::backdrop { background: rgba(0, 0, 0, 0.75); }
   .st-btn span { writing-mode: horizontal-tb; transform: none; }
   .st.is-open .st-body { display: flex; flex-direction: column; height: auto; padding: 28px 20px; gap: 16px; }
   html:not(.js) .st-body { display: flex; flex-direction: column; padding: 24px 20px; }
-  .compare h2, .cmp-wrap { grid-column: 1 / -1; }
+  .compare h2, .cmp-wrap, .cmp-side { grid-column: 1 / -1; }
+  .cmp-side { margin-top: 32px; }
+  .cmp-verdict { max-width: none; }
   .cmp-wrap { margin-top: 40px; overflow: visible; }
   .cmp thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .cmp, .cmp tbody, .cmp tr, .cmp th, .cmp td { display: block; width: 100%; }
