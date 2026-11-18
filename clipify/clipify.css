@@ -279,12 +279,11 @@ nav.top {
 .flow-step h3 svg { font-size: 19px; }
 .flow-step p { color: rgba(255, 255, 255, 0.72); font-size: 15px; margin-top: 8px; max-width: 260px; }
 .flow-art { position: relative; height: 150px; display: flex; align-items: center; justify-content: center; }
-.mini-vod { width: 190px; aspect-ratio: 16 / 9; border-radius: 10px; background: linear-gradient(135deg, #0e5f73, #2b1e55); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); }
+.mini-vod { width: 200px; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px; background: #2b1e55; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); }
 .new { position: absolute; top: 14px; right: 18%; z-index: 1; font-size: 12px; font-weight: 600; color: #000; background: #ffd400; padding: 4px 9px; border-radius: 5px; }
-.mini-clip { width: 62px; aspect-ratio: 9 / 16; border-radius: 8px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); }
-.mini-clip.a { background: linear-gradient(180deg, #1d3b5c 0 42%, #2f8f6b 42%); }
-.mini-clip.b { background: linear-gradient(180deg, #3b2a5c 0 42%, #b0457a 42%); margin-left: -18px; transform: translateY(-8px); }
-.mini-clip.c { background: linear-gradient(180deg, #4a3b1d 0 42%, #e0a028 42%); margin-left: -18px; transform: translateY(-16px); }
+.mini-clip { width: 72px; height: auto; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 8px; background: #1d3b5c; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); }
+.mini-clip.b { margin-left: -18px; transform: translateY(-8px); }
+.mini-clip.c { margin-left: -18px; transform: translateY(-16px); }
 .art3 { gap: 16px; }
 .ready { font-size: 16px; font-weight: 600; display: flex; flex-direction: column; }
 .ready small { font-size: 14px; font-weight: 400; color: rgba(255, 255, 255, 0.72); }
