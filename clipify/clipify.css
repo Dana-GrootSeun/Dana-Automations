@@ -538,6 +538,7 @@ dialog.enquiry::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur
 .dialog-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
 .wa-btn svg.wa { width: 18px; height: 18px; color: #25d366; }
 .wa-btn:hover { border-color: #25d366; }
+.opt { font-weight: 400; color: var(--faint); }
 .email-chooser { margin-top: 18px; }
 .chooser-label { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
 .chooser-btns { display: flex; flex-wrap: wrap; gap: 8px; }

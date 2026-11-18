@@ -37,5 +37,15 @@ waBtn?.addEventListener('click', () => {
     `Channel and schedule: ${f.details.value.trim()}`,
   ];
   if (f.email.value.trim()) lines.push(`Email: ${f.email.value.trim()}`);
+  if (f.phone.value.trim()) lines.push(`My number: ${f.phone.value.trim()}`);
   window.open(`https://wa.me/27765606016?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener');
 });
+
+// "Send request" only posts name/email/service/details, so fold the number into the details.
+// Capture phase: runs before main.js's submit handler reads the fields.
+const leadForm = document.getElementById('leadForm');
+leadForm?.addEventListener('submit', () => {
+  const phone = leadForm.elements.phone.value.trim();
+  const details = leadForm.elements.details;
+  if (phone && !details.value.includes(phone)) details.value += `\nWhatsApp: ${phone}`;
+}, true);
