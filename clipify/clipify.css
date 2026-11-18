@@ -101,98 +101,138 @@ nav.top {
 .drop-input:focus-within { border-color: rgba(255, 255, 255, 0.6); }
 .or { color: var(--faint); }
 
-/* hero stage: long stream -> link -> scored clips (loops every 9s) */
+/* hero stage: paste link -> scan the stream timeline -> clips rise out of the best moments (12s loop) */
+@property --n { syntax: "<integer>"; inherits: false; initial-value: 0; }
 .stage {
-  position: relative; max-width: 1000px; margin: 48px auto 0; padding: 30px 40px 46px; border-radius: 20px; overflow: hidden;
-  background:
-    radial-gradient(ellipse 70% 60% at 50% 20%, rgba(70, 105, 110, 0.55), transparent 70%),
-    linear-gradient(180deg, #1f2a2c, #121718);
+  --loop: 12s;
+  position: relative; max-width: 1040px; margin: 48px auto 0; padding: 30px 36px 40px; border-radius: 20px; overflow: hidden;
+  background: linear-gradient(180deg, #1c1c1e, #111112); border: 1px solid var(--line);
 }
-.vod { position: relative; width: 300px; aspect-ratio: 16 / 9; margin: 0 auto; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.18); }
-.vod-scene {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(circle at 26% 42%, #e7b08c 0 7%, transparent 7.5%),
-    radial-gradient(ellipse 15% 22% at 26% 70%, #1d2a3d 0 98%, transparent 100%),
-    radial-gradient(circle at 70% 58%, #ffd166 0 9%, transparent 9.5%),
-    radial-gradient(ellipse 30% 22% at 70% 72%, #3e2a6b 0 98%, transparent 100%),
-    linear-gradient(135deg, #0e5f73, #2b1e55 60%, #0d1b2a);
-  animation: vod-pan 9s var(--ease-io) infinite;
-}
-.live { position: absolute; top: 8px; left: 8px; font-size: 10px; font-weight: 700; background: #c62a2f; padding: 4px 8px; border-radius: 5px; }
-.dur { position: absolute; bottom: 8px; right: 8px; font-size: 12px; font-weight: 600; background: rgba(0, 0, 0, 0.7); padding: 4px 8px; border-radius: 5px; }
-
 .bar {
-  position: relative; display: flex; align-items: center; gap: 10px; width: min(500px, 100%); margin: 26px auto 0;
-  background: rgba(255, 255, 255, 0.92); color: #111; border-radius: 999px; padding: 6px 6px 6px 18px; text-align: left;
+  position: relative; z-index: 2; display: flex; align-items: center; gap: 10px; width: min(500px, 100%); margin: 0 auto;
+  background: rgba(255, 255, 255, 0.94); color: #111; border-radius: 999px; padding: 6px 6px 6px 18px; text-align: left;
 }
 .bar .ico { color: #666; flex: none; font-size: 18px; }
 .typed { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; font-size: 17px; }
-.typed span { display: inline-block; animation: type 9s steps(32, end) infinite; }
-.get { background: #000; color: #fff; font-weight: 500; font-size: 16px; padding: 10px 20px; border-radius: 999px; animation: press 9s var(--ease-out) infinite; }
+.typed span { display: inline-block; animation: type var(--loop) steps(32, end) infinite; }
+.get { background: #000; color: #fff; font-weight: 500; font-size: 16px; padding: 10px 20px; border-radius: 999px; animation: press var(--loop) var(--ease-out) infinite; }
 .pointer {
-  position: absolute; right: 26px; top: 28px; width: 22px; height: 22px; border-radius: 50%;
+  position: absolute; right: 30px; top: 30px; width: 22px; height: 22px; border-radius: 50%;
   background: #fff; border: 2px solid #000; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  animation: pointer 9s var(--ease-out) infinite;
+  animation: pointer var(--loop) var(--ease-out) infinite;
 }
 
-.clips { display: flex; justify-content: center; gap: 10px; margin-top: 38px; }
-.clip {
-  position: relative; flex: 0 1 140px; aspect-ratio: 9 / 16; border-radius: 12px; overflow: visible;
-  display: flex; align-items: center; justify-content: center; padding: 0 8px;
-  animation: pop 9s var(--ease-pop) infinite both;
+/* the stream: a pack-opening scene (no faces) + its timeline */
+.player { width: min(620px, 100%); margin: 26px auto 0; }
+.screen {
+  position: relative; aspect-ratio: 16 / 7; border-radius: 14px; overflow: hidden; border: 1px solid var(--line-2);
+  background: radial-gradient(ellipse 60% 70% at 42% 60%, #3a2350, transparent 70%), linear-gradient(160deg, #1a1430, #0d0b18);
 }
-.clip::before { content: ""; position: absolute; inset: 0; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15); }
-.c1 { background: radial-gradient(circle at 50% 22%, #e7b08c 0 9%, transparent 9.5%), linear-gradient(180deg, #1d3b5c 0 42%, #2f8f6b 42%, #154734); animation-delay: 0s; }
-.c2 { background: radial-gradient(circle at 50% 22%, #c98b6b 0 9%, transparent 9.5%), linear-gradient(180deg, #3b2a5c 0 42%, #b0457a 42%, #4a1d4f); animation-delay: 0.18s; }
-.c3 { background: radial-gradient(circle at 50% 22%, #f0c4a0 0 9%, transparent 9.5%), linear-gradient(180deg, #4a3b1d 0 42%, #e0a028 42%, #6b3d0d); animation-delay: 0.36s; }
-.c4 { background: radial-gradient(circle at 50% 22%, #d9a07c 0 9%, transparent 9.5%), linear-gradient(180deg, #15394a 0 42%, #2a8bbf 42%, #0d3550); animation-delay: 0.54s; }
-.c5 { background: radial-gradient(circle at 50% 22%, #b9805e 0 9%, transparent 9.5%), linear-gradient(180deg, #402020 0 42%, #d0503c 42%, #5a1a12); animation-delay: 0.72s; }
-.c6 { background: radial-gradient(circle at 50% 22%, #edb995 0 9%, transparent 9.5%), linear-gradient(180deg, #23402a 0 42%, #6fa83a 42%, #24451a); animation-delay: 0.9s; }
+.screen::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 26%; background: linear-gradient(180deg, transparent, #2a1d14 40%, #1d140e); }
+.live, .viewers, .dur { position: absolute; z-index: 1; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 6px; }
+.live { top: 10px; left: 10px; background: #c62a2f; }
+.live::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; background: #fff; vertical-align: 1px; animation: blink 1.4s infinite; }
+.viewers { top: 10px; left: 62px; background: rgba(0, 0, 0, 0.6); font-weight: 600; }
+.dur { bottom: 10px; right: 10px; background: rgba(0, 0, 0, 0.7); font-weight: 600; }
+.tcard {
+  display: block; aspect-ratio: 5 / 7; border-radius: 6px; border: 2px solid #e8d36a;
+  background: linear-gradient(115deg, #7d5cff, #3fd1ff 30%, #b4ff7a 48%, #ffd84a 62%, #ff6fb1 80%, #7d5cff) 0 0 / 300% 100%;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45); animation: holo 3s linear infinite;
+}
+.tcard.big { position: absolute; z-index: 1; left: 36%; top: 16%; height: 62%; transform: rotate(-6deg); animation: holo 3s linear infinite, lift 6s var(--ease-io) infinite; }
+.chat { position: absolute; right: 12px; top: 40px; bottom: 34px; width: 26%; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; }
+.chat i { height: 7px; border-radius: 4px; background: rgba(255, 255, 255, 0.22); animation: chat 2.4s var(--ease-out) infinite; }
+.chat i:nth-child(1) { width: 70%; animation-delay: -2s; }
+.chat i:nth-child(2) { width: 90%; animation-delay: -1.6s; }
+.chat i:nth-child(3) { width: 55%; animation-delay: -1.2s; background: rgba(209, 255, 5, 0.45); }
+.chat i:nth-child(4) { width: 80%; animation-delay: -0.8s; }
+.chat i:nth-child(5) { width: 62%; animation-delay: -0.4s; }
+
+.tl { position: relative; height: 34px; margin-top: 12px; }
+.wave { display: block; width: 100%; height: 100%; fill: rgba(255, 255, 255, 0.22); }
+.scanhead { position: absolute; top: -4px; bottom: -4px; left: 0; width: 2px; background: var(--lime); box-shadow: 0 0 0 3px rgba(209, 255, 5, 0.18); animation: scan var(--loop) linear infinite; }
+.marks { position: absolute; inset: 0; animation: reveal var(--loop) linear infinite; }
+.m { position: absolute; top: -2px; bottom: -2px; width: 4%; margin-left: -2%; border-radius: 4px; background: rgba(209, 255, 5, 0.22); border: 1px solid var(--lime); }
+.m1 { left: 9%; } .m2 { left: 24%; } .m3 { left: 39%; } .m4 { left: 56%; } .m5 { left: 72%; } .m6 { left: 88%; }
+.status { position: relative; height: 20px; margin-top: 10px; font-size: 13px; color: var(--muted); }
+.status span { position: absolute; inset: 0; text-align: center; }
+.s1 { animation: st1 var(--loop) linear infinite; }
+.s2 { color: var(--lime); font-weight: 600; animation: st2 var(--loop) linear infinite; }
+
+/* the clips: pack cam on top, captions below, scores count up */
+.clips { display: flex; justify-content: center; gap: 12px; margin-top: 26px; }
+.clip {
+  position: relative; flex: 0 1 138px; aspect-ratio: 9 / 16; border-radius: 12px; overflow: visible;
+  display: flex; flex-direction: column; align-items: center; border: 1px solid rgba(255, 255, 255, 0.14);
+  animation: rise var(--loop) var(--ease-pop) infinite both;
+}
+.clip .cam { position: relative; width: 100%; height: 46%; display: flex; align-items: center; justify-content: center; border-radius: 11px 11px 0 0; background: radial-gradient(ellipse 70% 80% at 50% 70%, rgba(255, 255, 255, 0.08), transparent 70%), #17121f; }
+.clip .cam .tcard { height: 76%; transform: rotate(-4deg); }
+.c1 { background: linear-gradient(180deg, #1d3b5c, #12253a); animation-delay: 0s; }
+.c2 { background: linear-gradient(180deg, #4b2a5c, #2a1638); animation-delay: 0.12s; }
+.c3 { background: linear-gradient(180deg, #5c4316, #33240b); animation-delay: 0.24s; }
+.c4 { background: linear-gradient(180deg, #15475a, #0c2a36); animation-delay: 0.36s; }
+.c5 { background: linear-gradient(180deg, #5a2219, #33120d); animation-delay: 0.48s; }
+.c6 { background: linear-gradient(180deg, #23472a, #122a17); animation-delay: 0.6s; }
+.c2 .cam .tcard { transform: rotate(5deg); } .c4 .cam .tcard { transform: rotate(3deg) scale(0.9); } .c6 .cam .tcard { transform: rotate(-8deg); }
 .plat {
-  position: absolute; top: -14px; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; border-radius: 50%;
+  position: absolute; z-index: 1; top: -14px; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; border-radius: 50%;
   background: #1b1b1b; border: 1px solid rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; font-size: 17px;
 }
-.cap { position: relative; font-family: "Arial Black", Arial, sans-serif; font-weight: 900; font-size: 12px; line-height: 1.15; text-align: center; color: #fff; paint-order: stroke fill; -webkit-text-stroke: 3px #000; margin-top: 18%; } /* impeccable-disable-line overused-font -- mirrors the real Clipify caption font */
-.cap em { font-style: normal; color: #ffd400; }
+.cap { position: relative; padding: 0 8px; font-family: "Arial Black", Arial, sans-serif; font-weight: 900; font-size: 12px; line-height: 1.15; text-align: center; color: #fff; paint-order: stroke fill; -webkit-text-stroke: 3px #000; margin-top: 16%; } /* impeccable-disable-line overused-font -- mirrors the real Clipify caption font */
+.cap em { display: inline-block; font-style: normal; color: #fff; animation: word var(--loop) var(--ease-pop) infinite both; animation-delay: inherit; }
 .score {
   position: absolute; left: 8px; bottom: 8px; display: flex; flex-direction: column; align-items: center;
   background: rgba(0, 0, 0, 0.72); color: var(--lime); font-size: 16px; font-weight: 700; line-height: 1; padding: 6px 8px; border-radius: 7px;
-  animation: badge 9s var(--ease-pop) infinite both; animation-delay: inherit;
+  animation: badge var(--loop) var(--ease-pop) infinite both; animation-delay: inherit;
 }
 .score small { font-size: 7px; letter-spacing: 0.06em; color: rgba(255, 255, 255, 0.75); margin-bottom: 2px; }
+.score b { font-weight: 700; counter-reset: n var(--n); animation: count var(--loop) var(--ease-out) infinite both; animation-delay: inherit; }
+.score b::after { content: counter(n); }
+.c1 { --to: 97; } .c2 { --to: 91; } .c3 { --to: 99; } .c4 { --to: 94; } .c5 { --to: 96; } .c6 { --to: 93; }
+.progress { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--lime); transform-origin: left; animation: progress var(--loop) linear infinite; }
 
-@keyframes vod-pan { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
 @keyframes type {
   0%, 4% { clip-path: inset(0 100% 0 0); }
-  26%, 92% { clip-path: inset(0 0 0 0); }
+  18%, 93% { clip-path: inset(0 0 0 0); }
   97%, 100% { clip-path: inset(0 100% 0 0); }
 }
 @keyframes pointer {
-  0%, 24% { transform: translate(140px, 90px); opacity: 0; }
-  27% { opacity: 1; }
-  32% { transform: translate(0, 0); }
-  34% { transform: translate(0, 0) scale(0.8); }
-  37% { transform: translate(0, 0) scale(1); opacity: 1; }
-  46%, 100% { transform: translate(60px, 70px); opacity: 0; }
+  0%, 16% { transform: translate(140px, 90px); opacity: 0; }
+  18% { opacity: 1; }
+  21% { transform: translate(0, 0); }
+  22.5% { transform: translate(0, 0) scale(0.8); }
+  24% { transform: translate(0, 0) scale(1); opacity: 1; }
+  32%, 100% { transform: translate(60px, 70px); opacity: 0; }
 }
-@keyframes press {
-  0%, 33% { transform: scale(1); }
-  35% { transform: scale(0.92); }
-  38%, 100% { transform: scale(1); }
+@keyframes press { 0%, 22% { transform: scale(1); } 23% { transform: scale(0.92); } 25%, 100% { transform: scale(1); } }
+@keyframes scan { 0%, 24% { left: 0; opacity: 0; } 25% { opacity: 1; } 56% { left: 100%; opacity: 1; } 58%, 100% { left: 100%; opacity: 0; } }
+@keyframes reveal {
+  0%, 24% { clip-path: inset(-8px 100% -8px 0); opacity: 1; }
+  56%, 92% { clip-path: inset(-8px 0 -8px 0); opacity: 1; }
+  96%, 100% { clip-path: inset(-8px 0 -8px 0); opacity: 0; }
 }
-@keyframes pop {
-  0%, 38% { opacity: 0; transform: translateY(16px) scale(0.6) rotate(-6deg); }
-  45% { opacity: 1; transform: translateY(0) scale(1.05) rotate(1deg); }
-  49%, 91% { opacity: 1; transform: none; }
-  96%, 100% { opacity: 0; transform: translateY(8px) scale(0.92); }
+@keyframes st1 { 0%, 24% { opacity: 0; } 26%, 56% { opacity: 1; } 58%, 100% { opacity: 0; } }
+@keyframes st2 { 0%, 58% { opacity: 0; transform: translateY(4px); } 61%, 92% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; } }
+@keyframes rise {
+  0%, 58% { opacity: 0; transform: translateY(-46px) scale(0.55); }
+  65% { opacity: 1; transform: translateY(0) scale(1.05); }
+  69%, 92% { opacity: 1; transform: none; }
+  97%, 100% { opacity: 0; transform: translateY(8px) scale(0.94); }
 }
+@keyframes word { 0%, 68% { color: #fff; transform: none; } 71% { color: #ffd400; transform: scale(1.18); } 74%, 100% { color: #ffd400; transform: none; } }
 @keyframes badge {
-  0%, 46% { opacity: 0; transform: rotate(-12deg) scale(0.6); }
-  52% { opacity: 1; transform: rotate(2deg) scale(1.06); }
-  56%, 91% { opacity: 1; transform: none; }
-  96%, 100% { opacity: 0; }
+  0%, 66% { opacity: 0; transform: rotate(-12deg) scale(0.6); }
+  70% { opacity: 1; transform: rotate(2deg) scale(1.06); }
+  73%, 92% { opacity: 1; transform: none; }
+  97%, 100% { opacity: 0; }
 }
+@keyframes count { 0%, 67% { --n: 0; } 76%, 100% { --n: var(--to); } }
+@keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes holo { to { background-position: 300% 0; } }
+@keyframes lift { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+@keyframes chat { 0% { transform: translateY(12px); opacity: 0; } 20%, 80% { transform: none; opacity: 1; } 100% { transform: translateY(-12px); opacity: 0; } }
+@keyframes blink { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
 
 /* chips */
 .chips { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 28px auto 0; max-width: 1100px; }
@@ -424,9 +464,15 @@ dialog.enquiry::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur
 @media (max-width: 760px) {
   .hero { padding-top: 64px; }
   .lede { font-size: 17px; }
-  .stage { padding: 24px 16px 32px; }
-  .vod { width: 220px; }
+  .stage { padding: 22px 14px 30px; }
   .typed { font-size: 14px; }
+  .screen { aspect-ratio: 16 / 9; }
+  .chat { display: none; }
+  .viewers { display: none; }
+  .clip .cam { height: 38%; }
+  .cap { font-size: 10px; margin-top: 9%; -webkit-text-stroke-width: 2.5px; }
+  .score { left: 6px; bottom: 6px; padding: 4px 6px; font-size: 13px; }
+  .tcard.big { left: 40%; }
   .get { font-size: 14px; padding: 8px 14px; }
   .clip:nth-child(n+4) { display: none; }
   .duo, .plans, .billing { grid-template-columns: 1fr; }
@@ -446,6 +492,9 @@ dialog.enquiry::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; }
+  .score b { --n: var(--to); }
+  .s1, .scanhead, .progress { display: none; }
+  .cap em { color: #ffd400; }
   .pointer { display: none; }
   .js .reveal { transform: none; transition: opacity 200ms; }
 }
