@@ -1,4 +1,4 @@
-/* Clipify landing page: standalone styles modelled on the OpusClip landing page (Geist, black canvas, lime accent). */
+/* Clipify landing page: standalone styles modelled on the OpusClip landing page (Geist, black canvas, green accent shared with the main site). */
 /* impeccable-disable overused-font,marquee,pulsing-dot,bounce-easing,side-tab -- Dana asked to match the OpusClip reference (Geist, marquee, blinking connector dots, its pop easing); side-tab is the CSS checkmark in .plan li::after, not a card border */
 
 @font-face {
@@ -17,7 +17,7 @@
   --text: #fff;
   --muted: rgba(255, 255, 255, 0.7);
   --faint: rgba(255, 255, 255, 0.6);
-  --lime: #d1ff05;
+  --green: #3ddc84; /* same green as the main site (styles.css) */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-io: cubic-bezier(0.65, 0, 0.45, 1);
@@ -37,8 +37,8 @@ svg { width: 1em; height: 1em; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: -9999px; top: 8px; }
 .skip:focus { left: 16px; z-index: 300; background: #fff; color: #000; padding: 8px 14px; border-radius: 8px; }
-:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
-a, button, input, textarea { touch-action: manipulation; -webkit-tap-highlight-color: rgba(209, 255, 5, 0.2); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+a, button, input, textarea { touch-action: manipulation; -webkit-tap-highlight-color: rgba(61, 220, 132, 0.2); }
 .price, .per, .score, .dur, .row > span { font-variant-numeric: tabular-nums; }
 
 h1, h2, h3 { font-weight: 600; }
@@ -110,7 +110,7 @@ nav.top {
   --loop: 12s;
   position: relative; max-width: 1120px; margin: 48px auto 0; padding: 28px 28px 34px; border-radius: 24px; overflow: hidden; text-align: left;
   background: #121214; border: 1px solid var(--line);
-  box-shadow: 0 40px 120px -40px rgba(209, 255, 5, 0.18), 0 30px 80px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 40px 120px -40px rgba(61, 220, 132, 0.18), 0 30px 80px rgba(0, 0, 0, 0.6);
 }
 .bar {
   position: relative; z-index: 2; display: flex; align-items: center; gap: 10px; width: min(520px, 100%); margin: 0 auto;
@@ -144,15 +144,15 @@ nav.top {
 
 .tl { position: relative; height: 40px; margin-top: 36px; container-type: inline-size; }
 .wave { display: block; width: 100%; height: 100%; fill: rgba(255, 255, 255, 0.2); }
-.scanhead { position: absolute; top: -6px; bottom: -6px; left: 0; width: 2px; border-radius: 2px; background: var(--lime); animation: scan var(--loop) linear infinite; }
+.scanhead { position: absolute; top: -6px; bottom: -6px; left: 0; width: 2px; border-radius: 2px; background: var(--green); animation: scan var(--loop) linear infinite; }
 .marks { position: absolute; inset: 0; animation: reveal var(--loop) linear infinite; }
-.m { position: absolute; top: -3px; bottom: -3px; width: 7%; margin-left: -3.5%; border-radius: 6px; background: rgba(209, 255, 5, 0.16); border: 1.5px solid var(--lime); }
-.m em { position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); font-style: normal; font-size: 11px; font-weight: 600; color: #000; background: var(--lime); padding: 2px 6px; border-radius: 5px; }
+.m { position: absolute; top: -3px; bottom: -3px; width: 7%; margin-left: -3.5%; border-radius: 6px; background: rgba(61, 220, 132, 0.16); border: 1.5px solid var(--green); }
+.m em { position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); font-style: normal; font-size: 11px; font-weight: 600; color: #000; background: var(--green); padding: 2px 6px; border-radius: 5px; }
 .m1 { left: 18%; } .m2 { left: 47%; } .m3 { left: 78%; }
 .status { position: relative; height: 18px; margin-top: 14px; font-size: 13px; color: var(--muted); }
 .status span { position: absolute; inset: 0; }
 .s1 { animation: st1 var(--loop) linear infinite; }
-.s2 { color: var(--lime); font-weight: 600; animation: st2 var(--loop) linear infinite; }
+.s2 { color: var(--green); font-weight: 600; animation: st2 var(--loop) linear infinite; }
 
 /* right: three Shorts with word-by-word captions */
 .phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
@@ -175,7 +175,7 @@ nav.top {
 .idx { font-size: 11px; font-weight: 600; color: rgba(255, 255, 255, 0.7); background: rgba(0, 0, 0, 0.35); padding: 3px 7px; border-radius: 999px; }
 .kc { position: relative; margin: auto 0; padding-right: 22px; font-size: clamp(15px, 1.7vw, 22px); font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; text-transform: uppercase; }
 .w { display: inline-block; opacity: 0; animation: word var(--loop) var(--ease-out) infinite both; }
-.w.hi { color: #000; background: var(--lime); padding: 0 6px; border-radius: 6px; }
+.w.hi { color: #000; background: var(--green); padding: 0 6px; border-radius: 6px; }
 .w[data-i="0"] { animation-delay: calc(var(--d, 0s) + 0s); } .w[data-i="1"] { animation-delay: calc(var(--d, 0s) + 0.22s); }
 .w[data-i="2"] { animation-delay: calc(var(--d, 0s) + 0.44s); } .w[data-i="3"] { animation-delay: calc(var(--d, 0s) + 0.66s); }
 .w[data-i="4"] { animation-delay: calc(var(--d, 0s) + 0.88s); }
@@ -185,13 +185,13 @@ nav.top {
 .bar-prog { position: absolute; left: 10px; right: 10px; bottom: 12px; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, 0.18); overflow: hidden; }
 .bar-prog i { display: block; height: 100%; background: #fff; transform-origin: left; animation: play var(--loop) linear infinite both; animation-delay: inherit; }
 .ph figcaption { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; margin-top: 10px; padding: 0 2px; }
-.sc { font-size: 20px; font-weight: 700; color: var(--lime); font-variant-numeric: tabular-nums; animation: badge var(--loop) var(--ease-out) infinite both; animation-delay: inherit; }
+.sc { font-size: 20px; font-weight: 700; color: var(--green); font-variant-numeric: tabular-nums; animation: badge var(--loop) var(--ease-out) infinite both; animation-delay: inherit; }
 .sc b { font-weight: 700; counter-reset: n var(--n); animation: count var(--loop) var(--ease-out) infinite both; animation-delay: inherit; }
 .sc b::after { content: counter(n); }
 .sc small { font-size: 12px; font-weight: 500; color: var(--faint); margin-left: 1px; }
 .ph1 { --to: 97; } .ph2 { --to: 91; } .ph3 { --to: 99; }
 .at { font-size: 12px; color: var(--faint); white-space: nowrap; }
-.progress { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--lime); transform-origin: left; animation: progress var(--loop) linear infinite; }
+.progress { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--green); transform-origin: left; animation: progress var(--loop) linear infinite; }
 
 @keyframes type { 0%, 4% { clip-path: inset(0 100% 0 0); } 18%, 93% { clip-path: inset(0 0 0 0); } 97%, 100% { clip-path: inset(0 100% 0 0); } }
 @keyframes pointer {
@@ -209,9 +209,9 @@ nav.top {
   56%, 92% { clip-path: inset(-30px 0 -8px 0); opacity: 1; }
   96%, 100% { clip-path: inset(-30px 0 -8px 0); opacity: 0; }
 }
-@keyframes hot1 { 0%, 29% { color: rgba(255, 255, 255, 0.55); background: transparent; border-color: transparent; } 32%, 92% { color: #fff; background: rgba(209, 255, 5, 0.08); border-color: rgba(209, 255, 5, 0.45); } 96%, 100% { color: rgba(255, 255, 255, 0.55); background: transparent; border-color: transparent; } }
-@keyframes hot3 { 0%, 39% { color: rgba(255, 255, 255, 0.55); background: transparent; border-color: transparent; } 42%, 92% { color: #fff; background: rgba(209, 255, 5, 0.08); border-color: rgba(209, 255, 5, 0.45); } 96%, 100% { color: rgba(255, 255, 255, 0.55); background: transparent; border-color: transparent; } }
-@keyframes hot4 { 0%, 49% { color: rgba(255, 255, 255, 0.55); background: transparent; border-color: transparent; } 52%, 92% { color: #fff; background: rgba(209, 255, 5, 0.08); border-color: rgba(209, 255, 5, 0.45); } 96%, 100% { color: rgba(255, 255, 255, 0.55); background: transparent; border-color: transparent; } }
+@keyframes hot1 { 0%, 29% { color: rgba(255, 255, 255, 0.55); background: transparent; border-color: transparent; } 32%, 92% { color: #fff; background: rgba(61, 220, 132, 0.08); border-color: rgba(61, 220, 132, 0.45); } 96%, 100% { color: rgba(255, 255, 255, 0.55); background: transparent; border-color: transparent; } }
+@keyframes hot3 { 0%, 39% { color: rgba(255, 255, 255, 0.55); background: transparent; border-color: transparent; } 42%, 92% { color: #fff; background: rgba(61, 220, 132, 0.08); border-color: rgba(61, 220, 132, 0.45); } 96%, 100% { color: rgba(255, 255, 255, 0.55); background: transparent; border-color: transparent; } }
+@keyframes hot4 { 0%, 49% { color: rgba(255, 255, 255, 0.55); background: transparent; border-color: transparent; } 52%, 92% { color: #fff; background: rgba(61, 220, 132, 0.08); border-color: rgba(61, 220, 132, 0.45); } 96%, 100% { color: rgba(255, 255, 255, 0.55); background: transparent; border-color: transparent; } }
 @keyframes st1 { 0%, 24% { opacity: 0; } 26%, 56% { opacity: 1; } 58%, 100% { opacity: 0; } }
 @keyframes st2 { 0%, 58% { opacity: 0; transform: translateY(4px); } 61%, 92% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; } }
 @keyframes slide {
@@ -281,13 +281,13 @@ nav.top {
 .q { font-size: 14px; color: #fff; }
 .q .ts { font-size: 12px; color: var(--faint); margin-right: 8px; font-variant-numeric: tabular-nums; }
 .checks { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; }
-.ck { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 3px 9px 3px 7px; border-radius: 999px; color: var(--lime); background: rgba(209, 255, 5, 0.1); border: 1px solid rgba(209, 255, 5, 0.4); animation: tick var(--fl) var(--ease-out) infinite both; animation-delay: inherit; }
+.ck { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 3px 9px 3px 7px; border-radius: 999px; color: var(--green); background: rgba(61, 220, 132, 0.1); border: 1px solid rgba(61, 220, 132, 0.4); animation: tick var(--fl) var(--ease-out) infinite both; animation-delay: inherit; }
 .ck::before { content: "✓"; font-weight: 700; }
 .ck.x { color: #ff8a80; background: rgba(255, 138, 128, 0.1); border-color: rgba(255, 138, 128, 0.4); }
 .ck.x::before { content: "✕"; }
 .ck.k2 { animation-name: tick2; } .ck.k3 { animation-name: tick3; }
 .verdict { margin-left: auto; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; animation: verdict var(--fl) var(--ease-out) infinite both; animation-delay: inherit; }
-.verdict.keep { color: #000; background: var(--lime); }
+.verdict.keep { color: #000; background: var(--green); }
 .verdict.keep b { font-weight: 700; margin-left: 2px; }
 .verdict.drop { color: rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.1); }
 
@@ -318,12 +318,12 @@ nav.top {
 /* overlays on the wide stream */
 .fr-crop, .fr-box { position: absolute; border-radius: 6px; }
 .fr-crop { left: 34.2%; width: 31.6%; top: 0; bottom: 0; border: 2px dashed rgba(255, 255, 255, 0.9); background: rgba(255, 255, 255, 0.08); animation: fr-crop var(--fl) var(--ease-out) infinite both; }
-.fr-box { border: 2px solid var(--lime); background: rgba(209, 255, 5, 0.1); animation: fr-box var(--fl) var(--ease-out) infinite both; }
+.fr-box { border: 2px solid var(--green); background: rgba(61, 220, 132, 0.1); animation: fr-box var(--fl) var(--ease-out) infinite both; }
 .fb-cam { right: 2%; top: 3%; width: 27%; height: 42%; }
 .fb-act { left: 30%; top: 26%; width: 40%; height: 60%; animation-delay: 0.25s; }
 .fr-crop em, .fr-box em { position: absolute; font-style: normal; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
 .fr-crop em { left: 50%; bottom: 6px; transform: translateX(-50%); color: #000; background: #fff; }
-.fr-box em { color: #000; background: var(--lime); }
+.fr-box em { color: #000; background: var(--green); }
 .fb-cam em { right: 4px; bottom: 4px; }
 .fb-act em { left: 4px; bottom: 4px; }
 
@@ -339,11 +339,11 @@ nav.top {
 .s-cam { width: 417%; left: -300%; right: auto; top: -19.5%; bottom: auto; aspect-ratio: 16 / 9; }
 .s-act { width: 250%; left: -75%; right: auto; top: -22%; bottom: auto; aspect-ratio: 16 / 9; }
 .fr-cap { position: absolute; z-index: 1; left: 0; right: 0; top: 40%; transform: translateY(-50%); padding: 4px 0; text-align: center; font-size: 11px; font-weight: 800; background: rgba(0, 0, 0, 0.72); }
-.fr-cap em { font-style: normal; color: #000; background: var(--lime); padding: 0 3px; border-radius: 3px; }
+.fr-cap em { font-style: normal; color: #000; background: var(--green); padding: 0 3px; border-radius: 3px; }
 .fr-out figcaption { display: grid; grid-template-columns: auto 1fr; column-gap: 6px; margin-top: 10px; font-size: 13px; font-weight: 600; line-height: 1.3; }
 .fr-out figcaption small { grid-column: 2; font-size: 11px; font-weight: 400; color: var(--faint); }
 .mark { grid-row: span 2; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #000; }
-.bad .mark { background: #ff8a80; } .good .mark { background: var(--lime); }
+.bad .mark { background: #ff8a80; } .good .mark { background: var(--green); }
 .bad .fr-phone { animation: fr-bad var(--fl) var(--ease-out) infinite both; }
 .bad figcaption { animation: fr-bad var(--fl) var(--ease-out) infinite both; }
 .good .s-top { animation: fr-top var(--fl) var(--ease-out) infinite both; }
@@ -370,10 +370,10 @@ nav.top {
 .step { position: relative; padding: 18px 18px 26px; border-radius: 20px; background: #141416; border: 1px solid var(--line); }
 .step:not(:last-child)::after {
   content: ""; position: absolute; z-index: 1; right: -15px; top: 120px; width: 10px; height: 10px;
-  border-top: 2px solid var(--lime); border-right: 2px solid var(--lime); transform: rotate(45deg);
+  border-top: 2px solid var(--green); border-right: 2px solid var(--green); transform: rotate(45deg);
 }
 .step-ui { height: 220px; padding: 16px; border-radius: 14px; background: #1a1a1d; border: 1px solid #26262b; display: flex; flex-direction: column; gap: 14px; overflow: hidden; }
-.num { display: block; margin-top: 22px; font-size: 14px; font-weight: 600; color: var(--lime); font-variant-numeric: tabular-nums; }
+.num { display: block; margin-top: 22px; font-size: 14px; font-weight: 600; color: var(--green); font-variant-numeric: tabular-nums; }
 .step h3 { font-size: 22px; letter-spacing: -0.03em; margin-top: 4px; }
 .step p { color: var(--muted); font-size: 15px; margin-top: 8px; }
 .when { margin-left: auto; font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums; }
@@ -385,23 +385,23 @@ nav.top {
 .dl { padding: 12px; border-radius: 10px; background: #222226; }
 .dl-top { display: flex; justify-content: space-between; font-size: 13px; }
 .dl-top span:first-child { display: flex; align-items: center; gap: 6px; }
-.dl-top svg { font-size: 15px; color: var(--lime); }
+.dl-top svg { font-size: 15px; color: var(--green); }
 .dl-len { color: var(--faint); font-variant-numeric: tabular-nums; }
 .dl-bar { display: block; height: 6px; margin-top: 10px; border-radius: 6px; background: #333338; overflow: hidden; }
-.dl-bar i { display: block; height: 100%; border-radius: 6px; background: var(--lime); transform-origin: left; }
+.dl-bar i { display: block; height: 100%; border-radius: 6px; background: var(--green); transform-origin: left; }
 .srcs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
 .srcs span { font-size: 12px; padding: 5px 10px; border-radius: 999px; background: #222226; color: var(--muted); border: 1px solid #2e2e34; }
-.srcs .on { color: #000; background: var(--lime); border-color: var(--lime); font-weight: 600; }
+.srcs .on { color: #000; background: var(--green); border-color: var(--green); font-weight: 600; }
 
 /* 02 edit */
 .mtl { position: relative; height: 34px; }
 .mwave { display: block; width: 100%; height: 100%; fill: rgba(255, 255, 255, 0.22); }
-.mk { position: absolute; top: -2px; bottom: -2px; width: 12%; margin-left: -6%; border-radius: 6px; border: 1.5px solid var(--lime); background: rgba(209, 255, 5, 0.14); }
+.mk { position: absolute; top: -2px; bottom: -2px; width: 12%; margin-left: -6%; border-radius: 6px; border: 1.5px solid var(--green); background: rgba(61, 220, 132, 0.14); }
 .k1 { left: 20%; } .k2 { left: 52%; } .k3 { left: 82%; }
 .mphones { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .mp { display: flex; align-items: center; padding: 8px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.14); overflow: hidden; }
 .mp b { font-size: 11px; font-weight: 800; line-height: 1.15; text-transform: uppercase; letter-spacing: -0.01em; }
-.mp em { font-style: normal; color: #000; background: var(--lime); padding: 0 3px; border-radius: 3px; }
+.mp em { font-style: normal; color: #000; background: var(--green); padding: 0 3px; border-radius: 3px; }
 .mp.yt { background: #b3141b; }
 .mp.tt { background: #0b0b0d; box-shadow: -2px 0 0 #25f4ee, 2px 0 0 #fe2c55; }
 .mp.ig { background: linear-gradient(160deg, #6a2bc2, #c8247a 55%, #f0782f); }
@@ -418,7 +418,7 @@ nav.top {
 .f-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
 .f-txt b { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .f-txt small { font-size: 11px; color: var(--faint); }
-.files .ok { flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--lime); color: #000; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.files .ok { flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--green); color: #000; display: flex; align-items: center; justify-content: center; font-size: 12px; }
 
 /* play once when the cards scroll in (main.js adds .in); without JS the final state shows */
 .steps.in .dl-bar i { animation: fill 1.6s 0.3s var(--ease-io) both; }
@@ -443,29 +443,29 @@ nav.top {
 .row > span { padding: 18px 22px; font-size: 15px; color: var(--muted); }
 .row > span[role="rowheader"] { color: #fff; font-weight: 500; }
 .row.head > span { color: #fff; font-weight: 600; }
-.row .us { background: rgba(209, 255, 5, 0.06); color: #fff; }
-.row.head .us { color: var(--lime); }
+.row .us { background: rgba(61, 220, 132, 0.06); color: #fff; }
+.row.head .us { color: var(--green); }
 .note { color: var(--faint); font-size: 14px; margin-top: 18px; }
 .note b { color: #fff; font-weight: 600; }
 
 /* pricing */
 .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 56px auto 0; text-align: left; }
 .plan { background: var(--panel); border-radius: 20px; padding: 32px; border: 1px solid transparent; }
-.plan.pro { border-color: rgba(209, 255, 5, 0.45); }
+.plan.pro { border-color: rgba(61, 220, 132, 0.45); }
 .plan-name { font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
-.badge { font-size: 12px; font-weight: 600; color: #000; background: var(--lime); padding: 4px 10px; border-radius: 999px; }
+.badge { font-size: 12px; font-weight: 600; color: #000; background: var(--green); padding: 4px 10px; border-radius: 999px; }
 .price { font-size: 48px; font-weight: 600; letter-spacing: -0.05em; margin: 10px 0 24px; }
 .price small { font-size: 16px; font-weight: 400; letter-spacing: 0; color: var(--faint); }
 .plan ul { list-style: none; margin-top: 26px; display: flex; flex-direction: column; gap: 12px; }
 .plan li { position: relative; padding-left: 26px; font-size: 15px; color: var(--muted); }
-.plan li::before { content: ""; position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: rgba(209, 255, 5, 0.16); }
-.plan li::after { content: ""; position: absolute; left: 5px; top: 8px; width: 6px; height: 3px; border-left: 2px solid var(--lime); border-bottom: 2px solid var(--lime); transform: rotate(-45deg); }
+.plan li::before { content: ""; position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: rgba(61, 220, 132, 0.16); }
+.plan li::after { content: ""; position: absolute; left: 5px; top: 8px; width: 6px; height: 3px; border-left: 2px solid var(--green); border-bottom: 2px solid var(--green); transform: rotate(-45deg); }
 .plan li b { color: #fff; font-weight: 600; }
 .plans.three { grid-template-columns: repeat(3, 1fr); max-width: 1140px; align-items: start; }
 .price { white-space: nowrap; }
 .plan.pro { background: #202020; }
 .per { font-size: 14px; color: var(--faint); margin: -16px 0 22px; }
-.plan.pro .per { color: var(--lime); }
+.plan.pro .per { color: var(--green); }
 .plan li.no { color: var(--faint); text-decoration: line-through; text-decoration-color: rgba(255, 255, 255, 0.35); }
 .plan li.no::before { background: rgba(255, 255, 255, 0.08); }
 .plan li.no::after { display: none; }
@@ -542,7 +542,7 @@ dialog.enquiry::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur
 .chooser-btns .btn-outline { padding: 8px 14px; font-size: 14px; flex: 1 1 auto; }
 .dialog-status { font-size: 14px; margin-top: 12px; color: var(--muted); }
 .dialog-status:empty { display: none; }
-.dialog-status.ok { color: var(--lime); }
+.dialog-status.ok { color: var(--green); }
 .dialog-status.err { color: #ff8a80; }
 
 /* pause control for the looping animations (WCAG 2.2.2); clipify.js also pauses the hero loop while it is off-screen */
