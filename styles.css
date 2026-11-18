@@ -242,6 +242,7 @@ section { padding: 110px 0; scroll-margin-top: 72px; }
 .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 64px; }
 .plan { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 34px 30px; }
 .plan.main { border-color: rgba(61,220,132,0.35); background: var(--card-2); }
+.plans.three { grid-template-columns: repeat(3, 1fr); }
 .plan .lbl { color: var(--gray); font-size: 13px; font-weight: 500; }
 .plan .amt { font-size: clamp(36px, 4.4vw, 48px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; margin-top: 10px; }
 .plan .amt small { font-size: 16px; color: var(--gray); font-weight: 500; letter-spacing: 0; }
@@ -258,7 +259,7 @@ section { padding: 110px 0; scroll-margin-top: 72px; }
 .soon { font-family: var(--mono); font-size: 11px; color: var(--gray-dim); border: 1px solid var(--border); border-radius: 99px; padding: 3px 10px; margin-left: 6px; white-space: nowrap; display: inline-block; line-height: 1.4; }
 @media (max-width: 860px) {
   .steps4 { grid-template-columns: 1fr 1fr; }
-  .plans, .billing { grid-template-columns: 1fr; }
+  .plans, .plans.three, .billing { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) { .steps4 { grid-template-columns: 1fr; } }
 

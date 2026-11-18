@@ -322,6 +322,16 @@ nav.top {
 .plan li::before { content: ""; position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: rgba(209, 255, 5, 0.16); }
 .plan li::after { content: ""; position: absolute; left: 5px; top: 8px; width: 6px; height: 3px; border-left: 2px solid var(--lime); border-bottom: 2px solid var(--lime); transform: rotate(-45deg); }
 .plan li b { color: #fff; font-weight: 600; }
+.plans.three { grid-template-columns: repeat(3, 1fr); max-width: 1140px; align-items: start; }
+.price { white-space: nowrap; }
+.plan.pro { background: #202020; }
+.per { font-size: 14px; color: var(--faint); margin: -16px 0 22px; }
+.plan.pro .per { color: var(--lime); }
+.plan li.no { color: var(--faint); text-decoration: line-through; text-decoration-color: rgba(255, 255, 255, 0.35); }
+.plan li.no::before { background: rgba(255, 255, 255, 0.08); }
+.plan li.no::after { display: none; }
+.setup { max-width: 900px; margin: 28px auto 0; color: var(--muted); font-size: 15px; }
+.setup b { color: #fff; font-weight: 600; }
 .billing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 900px; margin: 56px auto 0; text-align: left; }
 .billing h3 { font-size: 16px; padding-top: 16px; border-top: 1px solid var(--line-2); }
 .billing p { color: var(--muted); font-size: 15px; margin-top: 8px; }
@@ -401,6 +411,8 @@ dialog.enquiry::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur
 
 /* responsive */
 @media (max-width: 960px) {
+  .plans.three { grid-template-columns: 1fr; max-width: 560px; }
+  .plans.three .plan.pro { order: -1; }
   .nav-links, .ghost-link { display: none; }
   .flow { grid-template-columns: 1fr; padding: 40px 28px; gap: 0; }
   .connector { height: 60px; width: 40px; }
