@@ -179,7 +179,7 @@ nav.top {
 }
 .tag {
   position: absolute; top: -30px; transform: translateX(-50%); white-space: nowrap;
-  font-size: 11px; font-weight: 600; color: #000; background: var(--lime); padding: 3px 8px; border-radius: 6px;
+  font-size: 11px; font-weight: 600; color: #000; background: var(--lime); padding: 4px 10px; border-radius: 6px;
   animation: tag 9s var(--ease-pop) infinite both;
 }
 .t1 { left: calc(52px + (100% - 52px) * 0.25); }
@@ -211,7 +211,7 @@ nav.top {
 }
 .clip .len {
   position: absolute; top: 7px; right: 7px; font-size: 10px; font-weight: 600; font-variant-numeric: tabular-nums;
-  background: rgba(0, 0, 0, 0.6); padding: 2px 6px; border-radius: 5px;
+  background: rgba(0, 0, 0, 0.6); padding: 3px 7px; border-radius: 5px;
 }
 .cap { position: relative; font-family: "Arial Black", Arial, sans-serif; font-weight: 900; font-size: 12px; line-height: 1.15; text-align: center; color: #fff; paint-order: stroke fill; -webkit-text-stroke: 3px #000; margin-top: 46%; } /* impeccable-disable-line overused-font -- mirrors the real Clipify caption font */
 .cap em { font-style: normal; color: #ffd400; }
@@ -379,7 +379,7 @@ nav.top {
 .flow-art { position: relative; height: 150px; display: flex; align-items: center; justify-content: center; }
 .file-card, .tasks li, .notif { background: #17181a; border: 1px solid var(--line-2); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); }
 .file-card { position: relative; width: min(236px, 100%); display: grid; grid-template-columns: 34px 1fr; align-items: center; gap: 10px; padding: 14px; border-radius: 12px; }
-.new { position: absolute; top: -11px; right: 14px; font-size: 12px; font-weight: 600; color: #000; background: #ffd400; padding: 3px 9px; border-radius: 5px; }
+.new { position: absolute; top: -11px; right: 14px; font-size: 12px; font-weight: 600; color: #000; background: #ffd400; padding: 4px 10px; border-radius: 5px; }
 .fc-ico { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; color: var(--lime); background: rgba(209, 255, 5, 0.12); font-size: 17px; }
 .fc-name { font-size: 13px; font-weight: 500; overflow-wrap: anywhere; }
 .fc-name small { display: block; font-size: 11px; font-weight: 400; color: var(--faint); }
