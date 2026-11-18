@@ -23,3 +23,19 @@ const stage = document.querySelector('.stage');
 if (stage && 'IntersectionObserver' in window) {
   new IntersectionObserver(([e]) => stage.classList.toggle('offscreen', !e.isIntersecting)).observe(stage);
 }
+
+// "Send on WhatsApp": opens WhatsApp with the form details already written, so no email is needed.
+const waBtn = document.getElementById('sendWhatsApp');
+waBtn?.addEventListener('click', () => {
+  const f = document.getElementById('leadForm').elements;
+  if (!f.name.reportValidity() || !f.details.reportValidity()) return;
+  const lines = [
+    "Hi Dana, I'd like to get started with Clipify.",
+    '',
+    `Name: ${f.name.value.trim()}`,
+    `Plan / need: ${f.service.value.trim() || 'Clipify'}`,
+    `Channel and schedule: ${f.details.value.trim()}`,
+  ];
+  if (f.email.value.trim()) lines.push(`Email: ${f.email.value.trim()}`);
+  window.open(`https://wa.me/27765606016?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener');
+});
