@@ -142,7 +142,7 @@ nav.top {
 .l3 { animation: hot3 var(--loop) var(--ease-out) infinite both; }
 .l4 { animation: hot4 var(--loop) var(--ease-out) infinite both; }
 
-.tl { position: relative; height: 40px; margin-top: 36px; }
+.tl { position: relative; height: 40px; margin-top: 36px; container-type: inline-size; }
 .wave { display: block; width: 100%; height: 100%; fill: rgba(255, 255, 255, 0.2); }
 .scanhead { position: absolute; top: -6px; bottom: -6px; left: 0; width: 2px; border-radius: 2px; background: var(--lime); animation: scan var(--loop) linear infinite; }
 .marks { position: absolute; inset: 0; animation: reveal var(--loop) linear infinite; }
@@ -197,7 +197,7 @@ nav.top {
   31%, 100% { transform: translate(60px, 70px); opacity: 0; }
 }
 @keyframes press { 0%, 21.5% { transform: scale(1); } 22.5% { transform: scale(0.94); } 24.5%, 100% { transform: scale(1); } }
-@keyframes scan { 0%, 24% { left: 0; opacity: 0; } 25% { opacity: 1; } 56% { left: 100%; opacity: 1; } 58%, 100% { left: 100%; opacity: 0; } }
+@keyframes scan { 0%, 24% { transform: none; opacity: 0; } 25% { opacity: 1; } 56% { transform: translateX(100cqw); opacity: 1; } 58%, 100% { transform: translateX(100cqw); opacity: 0; } }
 @keyframes reveal {
   0%, 24% { clip-path: inset(-30px 100% -8px 0); opacity: 1; }
   56%, 92% { clip-path: inset(-30px 0 -8px 0); opacity: 1; }
