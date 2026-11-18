@@ -215,7 +215,7 @@ nav.top {
   display: grid; height: 100%; padding: 40px; gap: 24px; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr auto;
   animation: fade 450ms var(--ease) both;
 }
-.st-name { grid-column: 1; grid-row: 1; font-size: var(--t-m); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+.st-name { grid-column: 1; grid-row: 1; font-size: var(--t-m); font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; }
 .st-body > p:not(.st-name) { grid-column: 1; grid-row: 3; max-width: 36ch; }
 .st-body .frag { grid-column: 2; grid-row: 1 / 4; align-self: center; justify-self: center; }
 @keyframes fade { from { opacity: 0; } }
@@ -261,7 +261,7 @@ html:not(.js) .st-body { display: grid; padding: 32px; gap: 16px; grid-template-
 .compare { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap); }
 .compare h2 { grid-column: 1 / 13; max-width: 14ch; }
 .cmp-side { grid-column: 1 / 5; margin-top: 72px; display: flex; flex-direction: column; gap: 24px; }
-.cmp-verdict { font-size: var(--t-m); font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; }
+.cmp-verdict { font-size: var(--t-m); font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
 .cmp-wrap { grid-column: 5 / 13; margin-top: 72px; overflow-x: auto; }
 .cmp { width: 100%; border-collapse: collapse; font-size: var(--t-s); text-align: left; }
 .cmp th, .cmp td { padding: 18px 16px; vertical-align: top; border-bottom: 1px solid rgba(255, 255, 255, 0.16); }
@@ -296,7 +296,7 @@ html:not(.js) .st-body { display: grid; padding: 32px; gap: 16px; grid-template-
   width: 100%; min-height: 64px; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0;
   background: none; border: 0; color: var(--soft-l); font: inherit; text-align: left; cursor: pointer;
 }
-.kind button span { font-size: var(--t-m); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; transition: color 200ms; }
+.kind button span { font-size: var(--t-m); font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; transition: color 200ms; }
 .kind button small { flex: none; font-size: var(--t-s); }
 .kind.is-on button { color: #000; }
 .kind.is-on button span { font-weight: 700; }
@@ -342,7 +342,7 @@ html:not(.js) .st-body { display: grid; padding: 32px; gap: 16px; grid-template-
 .faq-head .wrap { padding-block: 56px; }
 .faq-head h2 { font-size: var(--t-xl); letter-spacing: -0.045em; }
 .qa-row { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap); padding-block: 56px; }
-.qa-row h3 { grid-column: 1 / 6; font-size: var(--t-m); letter-spacing: -0.02em; line-height: 1.15; }
+.qa-row h3 { grid-column: 1 / 6; font-size: var(--t-m); letter-spacing: -0.02em; line-height: 1.3; }
 .qa-row p { grid-column: 7 / 13; max-width: 56ch; }
 
 /* close: the idea again, inverted */
