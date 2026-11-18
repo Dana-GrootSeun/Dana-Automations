@@ -10,6 +10,10 @@
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://kcgfunowuvfovknqkmuc.supabase.co; form-action 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'
 
+/clipify/*
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://kcgfunowuvfovknqkmuc.supabase.co; form-action 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'
+
 /privacy
   Content-Security-Policy: default-src 'self'; script-src 'none'; style-src 'self'; img-src 'self' data:; form-action 'none'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'
 

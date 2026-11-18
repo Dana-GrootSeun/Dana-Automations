@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clipify — Stream clips ready by morning | Dana Automates</title>
+<meta name="description" content="A monthly clipping service for live streamers. Your VOD goes in overnight; captioned, quality-checked Shorts, TikToks and Reels come out by morning. From South Africa, priced in Rand.">
+<link rel="canonical" href="https://dana-automates.therondana65.workers.dev/clipify/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dana Automates">
+<meta property="og:title" content="Clipify — Your stream tonight. Clips ready by morning.">
+<meta property="og:description" content="Monthly clipping service for live streamers: captioned vertical clips, checked by a human, with titles and hashtags.">
+<meta property="og:url" content="https://dana-automates.therondana65.workers.dev/clipify/">
+<meta property="og:image" content="https://dana-automates.therondana65.workers.dev/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="clipify.css">
+<script src="/main.js" defer></script>
+<script src="clipify.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Icons: Lucide (ISC). -->
+<!-- impeccable-disable overused-font,marquee,pulsing-dot -- Dana asked to match the OpusClip reference (Geist, marquee, blinking connector dots) -->
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/></symbol>
+  <symbol id="i-cc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 10.5a2 2 0 1 0 0 3M17 10.5a2 2 0 1 0 0 3"/></symbol>
+  <symbol id="i-crop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></symbol>
+  <symbol id="i-vol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol>
+  <symbol id="i-hash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 4 4 4-4M12 8v8"/></symbol>
+  <symbol id="i-wand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72M14 7l3 3M5 6v4M19 14v4M10 2v2M7 8H3M21 16h-4M11 3H9"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+  <symbol id="i-sync" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="p-yt" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4" fill="#ff0033"/><path d="M10 9v6l5-3z" fill="#fff"/></symbol>
+  <symbol id="p-ig" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></symbol>
+  <symbol id="p-tt" viewBox="0 0 24 24" fill="#fff"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-1.8-2.5V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.3 7.3 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6"/></symbol>
+</svg>
+
+<a class="announce" href="#pricing">Founding-streamer rates are open for my first channels <span aria-hidden="true">→</span></a>
+
+<nav class="top" aria-label="Main">
+  <a class="logo" href="#top"><span class="mark" aria-hidden="true"><svg><use href="#i-scissors"/></svg></span>Clipify <small>by Dana Automates</small></a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="nav-right">
+    <a class="ghost-link" href="/">Dana Automates</a>
+    <a class="btn-white sm" href="#contact" data-enquiry="Clipify pilot">Start a pilot</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<header class="hero" id="top">
+  <p class="eyebrow">Stream clipping, done for you</p>
+  <h1>1 long stream, a week of clips. Ready by morning.</h1>
+  <p class="lede">Clipify turns your 3–8 hour streams into captioned vertical clips for Shorts, TikTok and Reels, checked by a person before they reach you.</p>
+
+  <form class="drop-form" id="pilotForm">
+    <label class="drop-input">
+      <svg class="ico" aria-hidden="true"><use href="#i-link"/></svg>
+      <span class="sr">Your channel link</span>
+      <input id="channel" name="channel" type="text" inputmode="url" autocomplete="url" placeholder="Your channel link" maxlength="200">
+      <button class="btn-white" type="submit">Start a pilot</button>
+    </label>
+    <span class="or">or</span>
+    <a class="btn-outline" href="#pricing">See pricing</a>
+  </form>
+
+  <div class="stage reveal" aria-hidden="true">
+    <div class="vod">
+      <div class="vod-scene"></div>
+      <span class="live">● LIVE</span>
+      <span class="dur">5:42:10</span>
+    </div>
+    <div class="bar">
+      <svg class="ico"><use href="#i-link"/></svg>
+      <span class="typed"><span>youtube.com/live/saturday-stream</span></span>
+      <span class="get">Get clips</span>
+      <span class="pointer"></span>
+    </div>
+    <div class="clips">
+      <div class="clip c1"><span class="plat"><svg><use href="#p-yt"/></svg></span><span class="cap">NO WAY HE <em>PULLED</em> IT</span><span class="score"><small>SCORE</small>97</span></div>
+      <div class="clip c2"><span class="plat"><svg><use href="#p-tt"/></svg></span><span class="cap">WAIT FOR <em>IT</em>…</span><span class="score"><small>SCORE</small>91</span></div>
+      <div class="clip c3"><span class="plat"><svg><use href="#p-ig"/></svg></span><span class="cap">CHAT WENT <em>CRAZY</em></span><span class="score"><small>SCORE</small>99</span></div>
+      <div class="clip c4"><span class="plat"><svg><use href="#p-yt"/></svg></span><span class="cap">LAST PACK OF THE <em>NIGHT</em></span><span class="score"><small>SCORE</small>94</span></div>
+      <div class="clip c5"><span class="plat"><svg><use href="#p-tt"/></svg></span><span class="cap">THAT'S A <em>ONE OF ONE</em></span><span class="score"><small>SCORE</small>96</span></div>
+      <div class="clip c6"><span class="plat"><svg><use href="#p-ig"/></svg></span><span class="cap">HE DIDN'T SEE <em>THAT</em></span><span class="score"><small>SCORE</small>93</span></div>
+    </div>
+  </div>
+
+  <ul class="chips" aria-label="What's included">
+    <li><svg aria-hidden="true"><use href="#i-scissors"/></svg>Moment picking</li>
+    <li><svg aria-hidden="true"><use href="#i-cc"/></svg>Animated captions</li>
+    <li><svg aria-hidden="true"><use href="#i-crop"/></svg>9:16 reframe</li>
+    <li><svg aria-hidden="true"><use href="#i-vol"/></svg>Loudness fix</li>
+    <li><svg aria-hidden="true"><use href="#i-hash"/></svg>Titles &amp; hashtags</li>
+    <li><svg aria-hidden="true"><use href="#i-check"/></svg>Human check</li>
+  </ul>
+</header>
+
+<section class="works" aria-label="Works with">
+  <p class="works-title">Works with every kind of stream</p>
+  <div class="marquee">
+    <div class="track" id="marquee">
+      <span>YouTube Live</span><span>Twitch</span><span>Kick</span><span>Pack openings</span><span>FPS</span><span>IRL</span><span>Just chatting</span><span>Card breaks</span><span>Speedruns</span><span>Sports talk</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="features">
+  <p class="eyebrow ico-eyebrow"><svg aria-hidden="true"><use href="#i-sparkle"/></svg>Built for streams</p>
+  <h2>Clipping that understands your stream</h2>
+  <p class="lede">Most AI clippers are made for two people at a desk. Streams are longer, louder and laid out differently, so Clipify is set up around yours.</p>
+
+  <div class="duo reveal">
+    <article class="feature">
+      <div class="visual v-pick" aria-hidden="true">
+        <div class="prompt"><span class="plabel">Looking for</span><span class="pbox">Moments that make sense on their own</span></div>
+        <div class="tags"><span>Big pull</span><span>Chat reaction</span><span>Clutch play</span></div>
+        <div class="strip"><span class="scan"></span></div>
+      </div>
+      <h3>Moments that stand on their own</h3>
+      <p>The whole stream is transcribed and every candidate is checked for a clear hook, a payoff and no dead air. Weak streams get fewer clips, never filler.</p>
+    </article>
+    <article class="feature">
+      <div class="visual v-frame" aria-hidden="true">
+        <div class="wide"><span class="cam"></span><span class="game"></span><span class="track-box"></span></div>
+        <div class="dots"><i></i><i></i><i></i><i></i></div>
+        <div class="tall"><span class="cam"></span><span class="game"></span></div>
+        <span class="ratio">9:16</span>
+      </div>
+      <h3>Framed for your camera setup</h3>
+      <p>Face cam, pack cam, gameplay or screen: your layout is mapped once at setup, so every clip stacks the right parts instead of a blind centre crop.</p>
+    </article>
+  </div>
+</section>
+
+<section class="sec" id="how">
+  <p class="eyebrow ico-eyebrow"><svg aria-hidden="true"><use href="#i-sync"/></svg>Workflow on autopilot</p>
+  <h2>You stream. The rest happens overnight.</h2>
+  <p class="lede">No uploads, no editing app, no command prompt. Clips are waiting in your folder when you wake up.</p>
+
+  <div class="flow reveal">
+    <div class="flow-step">
+      <div class="flow-art art1" aria-hidden="true"><span class="new">New</span><span class="mini-vod"></span></div>
+      <h3><svg aria-hidden="true"><use href="#i-down"/></svg>Auto pick-up</h3>
+      <p>Your VOD is collected from your channel after you go offline, or you drop the file in your shared folder.</p>
+    </div>
+    <div class="connector" aria-hidden="true"><span class="spin"><svg><use href="#i-sync"/></svg></span></div>
+    <div class="flow-step">
+      <div class="flow-art art2" aria-hidden="true"><span class="mini-clip a"></span><span class="mini-clip b"></span><span class="mini-clip c"></span></div>
+      <h3><svg aria-hidden="true"><use href="#i-wand"/></svg>Auto edit</h3>
+      <p>Moments are picked, cut tight, reframed, captioned in your style and levelled for phone speakers.</p>
+    </div>
+    <div class="connector" aria-hidden="true"><span class="spin"><svg><use href="#i-sync"/></svg></span></div>
+    <div class="flow-step">
+      <div class="flow-art art3" aria-hidden="true"><span class="mini-clip a"></span><span class="ready">Ready<small>7:00am</small></span></div>
+      <h3><svg aria-hidden="true"><use href="#i-folder"/></svg>Checked &amp; delivered</h3>
+      <p>Each clip passes a quality check, then lands in your folder with a title, description, hashtags and posting order.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="compare">
+  <p class="eyebrow">Your options</p>
+  <h2>Why a service, not another app?</h2>
+  <div class="cmp reveal" role="table" aria-label="Clipify compared with AI apps and freelance editors">
+    <div class="row head" role="row"><span role="columnheader"></span><span role="columnheader">AI clipping app</span><span role="columnheader" class="us">Clipify</span><span role="columnheader">Freelance editor</span></div>
+    <div class="row" role="row"><span role="rowheader">Who does the work</span><span role="cell">You: upload, pick, fix, export</span><span role="cell" class="us">Done for you, overnight</span><span role="cell">Done for you, in days</span></div>
+    <div class="row" role="row"><span role="rowheader">Long streams (4–8 h)</span><span role="cell">Often capped by plan</span><span role="cell" class="us">Yes, full VOD</span><span role="cell">Yes, billed by time</span></div>
+    <div class="row" role="row"><span role="rowheader">Your camera layout</span><span role="cell">Generic crops</span><span role="cell" class="us">Set up for your stream</span><span role="cell">Yes</span></div>
+    <div class="row" role="row"><span role="rowheader">Human check</span><span role="cell">No</span><span role="cell" class="us">Every clip</span><span role="cell">Yes</span></div>
+    <div class="row" role="row"><span role="rowheader">~30 clips a month</span><span role="cell">~R500–R1,400 + your time</span><span role="cell" class="us">R1,500</span><span role="cell">R8,000+</span></div>
+  </div>
+  <p class="note">App and freelance figures are typical published 2026 rates, converted at about R17 to the US dollar.</p>
+</section>
+
+<section class="sec" id="pricing">
+  <p class="eyebrow">Pricing</p>
+  <h2>One setup. One monthly fee.</h2>
+  <p class="lede">Try it for two weeks on your real streams before the monthly fee starts.</p>
+  <div class="plans reveal">
+    <div class="plan">
+      <p class="plan-name">Setup</p>
+      <p class="price">R3,000 <small>once-off</small></p>
+      <a class="btn-outline full" href="#contact" data-enquiry="Clipify pilot">Start a pilot</a>
+      <ul>
+        <li>Your caption style, title bar and branding, saved for every batch</li>
+        <li>Layout built for your camera setup (pack cam, face cam, game or screen)</li>
+        <li>Shared delivery folder set up</li>
+        <li><b>2-week pilot included.</b> Not working for you? You only pay setup.</li>
+      </ul>
+    </div>
+    <div class="plan pro">
+      <p class="plan-name">Monthly <span class="badge">Most streamers</span></p>
+      <p class="price">R1,500 <small>/ month</small></p>
+      <a class="btn-white full" href="#contact" data-enquiry="Clipify pilot">Start a pilot</a>
+      <ul>
+        <li>Up to 2 streams a week, plus the odd long-form video</li>
+        <li>Around 30 clips a month, and only strong moments: no filler</li>
+        <li>Titles, descriptions and hashtags for every clip</li>
+        <li>Fixes, improvements and processing costs included</li>
+        <li><b>Month-to-month.</b> Cancel anytime.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note"><b>Founding-streamer rates</b> for my first few channels. Ask before you sign up.</p>
+
+  <div class="billing reveal">
+    <div><h3>How billing works</h3><p>You pay setup once, before the pilot starts. After that, the monthly fee is billed in advance on the same date each month. No contract, no lock-in.</p></div>
+    <div><h3>Ways to pay</h3><p>EFT against a monthly invoice. Card and Instant EFT through a secure payment link <span class="soon">coming soon</span></p></div>
+    <div><h3>Currency</h3><p>Prices are in South African Rand. Outside South Africa? Ask for a quote in USD.</p></div>
+  </div>
+</section>
+
+<section class="sec" id="faq">
+  <h2>Got questions?</h2>
+  <div class="faq reveal">
+    <div class="qa">
+      <button type="button" aria-expanded="false" aria-controls="cf1">Do I need to install anything?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
+      <div class="ans" id="cf1" hidden><p>No. Clipify runs on my side. You stream as normal, and clips arrive in a shared folder you can open on your phone.</p></div>
+    </div>
+    <div class="qa">
+      <button type="button" aria-expanded="false" aria-controls="cf2">Do you post the clips for me?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
+      <div class="ans" id="cf2" hidden><p>By default you post them, using the titles and hashtags I supply. If you'd rather I upload them, you can give me Editor access to your YouTube channel and we'll agree a schedule.</p></div>
+    </div>
+    <div class="qa">
+      <button type="button" aria-expanded="false" aria-controls="cf3">What if I don't like a clip?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
+      <div class="ans" id="cf3" hidden><p>Tell me which one and why. I'll re-cut it or swap it, and save the note to your preferences so the next batch gets it right.</p></div>
+    </div>
+    <div class="qa">
+      <button type="button" aria-expanded="false" aria-controls="cf4">What happens after the pilot?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
+      <div class="ans" id="cf4" hidden><p>If you're happy, the monthly fee starts and carries on month-to-month. If not, you've only paid setup and we part ways.</p></div>
+    </div>
+    <div class="qa">
+      <button type="button" aria-expanded="false" aria-controls="cf5">Which platforms and games work?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
+      <div class="ans" id="cf5" hidden><p>Any stream with a saved VOD or recording: YouTube, Twitch or Kick, in English. Games, IRL, pack openings and just-chatting all work; the layout is set up per channel.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="contact">
+  <h2>Your next stream could be clipped by tomorrow morning.</h2>
+  <p class="lede">Tell me where you stream and how often. Within 24 hours you'll get a reply with a start date for your 2-week pilot.</p>
+  <div class="final-cta">
+    <a class="btn-white" href="mailto:dana.automates@gmail.com" data-enquiry="Clipify pilot">Start a pilot</a>
+    <a class="btn-outline" href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%27d%20like%20to%20try%20Clipify." target="_blank" rel="noopener">WhatsApp me</a>
+  </div>
+</section>
+
+</main>
+
+<dialog class="enquiry" id="enquiry" aria-labelledby="dialogTitle">
+  <div class="dialog-head"><h2 id="dialogTitle">Start a Clipify pilot</h2><button class="dialog-close" type="button" aria-label="Close">×</button></div>
+  <p class="intro">Tell me your channel and how often you stream.</p>
+  <form id="leadForm">
+    <label for="f-name">Your name</label>
+    <input id="f-name" name="name" autocomplete="name" maxlength="120" required>
+    <label for="f-email">Your email</label>
+    <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" placeholder="you@channel.com" required>
+    <label for="f-service">What do you need?</label>
+    <input id="f-service" name="service" maxlength="160" placeholder="e.g. Clipify pilot">
+    <label for="f-details">Channel link and streaming schedule</label>
+    <textarea id="f-details" name="details" minlength="5" maxlength="4000" required placeholder="e.g. youtube.com/@mychannel, 2 streams a week, 4–6 hours each"></textarea>
+    <input class="hp-field" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <p class="consent">By sending, you agree to the <a href="/privacy.html">Privacy Notice</a>.</p>
+    <div class="dialog-actions">
+      <button class="btn-white" type="submit">Send request</button>
+      <button class="btn-outline" type="button" id="openEmail" aria-expanded="false" aria-controls="emailChooser">Email me instead</button>
+    </div>
+  </form>
+  <div class="email-chooser" id="emailChooser" hidden>
+    <p class="chooser-label">Which email do you use?</p>
+    <div class="chooser-btns">
+      <button type="button" class="btn-outline" data-provider="gmail">Gmail</button>
+      <button type="button" class="btn-outline" data-provider="outlook">Outlook</button>
+      <button type="button" class="btn-outline" data-provider="yahoo">Yahoo</button>
+      <button type="button" class="btn-outline" data-provider="default">Other / mail app</button>
+    </div>
+  </div>
+  <p class="dialog-status" id="dialogStatus" role="status"></p>
+</dialog>
+
+<footer class="foot">
+  <div class="foot-card">
+    <div class="foot-cols">
+      <div>
+        <p class="foot-h">Clipify</p>
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div>
+        <p class="foot-h">Contact</p>
+        <a href="mailto:dana.automates@gmail.com">dana.automates@gmail.com</a>
+        <a href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%27d%20like%20to%20try%20Clipify." target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div>
+        <p class="foot-h">Dana Automates</p>
+        <a href="/">Home</a>
+        <a href="/#services">Other services</a>
+      </div>
+      <div>
+        <p class="foot-h">Trust and legal</p>
+        <a href="/privacy.html">Privacy Notice</a>
+        <a href="/privacy.html#terms">Terms</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Clipify by Dana Theron. Based in South Africa.</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
