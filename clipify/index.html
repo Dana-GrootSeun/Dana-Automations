@@ -79,24 +79,15 @@
   </form>
 
   <div class="stage reveal" aria-hidden="true">
-    <div class="vod">
-      <div class="vod-scene"></div>
-      <span class="live">● LIVE</span>
-      <span class="dur">5:42:10</span>
-    </div>
-    <div class="bar">
-      <svg class="ico"><use href="#i-link"/></svg>
-      <span class="typed"><span>youtube.com/live/saturday-stream</span></span>
-      <span class="get">Get clips</span>
-      <span class="pointer"></span>
-    </div>
+    <figure class="vod">
+      <video src="media/hero-stream.mp4" poster="media/hero-stream.webp" width="960" height="540" autoplay muted loop playsinline preload="metadata"></video>
+      <span class="live">LIVE</span><span class="dur">5:42:10</span>
+    </figure>
+    <svg class="arrow" viewBox="0 0 120 40"><path d="M4 30 C40 34 76 26 108 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M96 8l13 4-6 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <div class="clips">
-      <div class="clip c1"><span class="plat"><svg><use href="#p-yt"/></svg></span><span class="cap">NO WAY HE <em>PULLED</em> IT</span><span class="score"><small>SCORE</small>97</span></div>
-      <div class="clip c2"><span class="plat"><svg><use href="#p-tt"/></svg></span><span class="cap">WAIT FOR <em>IT</em>…</span><span class="score"><small>SCORE</small>91</span></div>
-      <div class="clip c3"><span class="plat"><svg><use href="#p-ig"/></svg></span><span class="cap">CHAT WENT <em>CRAZY</em></span><span class="score"><small>SCORE</small>99</span></div>
-      <div class="clip c4"><span class="plat"><svg><use href="#p-yt"/></svg></span><span class="cap">LAST PACK OF THE <em>NIGHT</em></span><span class="score"><small>SCORE</small>94</span></div>
-      <div class="clip c5"><span class="plat"><svg><use href="#p-tt"/></svg></span><span class="cap">THAT'S A <em>ONE OF ONE</em></span><span class="score"><small>SCORE</small>96</span></div>
-      <div class="clip c6"><span class="plat"><svg><use href="#p-ig"/></svg></span><span class="cap">HE DIDN'T SEE <em>THAT</em></span><span class="score"><small>SCORE</small>93</span></div>
+      <figure class="clip c1"><video src="media/clip-a.mp4" poster="media/clip-a.webp" width="360" height="640" autoplay muted loop playsinline preload="metadata"></video><span class="score">94</span></figure>
+      <figure class="clip c2"><video src="media/clip-b.mp4" poster="media/clip-b.webp" width="360" height="640" autoplay muted loop playsinline preload="metadata"></video><span class="score">98</span></figure>
+      <figure class="clip c3"><video src="media/clip-c.mp4" poster="media/clip-c.webp" width="360" height="640" autoplay muted loop playsinline preload="metadata"></video><span class="score">96</span></figure>
     </div>
   </div>
 
@@ -124,53 +115,66 @@
   <h2>Clipping that understands your stream</h2>
   <p class="lede">Most AI clippers are made for two people at a desk. Streams are longer, louder and laid out differently, so Clipify is set up around yours.</p>
 
-  <div class="duo reveal">
-    <article class="feature">
-      <div class="visual v-pick" aria-hidden="true">
-        <div class="prompt"><span class="plabel">Looking for</span><span class="pbox">Moments that make sense on their own</span></div>
-        <div class="tags"><span>Big pull</span><span>Chat reaction</span><span>Clutch play</span></div>
-        <div class="strip"><span class="scan"></span></div>
+  <article class="canvas reframe reveal">
+    <div class="canvas-media">
+      <video src="media/reframe.mp4" poster="media/reframe.webp" width="1326" height="616" autoplay muted loop playsinline preload="metadata" aria-label="A wide card-game shot with a lime crop box moving across it, next to the matching vertical 9:16 clip with captions"></video>
+      <span class="chip-ratio">16:9 &rarr; 9:16</span>
+    </div>
+    <div class="canvas-text">
+      <p class="tag">Auto reframe</p>
+      <h3>Your camera, kept in frame.</h3>
+      <p>Face cam, pack cam, gameplay or screen: your layout is mapped once at setup, so every clip follows the action instead of a blind centre crop.</p>
+    </div>
+  </article>
+
+  <article class="moments reveal">
+    <div class="timeline" aria-hidden="true">
+      <div class="thumbs">
+        <img src="media/moment-1.webp" alt="" width="320" height="180" loading="lazy">
+        <img src="media/moment-2.webp" alt="" width="320" height="180" loading="lazy">
+        <img class="on" src="media/moment-3.webp" alt="" width="320" height="180" loading="lazy">
+        <img src="media/moment-4.webp" alt="" width="320" height="180" loading="lazy">
+        <img src="media/moment-5.webp" alt="" width="320" height="180" loading="lazy">
       </div>
-      <h3>Moments that stand on their own</h3>
+      <span class="pick">Clip 3 &middot; 0:42 &middot; score 96</span>
+      <div class="lane"><span class="lbl">Chat</span><svg class="bars" viewBox="0 0 540 44" preserveAspectRatio="none"><rect x="0" y="36.2" width="3" height="7.8" rx="1" fill="#4a4a4a"/><rect x="6" y="37.5" width="3" height="6.5" rx="1" fill="#4a4a4a"/><rect x="12" y="33.6" width="3" height="10.4" rx="1" fill="#4a4a4a"/><rect x="18" y="38.1" width="3" height="5.9" rx="1" fill="#4a4a4a"/><rect x="24" y="34.2" width="3" height="9.8" rx="1" fill="#4a4a4a"/><rect x="30" y="34.3" width="3" height="9.7" rx="1" fill="#4a4a4a"/><rect x="36" y="31.9" width="3" height="12.1" rx="1" fill="#4a4a4a"/><rect x="42" y="17.2" width="3" height="26.8" rx="1" fill="#d1ff05"/><rect x="48" y="6.9" width="3" height="37.1" rx="1" fill="#d1ff05"/><rect x="54" y="0.0" width="3" height="44.0" rx="1" fill="#d1ff05"/><rect x="60" y="9.2" width="3" height="34.8" rx="1" fill="#d1ff05"/><rect x="66" y="23.2" width="3" height="20.8" rx="1" fill="#d1ff05"/><rect x="72" y="30.4" width="3" height="13.6" rx="1" fill="#4a4a4a"/><rect x="78" y="31.1" width="3" height="12.9" rx="1" fill="#4a4a4a"/><rect x="84" y="37.6" width="3" height="6.4" rx="1" fill="#4a4a4a"/><rect x="90" y="36.9" width="3" height="7.1" rx="1" fill="#4a4a4a"/><rect x="96" y="33.7" width="3" height="10.3" rx="1" fill="#4a4a4a"/><rect x="102" y="31.2" width="3" height="12.8" rx="1" fill="#4a4a4a"/><rect x="108" y="34.1" width="3" height="9.9" rx="1" fill="#4a4a4a"/><rect x="114" y="35.6" width="3" height="8.4" rx="1" fill="#4a4a4a"/><rect x="120" y="31.0" width="3" height="13.0" rx="1" fill="#4a4a4a"/><rect x="126" y="38.3" width="3" height="5.7" rx="1" fill="#4a4a4a"/><rect x="132" y="31.6" width="3" height="12.4" rx="1" fill="#4a4a4a"/><rect x="138" y="34.3" width="3" height="9.7" rx="1" fill="#4a4a4a"/><rect x="144" y="29.5" width="3" height="14.5" rx="1" fill="#4a4a4a"/><rect x="150" y="17.4" width="3" height="26.6" rx="1" fill="#d1ff05"/><rect x="156" y="2.5" width="3" height="41.5" rx="1" fill="#d1ff05"/><rect x="162" y="0.0" width="3" height="44.0" rx="1" fill="#d1ff05"/><rect x="168" y="11.1" width="3" height="32.9" rx="1" fill="#d1ff05"/><rect x="174" y="21.8" width="3" height="22.2" rx="1" fill="#4a4a4a"/><rect x="180" y="29.9" width="3" height="14.1" rx="1" fill="#4a4a4a"/><rect x="186" y="35.0" width="3" height="9.0" rx="1" fill="#4a4a4a"/><rect x="192" y="34.3" width="3" height="9.7" rx="1" fill="#4a4a4a"/><rect x="198" y="38.2" width="3" height="5.8" rx="1" fill="#4a4a4a"/><rect x="204" y="38.2" width="3" height="5.8" rx="1" fill="#4a4a4a"/><rect x="210" y="37.1" width="3" height="6.9" rx="1" fill="#4a4a4a"/><rect x="216" y="33.3" width="3" height="10.7" rx="1" fill="#4a4a4a"/><rect x="222" y="35.3" width="3" height="8.7" rx="1" fill="#4a4a4a"/><rect x="228" y="36.2" width="3" height="7.8" rx="1" fill="#4a4a4a"/><rect x="234" y="34.0" width="3" height="10.0" rx="1" fill="#4a4a4a"/><rect x="240" y="34.6" width="3" height="9.4" rx="1" fill="#4a4a4a"/><rect x="246" y="33.5" width="3" height="10.5" rx="1" fill="#4a4a4a"/><rect x="252" y="22.4" width="3" height="21.6" rx="1" fill="#4a4a4a"/><rect x="258" y="9.9" width="3" height="34.1" rx="1" fill="#d1ff05"/><rect x="264" y="1.3" width="3" height="42.7" rx="1" fill="#d1ff05"/><rect x="270" y="0.0" width="3" height="44.0" rx="1" fill="#d1ff05"/><rect x="276" y="11.3" width="3" height="32.7" rx="1" fill="#d1ff05"/><rect x="282" y="21.7" width="3" height="22.3" rx="1" fill="#4a4a4a"/><rect x="288" y="30.1" width="3" height="13.9" rx="1" fill="#4a4a4a"/><rect x="294" y="35.9" width="3" height="8.1" rx="1" fill="#4a4a4a"/><rect x="300" y="30.9" width="3" height="13.1" rx="1" fill="#4a4a4a"/><rect x="306" y="37.8" width="3" height="6.2" rx="1" fill="#4a4a4a"/><rect x="312" y="35.4" width="3" height="8.6" rx="1" fill="#4a4a4a"/><rect x="318" y="32.7" width="3" height="11.3" rx="1" fill="#4a4a4a"/><rect x="324" y="37.5" width="3" height="6.5" rx="1" fill="#4a4a4a"/><rect x="330" y="34.8" width="3" height="9.2" rx="1" fill="#4a4a4a"/><rect x="336" y="38.4" width="3" height="5.6" rx="1" fill="#4a4a4a"/><rect x="342" y="33.3" width="3" height="10.7" rx="1" fill="#4a4a4a"/><rect x="348" y="31.9" width="3" height="12.1" rx="1" fill="#4a4a4a"/><rect x="354" y="30.4" width="3" height="13.6" rx="1" fill="#4a4a4a"/><rect x="360" y="19.5" width="3" height="24.5" rx="1" fill="#4a4a4a"/><rect x="366" y="10.0" width="3" height="34.0" rx="1" fill="#d1ff05"/><rect x="372" y="0.0" width="3" height="44.0" rx="1" fill="#d1ff05"/><rect x="378" y="0.3" width="3" height="43.7" rx="1" fill="#d1ff05"/><rect x="384" y="13.8" width="3" height="30.2" rx="1" fill="#d1ff05"/><rect x="390" y="27.0" width="3" height="17.0" rx="1" fill="#4a4a4a"/><rect x="396" y="30.0" width="3" height="14.0" rx="1" fill="#4a4a4a"/><rect x="402" y="30.9" width="3" height="13.1" rx="1" fill="#4a4a4a"/><rect x="408" y="34.9" width="3" height="9.1" rx="1" fill="#4a4a4a"/><rect x="414" y="33.5" width="3" height="10.5" rx="1" fill="#4a4a4a"/><rect x="420" y="38.2" width="3" height="5.8" rx="1" fill="#4a4a4a"/><rect x="426" y="33.2" width="3" height="10.8" rx="1" fill="#4a4a4a"/><rect x="432" y="33.6" width="3" height="10.4" rx="1" fill="#4a4a4a"/><rect x="438" y="30.9" width="3" height="13.1" rx="1" fill="#4a4a4a"/><rect x="444" y="32.2" width="3" height="11.8" rx="1" fill="#4a4a4a"/><rect x="450" y="36.3" width="3" height="7.7" rx="1" fill="#4a4a4a"/><rect x="456" y="34.6" width="3" height="9.4" rx="1" fill="#4a4a4a"/><rect x="462" y="28.5" width="3" height="15.5" rx="1" fill="#4a4a4a"/><rect x="468" y="23.8" width="3" height="20.2" rx="1" fill="#d1ff05"/><rect x="474" y="6.1" width="3" height="37.9" rx="1" fill="#d1ff05"/><rect x="480" y="0.1" width="3" height="43.9" rx="1" fill="#d1ff05"/><rect x="486" y="6.3" width="3" height="37.7" rx="1" fill="#d1ff05"/><rect x="492" y="20.8" width="3" height="23.2" rx="1" fill="#d1ff05"/><rect x="498" y="26.3" width="3" height="17.7" rx="1" fill="#4a4a4a"/><rect x="504" y="36.2" width="3" height="7.8" rx="1" fill="#4a4a4a"/><rect x="510" y="36.5" width="3" height="7.5" rx="1" fill="#4a4a4a"/><rect x="516" y="35.6" width="3" height="8.4" rx="1" fill="#4a4a4a"/><rect x="522" y="31.8" width="3" height="12.2" rx="1" fill="#4a4a4a"/><rect x="528" y="38.1" width="3" height="5.9" rx="1" fill="#4a4a4a"/><rect x="534" y="35.2" width="3" height="8.8" rx="1" fill="#4a4a4a"/></svg></div>
+      <div class="lane"><span class="lbl">Audio</span><svg class="bars" viewBox="0 0 540 44" preserveAspectRatio="none"><rect x="0" y="17.2" width="3" height="9.6" rx="1" fill="#4a4a4a"/><rect x="6" y="15.9" width="3" height="12.3" rx="1" fill="#4a4a4a"/><rect x="12" y="16.1" width="3" height="11.8" rx="1" fill="#4a4a4a"/><rect x="18" y="15.9" width="3" height="12.1" rx="1" fill="#4a4a4a"/><rect x="24" y="18.1" width="3" height="7.7" rx="1" fill="#4a4a4a"/><rect x="30" y="17.0" width="3" height="10.1" rx="1" fill="#4a4a4a"/><rect x="36" y="14.8" width="3" height="14.5" rx="1" fill="#4a4a4a"/><rect x="42" y="7.1" width="3" height="29.8" rx="1" fill="#d1ff05"/><rect x="48" y="0.0" width="3" height="44.0" rx="1" fill="#d1ff05"/><rect x="54" y="0.1" width="3" height="43.8" rx="1" fill="#d1ff05"/><rect x="60" y="4.2" width="3" height="35.7" rx="1" fill="#d1ff05"/><rect x="66" y="11.0" width="3" height="21.9" rx="1" fill="#d1ff05"/><rect x="72" y="16.0" width="3" height="12.1" rx="1" fill="#4a4a4a"/><rect x="78" y="16.9" width="3" height="10.2" rx="1" fill="#4a4a4a"/><rect x="84" y="16.9" width="3" height="10.1" rx="1" fill="#4a4a4a"/><rect x="90" y="18.3" width="3" height="7.4" rx="1" fill="#4a4a4a"/><rect x="96" y="19.3" width="3" height="5.3" rx="1" fill="#4a4a4a"/><rect x="102" y="17.7" width="3" height="8.6" rx="1" fill="#4a4a4a"/><rect x="108" y="17.9" width="3" height="8.2" rx="1" fill="#4a4a4a"/><rect x="114" y="17.1" width="3" height="9.8" rx="1" fill="#4a4a4a"/><rect x="120" y="15.6" width="3" height="12.8" rx="1" fill="#4a4a4a"/><rect x="126" y="16.6" width="3" height="10.8" rx="1" fill="#4a4a4a"/><rect x="132" y="17.1" width="3" height="9.7" rx="1" fill="#4a4a4a"/><rect x="138" y="15.9" width="3" height="12.3" rx="1" fill="#4a4a4a"/><rect x="144" y="12.6" width="3" height="18.7" rx="1" fill="#4a4a4a"/><rect x="150" y="9.0" width="3" height="26.1" rx="1" fill="#d1ff05"/><rect x="156" y="0.0" width="3" height="44.0" rx="1" fill="#d1ff05"/><rect x="162" y="0.0" width="3" height="44.0" rx="1" fill="#d1ff05"/><rect x="168" y="2.8" width="3" height="38.4" rx="1" fill="#d1ff05"/><rect x="174" y="10.1" width="3" height="23.9" rx="1" fill="#4a4a4a"/><rect x="180" y="15.9" width="3" height="12.2" rx="1" fill="#4a4a4a"/><rect x="186" y="17.4" width="3" height="9.2" rx="1" fill="#4a4a4a"/><rect x="192" y="18.9" width="3" height="6.2" rx="1" fill="#4a4a4a"/><rect x="198" y="16.8" width="3" height="10.3" rx="1" fill="#4a4a4a"/><rect x="204" y="19.1" width="3" height="5.8" rx="1" fill="#4a4a4a"/><rect x="210" y="19.1" width="3" height="5.8" rx="1" fill="#4a4a4a"/><rect x="216" y="18.5" width="3" height="6.9" rx="1" fill="#4a4a4a"/><rect x="222" y="18.7" width="3" height="6.6" rx="1" fill="#4a4a4a"/><rect x="228" y="18.0" width="3" height="8.0" rx="1" fill="#4a4a4a"/><rect x="234" y="19.1" width="3" height="5.8" rx="1" fill="#4a4a4a"/><rect x="240" y="19.1" width="3" height="5.8" rx="1" fill="#4a4a4a"/><rect x="246" y="17.3" width="3" height="9.3" rx="1" fill="#4a4a4a"/><rect x="252" y="13.9" width="3" height="16.1" rx="1" fill="#4a4a4a"/><rect x="258" y="6.3" width="3" height="31.5" rx="1" fill="#d1ff05"/><rect x="264" y="1.5" width="3" height="41.0" rx="1" fill="#d1ff05"/><rect x="270" y="0.0" width="3" height="44.0" rx="1" fill="#d1ff05"/><rect x="276" y="5.3" width="3" height="33.4" rx="1" fill="#d1ff05"/><rect x="282" y="13.8" width="3" height="16.5" rx="1" fill="#4a4a4a"/><rect x="288" y="16.9" width="3" height="10.1" rx="1" fill="#4a4a4a"/><rect x="294" y="17.7" width="3" height="8.6" rx="1" fill="#4a4a4a"/><rect x="300" y="17.9" width="3" height="8.2" rx="1" fill="#4a4a4a"/><rect x="306" y="18.9" width="3" height="6.3" rx="1" fill="#4a4a4a"/><rect x="312" y="16.0" width="3" height="12.0" rx="1" fill="#4a4a4a"/><rect x="318" y="15.4" width="3" height="13.1" rx="1" fill="#4a4a4a"/><rect x="324" y="17.5" width="3" height="9.0" rx="1" fill="#4a4a4a"/><rect x="330" y="17.4" width="3" height="9.1" rx="1" fill="#4a4a4a"/><rect x="336" y="19.0" width="3" height="6.0" rx="1" fill="#4a4a4a"/><rect x="342" y="18.9" width="3" height="6.2" rx="1" fill="#4a4a4a"/><rect x="348" y="17.6" width="3" height="8.8" rx="1" fill="#4a4a4a"/><rect x="354" y="16.4" width="3" height="11.2" rx="1" fill="#4a4a4a"/><rect x="360" y="9.9" width="3" height="24.1" rx="1" fill="#4a4a4a"/><rect x="366" y="5.6" width="3" height="32.8" rx="1" fill="#d1ff05"/><rect x="372" y="0.9" width="3" height="42.2" rx="1" fill="#d1ff05"/><rect x="378" y="0.0" width="3" height="44.0" rx="1" fill="#d1ff05"/><rect x="384" y="7.1" width="3" height="29.8" rx="1" fill="#d1ff05"/><rect x="390" y="14.7" width="3" height="14.5" rx="1" fill="#4a4a4a"/><rect x="396" y="16.2" width="3" height="11.7" rx="1" fill="#4a4a4a"/><rect x="402" y="19.1" width="3" height="5.9" rx="1" fill="#4a4a4a"/><rect x="408" y="17.2" width="3" height="9.5" rx="1" fill="#4a4a4a"/><rect x="414" y="15.5" width="3" height="13.0" rx="1" fill="#4a4a4a"/><rect x="420" y="15.9" width="3" height="12.1" rx="1" fill="#4a4a4a"/><rect x="426" y="16.6" width="3" height="10.8" rx="1" fill="#4a4a4a"/><rect x="432" y="18.3" width="3" height="7.3" rx="1" fill="#4a4a4a"/><rect x="438" y="17.9" width="3" height="8.2" rx="1" fill="#4a4a4a"/><rect x="444" y="18.7" width="3" height="6.6" rx="1" fill="#4a4a4a"/><rect x="450" y="16.2" width="3" height="11.6" rx="1" fill="#4a4a4a"/><rect x="456" y="16.7" width="3" height="10.6" rx="1" fill="#4a4a4a"/><rect x="462" y="13.8" width="3" height="16.4" rx="1" fill="#4a4a4a"/><rect x="468" y="10.7" width="3" height="22.7" rx="1" fill="#d1ff05"/><rect x="474" y="4.0" width="3" height="36.0" rx="1" fill="#d1ff05"/><rect x="480" y="0.0" width="3" height="44.0" rx="1" fill="#d1ff05"/><rect x="486" y="0.0" width="3" height="44.0" rx="1" fill="#d1ff05"/><rect x="492" y="7.2" width="3" height="29.5" rx="1" fill="#d1ff05"/><rect x="498" y="13.0" width="3" height="18.0" rx="1" fill="#4a4a4a"/><rect x="504" y="15.4" width="3" height="13.3" rx="1" fill="#4a4a4a"/><rect x="510" y="16.3" width="3" height="11.4" rx="1" fill="#4a4a4a"/><rect x="516" y="18.4" width="3" height="7.1" rx="1" fill="#4a4a4a"/><rect x="522" y="17.3" width="3" height="9.4" rx="1" fill="#4a4a4a"/><rect x="528" y="18.0" width="3" height="8.1" rx="1" fill="#4a4a4a"/><rect x="534" y="19.2" width="3" height="5.5" rx="1" fill="#4a4a4a"/></svg></div>
+      <div class="ticks"><span>0:00</span><span>1:00</span><span>2:00</span><span>3:00</span><span>4:00</span><span>5:00</span><span>6:00</span></div>
+    </div>
+    <div class="moments-text">
+      <p class="tag">AI + human check</p>
+      <h3>Only the moments worth posting.</h3>
       <p>The whole stream is transcribed and every candidate is checked for a clear hook, a payoff and no dead air. Weak streams get fewer clips, never filler.</p>
-    </article>
-    <article class="feature">
-      <div class="visual v-frame" aria-hidden="true">
-        <div class="wide"><span class="cam"></span><span class="game"></span><span class="track-box"></span></div>
-        <div class="dots"><i></i><i></i><i></i><i></i></div>
-        <div class="tall"><span class="cam"></span><span class="game"></span></div>
-        <span class="ratio">9:16</span>
-      </div>
-      <h3>Framed for your camera setup</h3>
-      <p>Face cam, pack cam, gameplay or screen: your layout is mapped once at setup, so every clip stacks the right parts instead of a blind centre crop.</p>
-    </article>
-  </div>
+      <a class="arrow-link" href="#how">See how it works &rarr;</a>
+    </div>
+  </article>
 </section>
 
-<section class="sec" id="how">
+<section class="sec how" id="how">
   <p class="eyebrow ico-eyebrow"><svg aria-hidden="true"><use href="#i-sync"/></svg>Workflow on autopilot</p>
   <h2>You stream. The rest happens overnight.</h2>
   <p class="lede">No uploads, no editing app, no command prompt. Clips are waiting in your folder when you wake up.</p>
 
-  <div class="flow reveal">
-    <div class="flow-step">
-      <div class="flow-art art1" aria-hidden="true"><span class="new">New</span><img class="mini-vod" src="img/stream-desk.webp" alt="" width="400" height="225" loading="lazy"></div>
-      <h3><svg aria-hidden="true"><use href="#i-down"/></svg>Auto pick-up</h3>
-      <p>Your VOD is collected from your channel after you go offline, or you drop the file in your shared folder.</p>
-    </div>
-    <div class="connector" aria-hidden="true"><span class="spin"><svg><use href="#i-sync"/></svg></span></div>
-    <div class="flow-step">
-      <div class="flow-art art2" aria-hidden="true"><img class="mini-clip a" src="img/clip-1.webp" alt="" width="160" height="284" loading="lazy"><img class="mini-clip b" src="img/clip-2.webp" alt="" width="160" height="284" loading="lazy"><img class="mini-clip c" src="img/clip-3.webp" alt="" width="160" height="284" loading="lazy"></div>
-      <h3><svg aria-hidden="true"><use href="#i-wand"/></svg>Auto edit</h3>
-      <p>Moments are picked, cut tight, reframed, captioned in your style and levelled for phone speakers.</p>
-    </div>
-    <div class="connector" aria-hidden="true"><span class="spin"><svg><use href="#i-sync"/></svg></span></div>
-    <div class="flow-step">
-      <div class="flow-art art3" aria-hidden="true"><img class="mini-clip a" src="img/clip-ready.webp" alt="" width="160" height="284" loading="lazy"><span class="ready">Ready<small>7:00am</small></span></div>
-      <h3><svg aria-hidden="true"><use href="#i-folder"/></svg>Checked &amp; delivered</h3>
-      <p>Each clip passes a quality check, then lands in your folder with a title, description, hashtags and posting order.</p>
-    </div>
-  </div>
+  <ol class="steps reveal">
+    <li class="step s1">
+      <div class="step-art"><img src="media/desk.webp" alt="" width="720" height="405" loading="lazy"></div>
+      <div class="step-text"><span class="num">01</span><h3>Auto pick-up</h3><p>Your VOD is collected after you go offline, or you drop the file in your shared folder.</p></div>
+    </li>
+    <li class="step s2">
+      <div class="step-art fan" aria-hidden="true"><img src="media/clip-b.webp" alt="" width="360" height="640" loading="lazy"><img src="media/clip-a.webp" alt="" width="360" height="640" loading="lazy"><img src="media/clip-c.webp" alt="" width="360" height="640" loading="lazy"></div>
+      <div class="step-text"><span class="num">02</span><h3>Auto edit</h3><p>Moments are picked, cut tight, reframed, captioned in your style and levelled for phone speakers.</p></div>
+    </li>
+    <li class="step s3">
+      <div class="step-art phone" aria-hidden="true">
+        <div class="screen">
+          <span class="ready"><svg><use href="#i-check"/></svg>Ready 7:00am</span>
+          <span class="folder"><svg><use href="#i-folder"/></svg>Clipify &middot; your clips</span>
+          <div class="grid"><img src="media/clip-a.webp" alt="" width="360" height="640" loading="lazy"><img src="media/clip-b.webp" alt="" width="360" height="640" loading="lazy"><img src="media/clip-c.webp" alt="" width="360" height="640" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="step-text"><span class="num">03</span><h3>Checked &amp; delivered</h3><p>Each clip passes a quality check, then lands in your folder with a title, description, hashtags and posting order.</p></div>
+    </li>
+  </ol>
 </section>
 
 <section class="sec" id="compare">
@@ -269,12 +273,15 @@
 </section>
 
 <section class="final" id="contact">
-  <h2>Your next stream could be clipped by tomorrow morning.</h2>
-  <p class="lede">Tell me where you stream and how often. Within 24 hours you'll get a reply with a start date.</p>
-  <div class="final-cta">
-    <a class="btn-white" href="mailto:dana.automates@gmail.com" data-enquiry="Clipify">Get started</a>
-    <a class="btn-outline" href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%27d%20like%20to%20try%20Clipify." target="_blank" rel="noopener">WhatsApp me</a>
+  <div class="final-text">
+    <h2>Your next stream, clipped by morning.</h2>
+    <p class="lede">Tell me where you stream and how often. You'll get a reply with a start date within 24 hours.</p>
+    <div class="final-cta">
+      <a class="btn-white" href="mailto:dana.automates@gmail.com" data-enquiry="Clipify">Get started</a>
+      <a class="btn-outline" href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%27d%20like%20to%20try%20Clipify." target="_blank" rel="noopener">WhatsApp me</a>
+    </div>
   </div>
+  <span class="big-ratio" aria-hidden="true">9:16</span>
 </section>
 
 </main>
