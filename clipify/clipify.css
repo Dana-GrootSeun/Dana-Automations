@@ -259,11 +259,12 @@ nav.top {
 
 /* feature duo: two explainer visuals that loop (9s), paused by the stage toggle via .visual */
 .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 56px; text-align: left; }
+.feature { display: flex; flex-direction: column; }
 .feature h3 { font-size: 24px; letter-spacing: -0.03em; margin-top: 30px; }
 .feature p { color: var(--muted); font-size: 16px; margin-top: 8px; }
 .visual {
   --fl: 9s;
-  position: relative; height: 420px; border-radius: 20px; overflow: hidden; padding: 24px; display: flex; flex-direction: column;
+  position: relative; flex: 1; min-height: 420px; border-radius: 20px; overflow: hidden; padding: 24px; display: flex; flex-direction: column;
   border: 1px solid var(--line);
 }
 .vp-foot { margin-top: auto; padding-top: 14px; font-size: 13px; color: rgba(255, 255, 255, 0.7); }
@@ -276,6 +277,7 @@ nav.top {
 .cand { padding: 12px 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); animation: cand var(--fl) var(--ease-out) infinite both; }
 .c-b { animation-name: cand-skip; animation-delay: 0.5s; }
 .c-c { animation-delay: 1s; }
+.c-d { animation-delay: 1.5s; }
 .q { font-size: 14px; color: #fff; }
 .q .ts { font-size: 12px; color: var(--faint); margin-right: 8px; font-variant-numeric: tabular-nums; }
 .checks { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; }
@@ -289,31 +291,72 @@ nav.top {
 .verdict.keep b { font-weight: 700; margin-left: 2px; }
 .verdict.drop { color: rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.1); }
 
-/* framing: the face cam and action are boxed on the wide stream, then stacked into 9:16 */
-.v-frame { background: radial-gradient(ellipse 90% 70% at 70% 0%, #2a2c33, #161618 75%); }
-.vf-stage { flex: 1; display: flex; align-items: center; justify-content: center; gap: 14px; }
-.src { flex: 1.7; min-width: 0; }
-.out { flex: 0 0 auto; width: 30%; }
-.src-label { display: block; font-size: 12px; color: var(--faint); margin-bottom: 8px; }
-.wide16 { position: relative; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; border: 1px solid #33333a; background: #10233a; }
-.game, .t-act { position: absolute; inset: 0; background: #10233a; }
-.hud { position: absolute; left: 6%; bottom: 8%; width: 30%; height: 6%; border-radius: 3px; background: #2fbf71; box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.35); }
-.mini { position: absolute; left: 5%; top: 8%; width: 16%; aspect-ratio: 1; border-radius: 4px; background: #1d3b5c; border: 1px solid rgba(255, 255, 255, 0.25); }
-.xhair { position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.85); }
-.fcam { position: absolute; right: 4%; top: 6%; width: 26%; aspect-ratio: 4 / 3; border-radius: 6px; background: #2b2f3a; border: 1px solid rgba(255, 255, 255, 0.25); display: flex; align-items: flex-end; justify-content: center; overflow: hidden; color: #8b93a7; }
-.fcam svg, .t-cam svg { width: 70%; height: auto; margin-bottom: -10%; }
-.box { position: absolute; border: 2px solid var(--lime); border-radius: 6px; background: rgba(209, 255, 5, 0.08); animation: boxin var(--fl) var(--ease-out) infinite both; }
-.box em { position: absolute; left: -2px; top: -22px; font-style: normal; font-size: 11px; font-weight: 600; color: #000; background: var(--lime); padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
-.b-cam { right: 3%; top: 4%; width: 28%; height: 34%; }
-.b-act { left: 30%; top: 26%; width: 40%; height: 58%; animation-delay: 0.4s; }
-.b-act em { top: auto; bottom: -22px; }
-.b-cam em { top: auto; bottom: -22px; left: auto; right: -2px; }
-.vf-arrow { width: 34px; flex: none; color: var(--lime); }
-.tall916 { position: relative; aspect-ratio: 9 / 16; border-radius: 12px; overflow: hidden; border: 1px solid #33333a; background: #0c0c0e; display: flex; flex-direction: column; }
-.t-cam { position: relative; flex: 0 0 38%; background: #2b2f3a; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; color: #8b93a7; animation: stackin var(--fl) var(--ease-out) infinite both; animation-delay: 0.9s; }
-.t-act { position: relative; inset: auto; flex: 1; animation: stackin var(--fl) var(--ease-out) infinite both; animation-delay: 1.1s; }
-.t-cap { position: absolute; z-index: 1; left: 0; right: 0; top: 38%; transform: translateY(-50%); text-align: center; font-size: 12px; font-weight: 800; letter-spacing: -0.01em; padding: 5px 0; background: rgba(0, 0, 0, 0.7); animation: capin var(--fl) var(--ease-out) infinite both; animation-delay: 1.5s; }
-.t-cap em { font-style: normal; color: #000; background: var(--lime); padding: 0 4px; border-radius: 3px; }
+/* framing: one stream scene, shown wide, as a blind centre crop, and as the Clipify stack */
+.v-frame { gap: 16px; background: radial-gradient(ellipse 90% 70% at 70% 0%, #2a2c33, #161618 75%); }
+.fr-label { display: block; font-size: 12px; color: var(--faint); margin-bottom: 8px; }
+.fr-screen { position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; border: 1px solid #34343b; }
+.scene { position: absolute; inset: 0; display: block; }
+/* the scene: all positions in %, so every crop below is the same picture */
+.sc-sky { position: absolute; inset: 0 0 38% 0; background: #2b4d72; }
+.sc-hill { position: absolute; bottom: 38%; border-radius: 50% 50% 0 0; background: #23405f; }
+.h1 { left: -6%; width: 46%; height: 18%; } .h2 { left: 52%; width: 60%; height: 13%; background: #1f3a57; }
+.sc-ground { position: absolute; inset: 62% 0 0 0; background: #3d5a36; }
+.sc-crate { position: absolute; left: 30%; top: 54%; width: 7%; height: 12%; background: #8a6a3e; border: 2px solid #5e4526; }
+.sc-target { position: absolute; left: 53%; top: 44%; width: 4.5%; height: 18%; border-radius: 40% 40% 10% 10%; background: #c0392b; }
+.sc-x { position: absolute; left: 50%; top: 50%; width: 3.4%; aspect-ratio: 1; transform: translate(-50%, -50%); border: 2px solid #fff; border-radius: 50%; }
+.sc-map { position: absolute; left: 3%; top: 5%; width: 12%; aspect-ratio: 1; border-radius: 4px; background: #1b2f45; border: 1px solid rgba(255, 255, 255, 0.35); }
+.sc-feed { position: absolute; left: 40%; top: 5%; width: 20%; display: flex; flex-direction: column; gap: 4%; }
+.sc-feed i { display: block; height: 0.9vmin; min-height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.55); }
+.sc-feed i + i { width: 70%; background: rgba(255, 255, 255, 0.35); }
+.sc-hp { position: absolute; left: 3%; bottom: 6%; width: 22%; height: 4%; border-radius: 3px; background: rgba(0, 0, 0, 0.45); overflow: hidden; }
+.sc-hp i { display: block; width: 72%; height: 100%; background: #2fbf71; }
+.sc-ammo { position: absolute; right: 3%; bottom: 6%; display: flex; gap: 2px; width: 9%; height: 6%; }
+.sc-ammo i { flex: 1; border-radius: 2px; background: #f5c542; }
+.sc-cam { position: absolute; right: 3%; top: 5%; width: 24%; aspect-ratio: 4 / 3; border-radius: 6px; overflow: hidden; background: #3a3f4d; border: 2px solid #111; display: flex; align-items: flex-end; justify-content: center; color: #aab2c5; }
+.sc-cam svg { width: 62%; height: auto; margin-bottom: -6%; }
+
+/* overlays on the wide stream */
+.fr-crop, .fr-box { position: absolute; border-radius: 6px; }
+.fr-crop { left: 34.2%; width: 31.6%; top: 0; bottom: 0; border: 2px dashed rgba(255, 255, 255, 0.9); background: rgba(255, 255, 255, 0.08); animation: fr-crop var(--fl) var(--ease-out) infinite both; }
+.fr-box { border: 2px solid var(--lime); background: rgba(209, 255, 5, 0.1); animation: fr-box var(--fl) var(--ease-out) infinite both; }
+.fb-cam { right: 2%; top: 3%; width: 27%; height: 42%; }
+.fb-act { left: 30%; top: 26%; width: 40%; height: 60%; animation-delay: 0.25s; }
+.fr-crop em, .fr-box em { position: absolute; font-style: normal; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
+.fr-crop em { left: 50%; bottom: 6px; transform: translateX(-50%); color: #000; background: #fff; }
+.fr-box em { color: #000; background: var(--lime); }
+.fb-cam em { right: 4px; bottom: 4px; }
+.fb-act em { left: 4px; bottom: 4px; }
+
+/* the two results */
+.fr-outs { display: flex; justify-content: center; gap: 18%; }
+.fr-out { margin: 0; width: 30%; }
+.fr-phone { position: relative; aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; border: 2px solid #34343b; background: #0c0c0e; }
+.s-centre { width: 316%; left: -108%; right: auto; }
+.stack { display: flex; flex-direction: column; }
+.slot { position: relative; display: block; overflow: hidden; }
+.s-top { flex: 0 0 40%; border-bottom: 1px solid #000; }
+.s-bot { flex: 1; }
+.s-cam { width: 417%; left: -300%; right: auto; top: -19.5%; bottom: auto; aspect-ratio: 16 / 9; }
+.s-act { width: 250%; left: -75%; right: auto; top: -22%; bottom: auto; aspect-ratio: 16 / 9; }
+.fr-cap { position: absolute; z-index: 1; left: 0; right: 0; top: 40%; transform: translateY(-50%); padding: 4px 0; text-align: center; font-size: 11px; font-weight: 800; background: rgba(0, 0, 0, 0.72); }
+.fr-cap em { font-style: normal; color: #000; background: var(--lime); padding: 0 3px; border-radius: 3px; }
+.fr-out figcaption { display: grid; grid-template-columns: auto 1fr; column-gap: 6px; margin-top: 10px; font-size: 13px; font-weight: 600; line-height: 1.3; }
+.fr-out figcaption small { grid-column: 2; font-size: 11px; font-weight: 400; color: var(--faint); }
+.mark { grid-row: span 2; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #000; }
+.bad .mark { background: #ff8a80; } .good .mark { background: var(--lime); }
+.bad .fr-phone { animation: fr-bad var(--fl) var(--ease-out) infinite both; }
+.bad figcaption { animation: fr-bad var(--fl) var(--ease-out) infinite both; }
+.good .s-top { animation: fr-top var(--fl) var(--ease-out) infinite both; }
+.good .s-bot { animation: fr-bot var(--fl) var(--ease-out) infinite both; }
+.good .fr-cap { animation: fr-cap var(--fl) var(--ease-out) infinite both; }
+.good figcaption { animation: fr-cap var(--fl) var(--ease-out) infinite both; }
+
+@keyframes fr-crop { 0%, 6% { opacity: 0; transform: scaleX(1.25); } 12%, 30% { opacity: 1; transform: none; } 36%, 100% { opacity: 0; transform: none; } }
+@keyframes fr-bad { 0%, 14% { opacity: 0; transform: translateY(10px); } 22%, 92% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
+@keyframes fr-box { 0%, 34% { opacity: 0; transform: scale(1.1); } 40%, 92% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
+@keyframes fr-top { 0%, 44% { opacity: 0; transform: translateY(-24px); } 52%, 92% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
+@keyframes fr-bot { 0%, 46% { opacity: 0; transform: translateY(24px); } 54%, 92% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
+@keyframes fr-cap { 0%, 56% { opacity: 0; } 62%, 92% { opacity: 1; } 98%, 100% { opacity: 0; } }
 
 @keyframes cand { 0%, 4% { opacity: 0; transform: translateY(8px); } 10%, 92% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
 @keyframes cand-skip { 0%, 4% { opacity: 0; transform: translateY(8px); } 10%, 40% { opacity: 1; transform: none; } 46%, 92% { opacity: 0.45; transform: none; } 98%, 100% { opacity: 0; } }
@@ -321,9 +364,6 @@ nav.top {
 @keyframes tick2 { 0%, 20% { opacity: 0; transform: scale(0.85); } 24%, 100% { opacity: 1; transform: none; } }
 @keyframes tick3 { 0%, 26% { opacity: 0; transform: scale(0.85); } 30%, 100% { opacity: 1; transform: none; } }
 @keyframes verdict { 0%, 33% { opacity: 0; transform: translateX(-6px); } 38%, 100% { opacity: 1; transform: none; } }
-@keyframes boxin { 0%, 6% { opacity: 0; transform: scale(1.12); } 14%, 92% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
-@keyframes stackin { 0%, 22% { opacity: 0; transform: translateX(-18px); } 32%, 92% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; } }
-@keyframes capin { 0%, 30% { opacity: 0; } 36%, 92% { opacity: 1; } 98%, 100% { opacity: 0; } }
 
 /* how it works: three product-UI cards that play once when revealed */
 .steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; text-align: left; }
@@ -526,6 +566,8 @@ dialog.enquiry::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur
 
 /* responsive */
 @media (max-width: 960px) {
+  .fr-outs { gap: 6%; }
+  .fr-out { width: 42%; }
   .studio { grid-template-columns: 1fr; }
   .plans.three { grid-template-columns: 1fr; max-width: 560px; }
   .plans.three .plan.pro { order: -1; }
@@ -554,11 +596,9 @@ dialog.enquiry::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur
   .at { display: none; }
   .get { font-size: 14px; padding: 8px 14px; }
   .duo, .plans, .billing { grid-template-columns: 1fr; }
-  .visual { height: auto; min-height: 360px; padding: 18px; }
-  .vf-stage { flex-direction: column; gap: 10px; }
-  .src { width: 100%; flex: none; }
-  .out { width: 44%; }
-  .vf-arrow { transform: rotate(90deg); }
+  .visual { min-height: 0; padding: 18px; }
+  .fr-outs { gap: 10%; }
+  .fr-out { width: 38%; }
   .sec { padding-top: 96px; }
   .row { grid-template-columns: 1fr 1fr 1fr; }
   .row > span { padding: 14px 12px; font-size: 13px; }
