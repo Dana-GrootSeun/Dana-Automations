@@ -110,7 +110,6 @@ nav.top {
   --loop: 12s;
   position: relative; max-width: 1120px; margin: 48px auto 0; padding: 28px 28px 34px; border-radius: 24px; overflow: hidden; text-align: left;
   background: #121214; border: 1px solid var(--line);
-  box-shadow: 0 40px 120px -40px rgba(61, 220, 132, 0.18), 0 30px 80px rgba(0, 0, 0, 0.6);
 }
 .bar {
   position: relative; z-index: 2; display: flex; align-items: center; gap: 10px; width: min(520px, 100%); margin: 0 auto;
@@ -270,7 +269,7 @@ nav.top {
 .vp-foot { margin-top: auto; padding-top: 14px; font-size: 13px; color: rgba(255, 255, 255, 0.7); }
 
 /* moments: candidates are checked, weak ones are skipped */
-.v-pick { gap: 10px; background: radial-gradient(ellipse 90% 70% at 30% 0%, #2c2a33, #161618 75%); }
+.v-pick { gap: 10px; background: #18181b; }
 .vp-head { display: flex; align-items: baseline; justify-content: space-between; font-size: 14px; margin-bottom: 4px; }
 .vp-head b { font-weight: 600; }
 .vp-head span { font-size: 12px; color: var(--faint); }
@@ -292,7 +291,7 @@ nav.top {
 .verdict.drop { color: rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.1); }
 
 /* framing: one stream scene, shown wide, as a blind centre crop, and as the Clipify stack */
-.v-frame { gap: 16px; background: radial-gradient(ellipse 90% 70% at 70% 0%, #2a2c33, #161618 75%); }
+.v-frame { gap: 16px; background: #18181b; }
 .fr-label { display: block; font-size: 12px; color: var(--faint); margin-bottom: 8px; }
 .fr-screen { position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; border: 1px solid #34343b; }
 .scene { position: absolute; inset: 0; display: block; }
@@ -373,8 +372,8 @@ nav.top {
   border-top: 2px solid var(--green); border-right: 2px solid var(--green); transform: rotate(45deg);
 }
 .step-ui { height: 220px; padding: 16px; border-radius: 14px; background: #1a1a1d; border: 1px solid #26262b; display: flex; flex-direction: column; gap: 14px; overflow: hidden; }
-.num { display: block; margin-top: 22px; font-size: 14px; font-weight: 600; color: var(--green); font-variant-numeric: tabular-nums; }
-.step h3 { font-size: 22px; letter-spacing: -0.03em; margin-top: 4px; }
+
+.step h3 { font-size: 22px; letter-spacing: -0.03em; margin-top: 22px; }
 .step p { color: var(--muted); font-size: 15px; margin-top: 8px; }
 .when { margin-left: auto; font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums; }
 
@@ -495,9 +494,7 @@ nav.top {
 /* final cta */
 .final {
   max-width: 1200px; margin: 140px auto 0; padding: 90px 24px; text-align: center; border-radius: 20px; scroll-margin-top: 72px;
-  background:
-    radial-gradient(ellipse 60% 80% at 50% 0%, rgba(70, 105, 110, 0.5), transparent 70%),
-    #101415;
+  background: #141416; border: 1px solid var(--line);
 }
 .final h2 { max-width: 760px; margin: 0 auto; text-wrap: balance; }
 .final-cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
