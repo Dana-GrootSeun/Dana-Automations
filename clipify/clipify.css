@@ -48,6 +48,7 @@ svg { width: 1em; height: 1em; }
 .ch-pricing :focus-visible, .f5 :focus-visible, .foot :focus-visible, .ch-streams :focus-visible, .ch-faq :focus-visible { outline-color: #000; }
 h1, h2, h3 { font-weight: 700; letter-spacing: -0.035em; line-height: 1; text-wrap: balance; }
 h2 { font-size: var(--t-l); }
+p, li, td { text-wrap: pretty; }
 .wrap { padding-inline: max(var(--m), env(safe-area-inset-left, 0px)) max(var(--m), env(safe-area-inset-right, 0px)); }
 
 /* buttons: square, one fill */
@@ -94,7 +95,7 @@ nav.top {
   clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 100%, 0 100%);
 }
 .f1, .f2, .f3, .f4 { position: absolute; left: 0; right: 0; height: 240px; transition: transform 300ms var(--ease); }
-.f1 { top: 40px; --fc: #3a3d42; } .f1 .tab { left: 66%; }
+.f1 { top: 40px; --fc: var(--dusk); } .f1 .tab { left: 66%; }
 .f2 { top: 104px; --fc: var(--dawn); --fi: #000; } .f2 .tab { left: 46%; }
 .f3 { top: 168px; --fc: var(--night); } .f3 .tab { left: 26%; }
 .f4 { top: 232px; --fc: var(--paper); --fi: #000; } .f4 .tab { left: 8%; }
