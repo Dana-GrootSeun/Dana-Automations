@@ -111,7 +111,15 @@
 
 /* Racket-led brand layer: sky blue, white and black with restrained gold and neon details. */
 .hero{position:relative;background:var(--p-bg);overflow:hidden}
-.hero::before{content:"";position:absolute;inset:auto -9vw -34vh auto;width:56vw;height:78vh;background:var(--p-surface);border-radius:48% 0 0 0;pointer-events:none}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: clamp(150px, min(46vw, 48svh), 520px);
+  background: var(--p-surface);
+  clip-path: polygon(0 calc(100% - 14px), 100% 0, 100% 100%, 0 100%);
+  pointer-events: none;
+}
 .hero__media{position:relative;overflow:visible;isolation:isolate;box-shadow:14px 14px 0 var(--brand-black)}
 .hero__media img{position:relative;z-index:1;border-radius:var(--r-lg)}
 .hero__media::before{content:"";position:absolute;inset:-16px 20px 18px -18px;z-index:0;background:var(--p-accent);border-radius:var(--r-lg);transform:rotate(-2deg)}
@@ -135,15 +143,8 @@
 .preference-panel{border-top:5px solid var(--brand-gold)}
 @media(min-width:640px){.hero .btn--secondary{background:#fff;border-color:var(--p-ink)}}
 
-@media(max-width:1023px){.hero::before{width:72vw;height:58vh;bottom:-28vh}.hero__media{box-shadow:9px 9px 0 var(--brand-black)}.hero__media::before{inset:-10px 14px 12px -12px}}
+@media(max-width:1023px){.hero__media{box-shadow:9px 9px 0 var(--brand-black)}.hero__media::before{inset:-10px 14px 12px -12px}}
 @media (max-width: 639px) {
-  .hero::before {
-    inset: auto 0 0;
-    width: auto;
-    height: clamp(150px, 46vw, 275px);
-    border-radius: 0;
-    clip-path: polygon(0 calc(100% - 14px), 100% 0, 100% 100%, 0 100%);
-  }
   .hero__media { box-shadow: 7px 7px 0 var(--brand-black); }
   .hero__media::after { right: -8px; width: 76px; }
   .statement::before, .statement::after { right: -150px; }
