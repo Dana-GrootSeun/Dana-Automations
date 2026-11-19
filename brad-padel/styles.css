@@ -136,7 +136,17 @@
 @media(min-width:640px){.hero .btn--secondary{background:#fff;border-color:var(--p-ink)}}
 
 @media(max-width:1023px){.hero::before{width:72vw;height:58vh;bottom:-28vh}.hero__media{box-shadow:9px 9px 0 var(--brand-black)}.hero__media::before{inset:-10px 14px 12px -12px}}
-@media(max-width:639px){.hero::before{width:90vw;height:48vh;bottom:-22vh}.hero__media{box-shadow:7px 7px 0 var(--brand-black)}.hero__media::after{right:-8px;width:76px}.statement::before,.statement::after{right:-150px}.booking-form{box-shadow:6px 6px 0 color-mix(in oklab,var(--p-accent) 68%,#fff)}}
+@media (max-width: 639px) {
+  .hero {
+    background: linear-gradient(var(--p-bg), var(--p-surface) 85%)
+      bottom / 100% clamp(200px, 32svh, 315px) no-repeat var(--p-bg);
+  }
+  .hero::before { content: none; }
+  .hero__media { box-shadow: 7px 7px 0 var(--brand-black); }
+  .hero__media::after { right: -8px; width: 76px; }
+  .statement::before, .statement::after { right: -150px; }
+  .booking-form { box-shadow: 6px 6px 0 color-mix(in oklab,var(--p-accent) 68%,#fff); }
+}
 
 /* Rounded handwriting inspired by Ginthul; Patrick Hand is available under SIL OFL. */
 :root{--font-handwritten:"Patrick Hand","Segoe Print",cursive}
