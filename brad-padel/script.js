@@ -8,9 +8,18 @@ const genericMessage = "Hi Brad, I'm interested in padel coaching at Lourensford
 
 const playfulHeadings = [...document.querySelectorAll("h1, main h2:not(.sr-only)")];
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const touchMotion = window.matchMedia("(hover: none), (pointer: coarse)");
+let motionPaused = false;
 
 const playHeading = (heading) => {
   if (!heading || reduceMotion.matches || motionPaused) return;
+  if (touchMotion.matches) {
+    // A light emphasis keeps text steady during a swipe.
+    heading.animate([{ opacity: .88 }, { opacity: 1 }], {
+      duration: 280, easing: 'ease-out'
+    });
+    return;
+  }
   heading.querySelectorAll('.word').forEach((word, index) => {
     word.getAnimations().forEach(animation => animation.cancel());
     word.animate([
@@ -32,28 +41,27 @@ playfulHeadings.forEach((heading) => {
     const span = document.createElement("span");
     span.className = "word";
     span.setAttribute("aria-hidden", "true");
-    span.style.setProperty("--word-i", index);
-    span.style.setProperty("--word-x", `${index % 2 === 0 ? -10 : 10}px`);
-    span.style.setProperty("--word-return-x", `${index % 2 === 0 ? 2 : -2}px`);
     span.textContent = word;
     heading.append(span);
     if (index < words.length - 1) heading.append(document.createTextNode(" "));
   });
 
-  heading.addEventListener("pointerdown", () => playHeading(heading));
+  heading.addEventListener("pointerup", event => {
+    if (event.pointerType === 'mouse') playHeading(heading);
+  });
 });
 
 const heroHeading = document.querySelector("h1.play-heading");
 window.requestAnimationFrame(() => playHeading(heroHeading));
 
 window.addEventListener("hashchange", () => {
+  if (touchMotion.matches) return;
   const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
   const heading = target?.querySelector("h2.play-heading");
   if (heading) window.setTimeout(() => playHeading(heading), 180);
 });
 
 // Visible sections alone animate. Drift and scroll rotation live on separate layers.
-let motionPaused = false;
 const ballScenes = [...document.querySelectorAll('.ball-field')].map(field => {
   const section = field.parentElement;
   const balls = [...field.children].map((ball, index) => {
@@ -62,12 +70,12 @@ const ballScenes = [...document.querySelectorAll('.ball-field')].map(field => {
     const direction = index % 2 ? -1 : 1;
     const drift = ball.animate([
       { transform: 'translate3d(0,0,0)' },
-      { transform: `translate3d(${direction * 20}px,-18px,0)`, offset: .45 },
-      { transform: `translate3d(${direction * -8}px,6px,0)`, offset: .8 },
-      { transform: 'translate3d(0,0,0)' }
-    ], { duration: 5600 + index * 900, iterations: Infinity, easing: 'ease-in-out' });
+      { transform: `translate3d(${direction * 20}px,-16px,0)` }
+    ], { duration: 2900 + index * 440, direction: 'alternate', iterations: Infinity, easing: 'ease-in-out' });
     drift.pause();
-    return { skin, drift, direction, index };
+    const ballMotion = { skin, drift, direction, angle: index * 35 };
+    skin.style.transform = `rotate(${ballMotion.angle}deg)`;
+    return ballMotion;
   });
   const toggle = document.createElement('button');
   toggle.className = 'motion-toggle';
@@ -77,20 +85,38 @@ const ballScenes = [...document.querySelectorAll('.ball-field')].map(field => {
   return { section, balls, toggle, visible: false };
 });
 
+let scrollFrame = 0;
+let previousScroll = Math.max(0, window.scrollY);
+let pendingScroll = 0;
+let previousFrame = 0;
+
+function stopBallScroll() {
+  cancelAnimationFrame(scrollFrame);
+  scrollFrame = 0;
+  pendingScroll = 0;
+  previousFrame = 0;
+  previousScroll = Math.max(0, window.scrollY);
+}
+
 function syncMotion() {
   const stopped = motionPaused || reduceMotion.matches;
+  if (stopped || document.hidden || !ballScenes.some(scene => scene.visible)) stopBallScroll();
   document.documentElement.classList.toggle('motion-paused', stopped);
   ballScenes.forEach(scene => {
     scene.toggle.textContent = stopped ? 'Play motion' : 'Pause motion';
     scene.toggle.setAttribute('aria-pressed', String(stopped));
     scene.toggle.hidden = reduceMotion.matches;
-    scene.balls.forEach(({ drift, skin }) => {
-      if (!stopped && scene.visible && !document.hidden) drift.play();
+    const active = !stopped && scene.visible && !document.hidden;
+    scene.balls.forEach(({ drift, skin, angle }) => {
+      if (active) drift.play();
       else drift.pause();
-      if (reduceMotion.matches) skin.style.transform = 'none';
+      skin.style.willChange = active ? 'transform' : 'auto';
+      skin.style.transform = reduceMotion.matches ? 'none' : `rotate(${angle}deg)`;
     });
   });
-  if (stopped) playfulHeadings.forEach(heading => heading.querySelectorAll('.word').forEach(word => word.getAnimations().forEach(animation => animation.cancel())));
+  if (stopped) playfulHeadings.forEach(heading => {
+    heading.getAnimations({ subtree: true }).forEach(animation => animation.cancel());
+  });
 }
 
 const sceneObserver = new IntersectionObserver(entries => {
@@ -105,16 +131,33 @@ reduceMotion.addEventListener('change', syncMotion);
 document.addEventListener('visibilitychange', syncMotion);
 syncMotion();
 
-let scrollFrame = 0;
+function easeBallRotation(now) {
+  // Consume the remaining swipe distance gradually, independent of refresh rate.
+  const elapsed = previousFrame ? Math.min(now - previousFrame, 48) : 16;
+  previousFrame = now;
+  const step = Math.abs(pendingScroll) < .25
+    ? pendingScroll
+    : pendingScroll * (1 - Math.exp(-elapsed / (touchMotion.matches ? 105 : 58)));
+  pendingScroll -= step;
+  const degreesPerPixel = touchMotion.matches ? .15 : .24;
+  for (const scene of ballScenes) {
+    if (!scene.visible) continue;
+    for (const ball of scene.balls) {
+      ball.angle += step * degreesPerPixel * ball.direction;
+      ball.skin.style.transform = `rotate(${ball.angle}deg)`;
+    }
+  }
+  scrollFrame = pendingScroll ? requestAnimationFrame(easeBallRotation) : 0;
+  if (!scrollFrame) previousFrame = 0;
+}
+
 window.addEventListener('scroll', () => {
-  if (scrollFrame || motionPaused || reduceMotion.matches) return;
-  scrollFrame = requestAnimationFrame(() => {
-    scrollFrame = 0;
-    if (motionPaused || reduceMotion.matches) return;
-    ballScenes.filter(scene => scene.visible).forEach(scene => scene.balls.forEach(({ skin, direction, index }) => {
-      skin.style.transform = `rotate(${window.scrollY * .24 * direction + index * 35}deg)`;
-    }));
-  });
+  const scroll = Math.max(0, window.scrollY);
+  const delta = scroll - previousScroll;
+  previousScroll = scroll;
+  if (motionPaused || reduceMotion.matches || document.hidden || !delta || !ballScenes.some(scene => scene.visible)) return;
+  pendingScroll += delta;
+  if (!scrollFrame) scrollFrame = requestAnimationFrame(easeBallRotation);
 }, { passive: true });
 
 const headingObserver = new IntersectionObserver(entries => {
