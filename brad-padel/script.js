@@ -178,6 +178,24 @@ document.querySelectorAll("[data-whatsapp]").forEach((link) => {
 const bookingForm = document.querySelector("[data-booking-form]");
 const formStatus = document.querySelector("[data-form-status]");
 
+if (bookingForm) {
+  const sessionType = bookingForm.elements.namedItem("session");
+  const childAge = bookingForm.elements.namedItem("childAge");
+  const ageField = childAge.closest("[data-child-age]");
+
+  function syncChildAge() {
+    const isKidsCoaching = sessionType.value === "Kids coaching";
+    ageField.hidden = !isKidsCoaching;
+    childAge.disabled = !isKidsCoaching;
+    childAge.required = isKidsCoaching;
+  }
+
+  sessionType.addEventListener("change", syncChildAge);
+  bookingForm.addEventListener("reset", () => queueMicrotask(syncChildAge));
+  window.addEventListener("pageshow", syncChildAge);
+  syncChildAge();
+}
+
 bookingForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   const selectedDays = [...bookingForm.querySelectorAll('input[name="days"]:checked')].map((input) => input.value);

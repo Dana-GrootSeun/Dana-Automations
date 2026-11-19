@@ -234,7 +234,29 @@
             </fieldset>
             <label>Preferred time of day<select name="timeOfDay" required><option value="">Choose what suits you</option><option>Morning · 08:00–11:00</option><option>Midday · 11:00–14:00</option><option>Afternoon · 14:00–17:00</option><option>Weekend · arrange a time with Brad</option><option>Flexible during the day</option></select></label>
             <label>Session type<select name="session" required><option value="">Choose a format</option><option>One-to-one coaching</option><option>Pairs coaching</option><option>Small-group coaching</option><option>Kids coaching</option><option>Match review</option><option>Leveling session · four players</option></select></label>
-            <label>Child’s age <small>Only needed for kids coaching</small><input type="text" name="childAge" inputmode="numeric" placeholder="For example: 10"></label>
+            <label data-child-age hidden>
+              Child’s age
+              <select name="childAge" disabled>
+                <option value="">Select an age</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+              </select>
+            </label>
             <label>Playing level<select name="level"><option value="Not supplied">Choose if known</option><option>New to padel · under 1</option><option>Beginner · 0–1.5</option><option>Intermediate · 1.5–3</option><option>Advanced · 3–4</option></select></label>
             <label>What would you like to improve?<textarea name="focus" rows="3" placeholder="For example: defending the glass or court positioning"></textarea></label>
             <button class="btn btn--primary booking-submit" type="submit">Send preferences on WhatsApp<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
@@ -261,6 +283,6 @@
   <nav class="actionbar" aria-label="Quick booking"><a class="btn btn--primary" href="#book">Book a session</a></nav>
   <script type="module" src="assets/system.js"></script>
   <script type="module" src="assets/layout/layout.js"></script>
-  <script src="script.js?v=mobile-motion"></script>
+  <script src="script.js?v=booking-age"></script>
 </body>
 </html>
