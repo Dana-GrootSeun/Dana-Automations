@@ -142,3 +142,28 @@
 @media(prefers-reduced-motion:reduce){
   .play-heading .word{animation:none;transition:none;transform:none;will-change:auto}
 }
+
+/* Supplied LŌK balls become quiet photographic motifs on the baby-blue sections. */
+#coaching,.kids-section{position:relative;overflow:hidden;isolation:isolate}
+.ball-field{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.ball-field span{--ball-opacity:.2;position:absolute;display:block;aspect-ratio:1;border-radius:50%;background-image:url("assets/club/lok-ball-detail.webp");background-repeat:no-repeat;background-position:center;background-size:112%;opacity:var(--ball-opacity);box-shadow:0 0 0 8px color-mix(in oklab,#fff 30%,transparent);animation:ball-settle 800ms cubic-bezier(.23,1,.32,1) both;transition:transform 240ms cubic-bezier(.645,.045,.355,1)}
+.ball-field span:nth-child(1){width:clamp(92px,12vw,174px);animation-delay:120ms}
+.ball-field span:nth-child(2){width:clamp(68px,8vw,116px);animation-delay:210ms}
+.ball-field span:nth-child(3){width:clamp(56px,6vw,88px);animation-delay:300ms}
+.ball-field--coaching span:nth-child(1){left:-42px;top:8%;background-position:46% 38%}
+.ball-field--coaching span:nth-child(2){right:4%;top:16%;background-position:72% 18%}
+.ball-field--coaching span:nth-child(3){left:43%;bottom:9%;background-position:20% 73%}
+.ball-field--kids span:nth-child(1){right:-36px;top:8%;background-position:54% 54%}
+.ball-field--kids span:nth-child(2){left:3%;bottom:10%;background-position:18% 66%}
+.ball-field--kids span:nth-child(3){right:32%;bottom:5%;background-position:82% 84%}
+@keyframes ball-settle{from{opacity:0;transform:translate3d(0,16px,0) scale(.88)}to{opacity:var(--ball-opacity);transform:translate3d(0,0,0) scale(1)}}
+@media(hover:hover) and (pointer:fine){
+  #coaching:hover .ball-field span:nth-child(odd),.kids-section:hover .ball-field span:nth-child(odd){transform:translate3d(0,-5px,0)}
+  #coaching:hover .ball-field span:nth-child(even),.kids-section:hover .ball-field span:nth-child(even){transform:translate3d(0,4px,0)}
+}
+@media(max-width:639px){
+  .ball-field span{--ball-opacity:.16;box-shadow:0 0 0 5px color-mix(in oklab,#fff 25%,transparent)}
+  .ball-field--coaching span:nth-child(1){left:-38px;top:2%}.ball-field--coaching span:nth-child(2){right:-24px;top:8%}.ball-field--coaching span:nth-child(3){left:-18px;bottom:12%}
+  .ball-field--kids span:nth-child(1){right:-42px;top:3%}.ball-field--kids span:nth-child(2){left:-26px;bottom:17%}.ball-field--kids span:nth-child(3){right:8%;bottom:3%}
+}
+@media(prefers-reduced-motion:reduce){.ball-field span{animation:none;transition:none;transform:none}}
