@@ -6,6 +6,48 @@ const config = window.BRAD_SITE_CONFIG;
 const whatsappNumber = String(config.whatsappNumber || "").replace(/\D/g, "");
 const genericMessage = "Hi Brad, I'm interested in padel coaching at Lourensford. Could you help me choose a session?";
 
+const playfulHeadings = [...document.querySelectorAll("h1, main h2:not(.sr-only)")];
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+const playHeading = (heading) => {
+  if (reduceMotion.matches) return;
+  heading.classList.remove("is-playing");
+  void heading.offsetWidth;
+  heading.classList.add("is-playing");
+  window.setTimeout(() => heading.classList.remove("is-playing"), 1250);
+};
+
+playfulHeadings.forEach((heading) => {
+  const label = heading.textContent.trim();
+  const words = label.split(/\s+/);
+  heading.classList.add("play-heading");
+  heading.setAttribute("aria-label", label);
+  heading.textContent = "";
+
+  words.forEach((word, index) => {
+    const span = document.createElement("span");
+    span.className = "word";
+    span.setAttribute("aria-hidden", "true");
+    span.style.setProperty("--word-i", index);
+    span.style.setProperty("--word-x", `${index % 2 === 0 ? -10 : 10}px`);
+    span.style.setProperty("--word-return-x", `${index % 2 === 0 ? 2 : -2}px`);
+    span.textContent = word;
+    heading.append(span);
+    if (index < words.length - 1) heading.append(document.createTextNode(" "));
+  });
+
+  heading.addEventListener("pointerdown", () => playHeading(heading));
+});
+
+const heroHeading = document.querySelector("h1.play-heading");
+window.requestAnimationFrame(() => playHeading(heroHeading));
+
+window.addEventListener("hashchange", () => {
+  const target = document.querySelector(window.location.hash);
+  const heading = target?.querySelector("h2.play-heading");
+  if (heading) window.setTimeout(() => playHeading(heading), 180);
+});
+
 document.querySelectorAll("[data-whatsapp]").forEach((link) => {
   link.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(genericMessage)}`;
   link.target = "_blank";
