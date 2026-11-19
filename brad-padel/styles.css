@@ -137,11 +137,13 @@
 
 @media(max-width:1023px){.hero::before{width:72vw;height:58vh;bottom:-28vh}.hero__media{box-shadow:9px 9px 0 var(--brand-black)}.hero__media::before{inset:-10px 14px 12px -12px}}
 @media (max-width: 639px) {
-  .hero {
-    background: linear-gradient(var(--p-bg), var(--p-surface) 85%)
-      bottom / 100% clamp(200px, 32svh, 315px) no-repeat var(--p-bg);
+  .hero::before {
+    inset: auto 0 0;
+    width: auto;
+    height: clamp(150px, 46vw, 275px);
+    border-radius: 0;
+    clip-path: polygon(0 calc(100% - 14px), 100% 0, 100% 100%, 0 100%);
   }
-  .hero::before { content: none; }
   .hero__media { box-shadow: 7px 7px 0 var(--brand-black); }
   .hero__media::after { right: -8px; width: 76px; }
   .statement::before, .statement::after { right: -150px; }
