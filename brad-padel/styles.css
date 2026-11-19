@@ -119,7 +119,20 @@
 .hero__kicker{max-width:100%}
 .section-head h2::after,.sponsor-head h2::after,.request-section h2::after{content:"";display:block;width:52px;height:4px;margin-top:14px;background:var(--brand-gold);transform:rotate(-2deg)}
 .sponsor-section{border-top:6px solid var(--brand-gold)}
-.booking-form{box-shadow:10px 10px 0 color-mix(in oklab,var(--p-accent) 68%,#fff)}
+.booking-form {
+  --booking-gold: color-mix(in oklab, var(--brand-gold) 48%, transparent);
+  background-image: linear-gradient(
+    164deg,
+    transparent calc(42% - 12px),
+    var(--booking-gold) calc(42% - 12px) calc(42% - 10px),
+    transparent calc(42% - 10px) calc(42% - 3px),
+    var(--booking-gold) calc(42% - 3px) 42%,
+    transparent 42% calc(42% + 7px),
+    var(--booking-gold) calc(42% + 7px) calc(42% + 11px),
+    transparent calc(42% + 11px)
+  );
+  box-shadow: 10px 10px 0 color-mix(in oklab, var(--p-accent) 68%, #fff);
+}
 .preference-panel{border-top:5px solid var(--brand-gold)}
 @media(min-width:640px){.hero .btn--secondary{background:#fff;border-color:var(--p-ink)}}
 
