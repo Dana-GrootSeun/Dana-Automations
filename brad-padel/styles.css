@@ -120,25 +120,17 @@
 .section-head h2::after,.sponsor-head h2::after,.request-section h2::after{content:"";display:block;width:52px;height:4px;margin-top:14px;background:var(--brand-gold);transform:rotate(-2deg)}
 .sponsor-section{border-top:6px solid var(--brand-gold)}
 .booking-form {
-  --booking-charcoal: color-mix(in oklab, var(--brand-black) 22%, transparent);
-  --booking-ink-line: color-mix(in oklab, var(--brand-black) 55%, transparent);
-  --booking-gold: color-mix(in oklab, var(--brand-gold) 70%, transparent);
-  --booking-echo: color-mix(in oklab, var(--brand-black) 13%, transparent);
-  background-image: linear-gradient(
-    160deg,
-    transparent calc(37% - 12px),
-    var(--booking-gold) calc(37% - 12px) calc(37% - 10px),
-    var(--booking-charcoal) calc(37% - 10px) calc(37% + 3px),
-    var(--booking-ink-line) calc(37% + 3px) calc(37% + 4px),
-    var(--booking-gold) calc(37% + 4px) calc(37% + 5px),
-    transparent calc(37% + 5px) calc(37% + 13px),
-    var(--booking-echo) calc(37% + 13px) calc(37% + 17px),
-    transparent calc(37% + 17px) calc(79% - 6px),
-    var(--booking-echo) calc(79% - 6px) 79%,
-    var(--booking-gold) 79% calc(79% + 2px),
-    transparent calc(79% + 2px)
-  );
+  background-image: url("assets/club/booking-court-lines.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   box-shadow: 10px 10px 0 color-mix(in oklab, var(--p-accent) 68%, #fff);
+}
+.booking-form .form-status {
+  justify-self: start;
+  padding: 5px 9px;
+  border-radius: var(--r-sm);
+  background-color: var(--p-surface);
 }
 .preference-panel{border-top:5px solid var(--brand-gold)}
 @media(min-width:640px){.hero .btn--secondary{background:#fff;border-color:var(--p-ink)}}
