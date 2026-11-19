@@ -148,7 +148,7 @@ h1,h2,.play-heading,.statement .mo-wh__text,.kids-section>.wrap>div>.t-label,.le
 #coaching>.wrap,.kids-section>.wrap{position:relative;z-index:1}
 .ball-field{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .ball-field span{position:absolute;display:block;width:100px;aspect-ratio:1;border-radius:50%;box-shadow:3px 5px 0 #101820}
-.ball-field span i{display:block;width:100%;height:100%;border-radius:50%;background:#d8f52b url("assets/club/lok-ball-detail.webp") center/112% no-repeat;opacity:1}
+.ball-field span i{display:block;width:100%;height:100%;border-radius:50%;background:#d8f52b url("assets/club/lok-ball-detail.webp") center/140% no-repeat;opacity:1}
 .ball-field span:nth-child(1){width:112px;left:5%;top:24px}
 .ball-field span:nth-child(2){width:80px;right:19%;top:44px}
 .ball-field span:nth-child(3){width:72px;right:7%;bottom:26px}
