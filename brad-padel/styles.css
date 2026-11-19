@@ -126,8 +126,14 @@
 @media(max-width:1023px){.hero::before{width:72vw;height:58vh;bottom:-28vh}.hero__media{box-shadow:9px 9px 0 var(--brand-black)}.hero__media::before{inset:-10px 14px 12px -12px}}
 @media(max-width:639px){.hero::before{width:90vw;height:48vh;bottom:-22vh}.hero__media{box-shadow:7px 7px 0 var(--brand-black)}.hero__media::after{right:-8px;width:76px}.statement::before,.statement::after{right:-150px}.booking-form{box-shadow:6px 6px 0 color-mix(in oklab,var(--p-accent) 68%,#fff)}}
 
+/* Rounded handwriting inspired by Ginthul; Patrick Hand is available under SIL OFL. */
+:root{--font-handwritten:"Patrick Hand","Segoe Print",cursive}
+h1,h2,.play-heading,.statement .mo-wh__text,.kids-section>.wrap>div>.t-label,.leveling-section>.wrap>div>.t-label{
+  font-family:var(--font-handwritten);font-weight:400;letter-spacing:0;line-height:1.12;font-synthesis:none
+}
+.kids-section>.wrap>div>.t-label,.leveling-section>.wrap>div>.t-label{font-size:24px;text-transform:none}
 /* Expressive heading motion: movement is brief, user-triggered and transform-only. */
-.play-heading{font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:var(--display-tracking);text-wrap:balance}
+.play-heading{text-wrap:balance}
 .play-heading .word{display:inline-block;transform-origin:50% 80%;transition:transform 220ms cubic-bezier(.645,.045,.355,1);will-change:transform}
 .play-heading.is-playing .word{animation:heading-word-pop 720ms cubic-bezier(.23,1,.32,1) both;animation-delay:calc(var(--word-i) * 62ms)}
 @keyframes heading-word-pop{
