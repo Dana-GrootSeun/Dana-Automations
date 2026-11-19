@@ -166,4 +166,12 @@
   .ball-field--coaching span:nth-child(1){left:-38px;top:2%}.ball-field--coaching span:nth-child(2){right:-24px;top:8%}.ball-field--coaching span:nth-child(3){left:-18px;bottom:12%}
   .ball-field--kids span:nth-child(1){right:-42px;top:3%}.ball-field--kids span:nth-child(2){left:-26px;bottom:17%}.ball-field--kids span:nth-child(3){right:8%;bottom:3%}
 }
+@keyframes ball-roll{
+  from{transform:translate3d(-7px,14px,0) rotate(-18deg) scale(.96)}
+  to{transform:translate3d(7px,-14px,0) rotate(342deg) scale(1)}
+}
+@supports(animation-timeline:view()){
+  .ball-field span{animation:ball-roll linear both;animation-timeline:view();animation-range:entry 0% exit 100%;will-change:transform}
+  .ball-field span:nth-child(2){animation-direction:reverse}
+}
 @media(prefers-reduced-motion:reduce){.ball-field span{animation:none;transition:none;transform:none}}
