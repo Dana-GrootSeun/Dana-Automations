@@ -134,13 +134,7 @@ h1,h2,.play-heading,.statement .mo-wh__text,.kids-section>.wrap>div>.t-label,.le
 .kids-section>.wrap>div>.t-label,.leveling-section>.wrap>div>.t-label{font-size:24px;text-transform:none}
 /* Expressive heading motion: movement is brief, user-triggered and transform-only. */
 .play-heading{text-wrap:balance}
-.play-heading .word{display:inline-block;transform-origin:50% 80%;transition:transform 220ms cubic-bezier(.645,.045,.355,1);will-change:transform}
-.play-heading.is-playing .word{animation:heading-word-pop 720ms cubic-bezier(.23,1,.32,1) both;animation-delay:calc(var(--word-i) * 62ms)}
-@keyframes heading-word-pop{
-  0%{opacity:0;transform:translate3d(var(--word-x),18px,0) scale(.94)}
-  58%{opacity:1;transform:translate3d(var(--word-return-x),-5px,0) scale(1.025)}
-  100%{opacity:1;transform:translate3d(0,0,0) scale(1)}
-}
+.play-heading .word{display:inline-block;transform-origin:50% 80%;transition:transform 220ms cubic-bezier(.645,.045,.355,1)}
 @media(hover:hover) and (pointer:fine){
   .play-heading:hover .word:nth-of-type(odd){transform:translate3d(0,-5px,0)}
   .play-heading:hover .word:nth-of-type(even){transform:translate3d(0,3px,0)}
@@ -149,35 +143,39 @@ h1,h2,.play-heading,.statement .mo-wh__text,.kids-section>.wrap>div>.t-label,.le
   .play-heading .word{animation:none;transition:none;transform:none;will-change:auto}
 }
 
-/* Supplied LŌK balls become quiet photographic motifs on the baby-blue sections. */
-#coaching,.kids-section{position:relative;overflow:hidden;isolation:isolate}
+/* Full-colour LŌK balls have dedicated space above and below the content. */
+#coaching,.kids-section{position:relative;overflow:hidden;isolation:isolate;height:auto!important;min-height:0!important;padding-top:160px;padding-bottom:132px}
+#coaching>.wrap,.kids-section>.wrap{position:relative;z-index:1}
 .ball-field{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.ball-field span{--ball-opacity:.2;position:absolute;display:block;aspect-ratio:1;border-radius:50%;background-image:url("assets/club/lok-ball-detail.webp");background-repeat:no-repeat;background-position:center;background-size:112%;opacity:var(--ball-opacity);box-shadow:0 0 0 8px color-mix(in oklab,#fff 30%,transparent);animation:ball-settle 800ms cubic-bezier(.23,1,.32,1) both;transition:transform 240ms cubic-bezier(.645,.045,.355,1)}
-.ball-field span:nth-child(1){width:clamp(92px,12vw,174px);animation-delay:120ms}
-.ball-field span:nth-child(2){width:clamp(68px,8vw,116px);animation-delay:210ms}
-.ball-field span:nth-child(3){width:clamp(56px,6vw,88px);animation-delay:300ms}
-.ball-field--coaching span:nth-child(1){left:-42px;top:8%;background-position:46% 38%}
-.ball-field--coaching span:nth-child(2){right:4%;top:16%;background-position:72% 18%}
-.ball-field--coaching span:nth-child(3){left:43%;bottom:9%;background-position:20% 73%}
-.ball-field--kids span:nth-child(1){right:-36px;top:8%;background-position:54% 54%}
-.ball-field--kids span:nth-child(2){left:3%;bottom:10%;background-position:18% 66%}
-.ball-field--kids span:nth-child(3){right:32%;bottom:5%;background-position:82% 84%}
-@keyframes ball-settle{from{opacity:0;transform:translate3d(0,16px,0) scale(.88)}to{opacity:var(--ball-opacity);transform:translate3d(0,0,0) scale(1)}}
-@media(hover:hover) and (pointer:fine){
-  #coaching:hover .ball-field span:nth-child(odd),.kids-section:hover .ball-field span:nth-child(odd){transform:translate3d(0,-5px,0)}
-  #coaching:hover .ball-field span:nth-child(even),.kids-section:hover .ball-field span:nth-child(even){transform:translate3d(0,4px,0)}
-}
+.ball-field span{position:absolute;display:block;width:100px;aspect-ratio:1;border-radius:50%;box-shadow:3px 5px 0 #101820}
+.ball-field span i{display:block;width:100%;height:100%;border-radius:50%;background:#d8f52b url("assets/club/lok-ball-detail.webp") center/112% no-repeat;opacity:1}
+.ball-field span:nth-child(1){width:112px;left:5%;top:24px}
+.ball-field span:nth-child(2){width:80px;right:19%;top:44px}
+.ball-field span:nth-child(3){width:72px;right:7%;bottom:26px}
+.ball-field--kids span:nth-child(1){left:14%;top:20px}
+.ball-field--kids span:nth-child(2){right:23%;top:52px}
+.ball-field--kids span:nth-child(3){right:auto;left:8%;bottom:24px}
+.motion-toggle{position:absolute;z-index:2;right:max(24px,4vw);top:24px;min-height:44px;padding:10px 14px;border:1px solid #101820;border-radius:24px;background:#fbfdfe;color:#101820;font:500 13px/1.2 var(--font-text);cursor:pointer}
+.motion-toggle:focus-visible{outline:3px solid #126b92;outline-offset:4px}
 @media(max-width:639px){
-  .ball-field span{--ball-opacity:.16;box-shadow:0 0 0 5px color-mix(in oklab,#fff 25%,transparent)}
-  .ball-field--coaching span:nth-child(1){left:-38px;top:2%}.ball-field--coaching span:nth-child(2){right:-24px;top:8%}.ball-field--coaching span:nth-child(3){left:-18px;bottom:12%}
-  .ball-field--kids span:nth-child(1){right:-42px;top:3%}.ball-field--kids span:nth-child(2){left:-26px;bottom:17%}.ball-field--kids span:nth-child(3){right:8%;bottom:3%}
+  #coaching,.kids-section{padding-top:144px;padding-bottom:112px}
+  .ball-field span:nth-child(1){width:88px;left:7%;top:26px}
+  .ball-field span:nth-child(2){width:60px;right:31%;top:64px}
+  .ball-field span:nth-child(3){width:64px;right:12%;bottom:20px}
+  .ball-field--kids span:nth-child(3){left:12%;right:auto}
+  .motion-toggle{right:20px;top:18px}
 }
-@keyframes ball-roll{
-  from{transform:translate3d(-7px,14px,0) rotate(-18deg) scale(.96)}
-  to{transform:translate3d(7px,-14px,0) rotate(342deg) scale(1)}
+@media(prefers-reduced-motion:no-preference){
+  .kids-card,.session-rows li{transition:transform 200ms cubic-bezier(.16,1,.3,1)}
+  .btn svg,.footer-cta-link svg{transition:transform 180ms ease-out}
+  @media(hover:hover) and (pointer:fine){
+    .kids-card:hover{transform:translateY(-4px)}
+    .session-rows li:hover{transform:translateX(5px)}
+    .btn:hover svg,.footer-cta-link:hover svg{transform:translateX(4px)}
+  }
 }
-@supports(animation-timeline:view()){
-  .ball-field span{animation:ball-roll linear both;animation-timeline:view();animation-range:entry 0% exit 100%;will-change:transform}
-  .ball-field span:nth-child(2){animation-direction:reverse}
+@media(prefers-reduced-motion:reduce){
+  .play-heading .word,.play-heading:hover .word:nth-of-type(n){animation:none;transition:none;transform:none;will-change:auto}
+  .ball-field span,.ball-field span i{transform:none!important}
 }
-@media(prefers-reduced-motion:reduce){.ball-field span{animation:none;transition:none;transform:none}}
+.motion-paused .play-heading:hover .word:nth-of-type(n){transform:none;transition:none}

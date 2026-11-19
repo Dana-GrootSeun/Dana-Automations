@@ -10,11 +10,15 @@ const playfulHeadings = [...document.querySelectorAll("h1, main h2:not(.sr-only)
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 const playHeading = (heading) => {
-  if (reduceMotion.matches) return;
-  heading.classList.remove("is-playing");
-  void heading.offsetWidth;
-  heading.classList.add("is-playing");
-  window.setTimeout(() => heading.classList.remove("is-playing"), 1250);
+  if (!heading || reduceMotion.matches || motionPaused) return;
+  heading.querySelectorAll('.word').forEach((word, index) => {
+    word.getAnimations().forEach(animation => animation.cancel());
+    word.animate([
+      { transform: 'translateY(12px) rotate(-3deg)', opacity: .65 },
+      { transform: 'translateY(-3px) rotate(1deg)', opacity: 1, offset: .7 },
+      { transform: 'none', opacity: 1 }
+    ], { duration: 520, delay: index * 45, easing: 'cubic-bezier(.16,1,.3,1)' });
+  });
 };
 
 playfulHeadings.forEach((heading) => {
@@ -43,10 +47,84 @@ const heroHeading = document.querySelector("h1.play-heading");
 window.requestAnimationFrame(() => playHeading(heroHeading));
 
 window.addEventListener("hashchange", () => {
-  const target = document.querySelector(window.location.hash);
+  const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
   const heading = target?.querySelector("h2.play-heading");
   if (heading) window.setTimeout(() => playHeading(heading), 180);
 });
+
+// Visible sections alone animate. Drift and scroll rotation live on separate layers.
+let motionPaused = false;
+const ballScenes = [...document.querySelectorAll('.ball-field')].map(field => {
+  const section = field.parentElement;
+  const balls = [...field.children].map((ball, index) => {
+    const skin = document.createElement('i');
+    ball.append(skin);
+    const direction = index % 2 ? -1 : 1;
+    const drift = ball.animate([
+      { transform: 'translate3d(0,0,0)' },
+      { transform: `translate3d(${direction * 20}px,-18px,0)`, offset: .45 },
+      { transform: `translate3d(${direction * -8}px,6px,0)`, offset: .8 },
+      { transform: 'translate3d(0,0,0)' }
+    ], { duration: 5600 + index * 900, iterations: Infinity, easing: 'ease-in-out' });
+    drift.pause();
+    return { skin, drift, direction, index };
+  });
+  const toggle = document.createElement('button');
+  toggle.className = 'motion-toggle';
+  toggle.type = 'button';
+  toggle.addEventListener('click', () => { motionPaused = !motionPaused; syncMotion(); });
+  section.append(toggle);
+  return { section, balls, toggle, visible: false };
+});
+
+function syncMotion() {
+  const stopped = motionPaused || reduceMotion.matches;
+  document.documentElement.classList.toggle('motion-paused', stopped);
+  ballScenes.forEach(scene => {
+    scene.toggle.textContent = stopped ? 'Play motion' : 'Pause motion';
+    scene.toggle.setAttribute('aria-pressed', String(stopped));
+    scene.toggle.hidden = reduceMotion.matches;
+    scene.balls.forEach(({ drift, skin }) => {
+      if (!stopped && scene.visible && !document.hidden) drift.play();
+      else drift.pause();
+      if (reduceMotion.matches) skin.style.transform = 'none';
+    });
+  });
+  if (stopped) playfulHeadings.forEach(heading => heading.querySelectorAll('.word').forEach(word => word.getAnimations().forEach(animation => animation.cancel())));
+}
+
+const sceneObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const scene = ballScenes.find(item => item.section === entry.target);
+    scene.visible = entry.isIntersecting;
+  });
+  syncMotion();
+}, { threshold: 0 });
+ballScenes.forEach(scene => sceneObserver.observe(scene.section));
+reduceMotion.addEventListener('change', syncMotion);
+document.addEventListener('visibilitychange', syncMotion);
+syncMotion();
+
+let scrollFrame = 0;
+window.addEventListener('scroll', () => {
+  if (scrollFrame || motionPaused || reduceMotion.matches) return;
+  scrollFrame = requestAnimationFrame(() => {
+    scrollFrame = 0;
+    if (motionPaused || reduceMotion.matches) return;
+    ballScenes.filter(scene => scene.visible).forEach(scene => scene.balls.forEach(({ skin, direction, index }) => {
+      skin.style.transform = `rotate(${window.scrollY * .24 * direction + index * 35}deg)`;
+    }));
+  });
+}, { passive: true });
+
+const headingObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    if (!motionPaused) playHeading(entry.target);
+    headingObserver.unobserve(entry.target);
+  });
+}, { threshold: .65 });
+playfulHeadings.filter(heading => heading !== heroHeading).forEach(heading => headingObserver.observe(heading));
 
 document.querySelectorAll("[data-whatsapp]").forEach((link) => {
   link.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(genericMessage)}`;
