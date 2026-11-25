@@ -1,457 +1,102 @@
-<!DOCTYPE html>
-<html lang="en-ZA">
+<!doctype html>
+<html lang="en-ZA" data-type="service" data-radius="soft" data-buttons="solid">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clipify — Stream clips ready by morning | Dana Automates</title>
-<meta name="description" content="A monthly clipping service for live streamers. Your VOD goes in overnight; captioned, quality-checked Shorts, TikToks and Reels come out by morning. From South Africa, priced in Rand.">
-<link rel="canonical" href="https://dana-automates.therondana65.workers.dev/clipify/">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#000000">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Dana Automates">
-<meta property="og:title" content="Clipify — Your stream tonight. Clips ready by morning.">
-<meta property="og:description" content="Monthly clipping service for live streamers: captioned vertical clips, checked by a human, with titles and hashtags.">
-<meta property="og:url" content="https://dana-automates.therondana65.workers.dev/clipify/">
-<meta property="og:image" content="https://dana-automates.therondana65.workers.dev/assets/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="clipify.css">
-<script src="/main.js" defer></script>
-<script src="clipify.js" defer></script>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Clipify — Stream clips ready by morning</title>
+  <meta name="description" content="A monthly clipping service for live streamers. Captioned vertical clips, checked by a person and delivered ready to post.">
+  <meta name="page-type" content="service"><meta name="site-kind" content="other"><meta name="theme-color" content="#f7f7f5">
+  <link rel="canonical" href="https://dana-automates.therondana65.workers.dev/clipify/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website"><meta property="og:title" content="Clipify — Stream clips ready by morning">
+  <meta property="og:description" content="One long stream becomes a week of captioned vertical clips."><meta property="og:image" content="https://dana-automates.therondana65.workers.dev/assets/og-image.png"><meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" href="Geist-Variable.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="clipify.css">
+  <script src="/main.js" defer></script><script src="clipify.js" defer></script>
 </head>
 <body>
+<!-- service · palette card-pastels · Geist · film hero · editorial type moment -->
 <a class="skip" href="#main">Skip to content</a>
-
-<!-- Icons: Lucide (ISC). -->
-<!-- impeccable-disable overused-font,marquee,pulsing-dot -- Dana asked to match the OpusClip reference (Geist, marquee, blinking connector dots) -->
-<svg class="sprite" aria-hidden="true">
-  <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
-  <symbol id="i-scissors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/></symbol>
-  <symbol id="i-cc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 10.5a2 2 0 1 0 0 3M17 10.5a2 2 0 1 0 0 3"/></symbol>
-  <symbol id="i-crop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></symbol>
-  <symbol id="i-vol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol>
-  <symbol id="i-hash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></symbol>
-  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
-  <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 4 4 4-4M12 8v8"/></symbol>
-  <symbol id="i-wand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72M14 7l3 3M5 6v4M19 14v4M10 2v2M7 8H3M21 16h-4M11 3H9"/></symbol>
-  <symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
-  <symbol id="i-sync" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></symbol>
-  <symbol id="i-sparkle" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></symbol>
-  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
-  <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
-  <symbol id="p-yt" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4" fill="#ff0033"/><path d="M10 9v6l5-3z" fill="#fff"/></symbol>
-  <symbol id="p-ig" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></symbol>
-  <symbol id="p-tt" viewBox="0 0 24 24" fill="#fff"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-1.8-2.5V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.3 7.3 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6"/></symbol>
-</svg>
-
-<a class="announce" href="#pricing">Founding-streamer rates are open for my first channels <span aria-hidden="true">→</span></a>
-
-<nav class="top" aria-label="Main">
-  <a class="logo" href="#top"><span class="mark" aria-hidden="true"><svg><use href="#i-scissors"/></svg></span>Clipify <small>by Dana Automates</small></a>
-  <div class="nav-links">
-    <a href="#features">Features</a>
-    <a href="#how">How it works</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#faq">FAQ</a>
-  </div>
-  <div class="nav-right">
-    <a class="ghost-link" href="/">Dana Automates</a>
-    <a class="btn-white sm" href="#contact" data-enquiry="Clipify">Get started</a>
-  </div>
-</nav>
+<nav class="top" aria-label="Main"><div class="wrap nav-inner">
+  <a class="logo" href="#top"><span class="mark" aria-hidden="true">✂</span> Clipify</a>
+  <div class="nav-links"><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+  <a class="nav-cta" href="#contact" data-enquiry="Clipify">Get started</a>
+</div></nav>
 
 <main id="main">
-
-<header class="hero" id="top">
-  <p class="eyebrow">Stream clipping, done for you</p>
-  <h1>1 long stream, a week of clips. Ready by morning.</h1>
-  <p class="lede">Clipify turns your 3–8 hour streams into captioned vertical clips for Shorts, TikTok and Reels, checked by a person before they reach you.</p>
-
-  <form class="drop-form" id="pilotForm">
-    <label class="drop-input">
-      <svg class="ico" aria-hidden="true"><use href="#i-link"/></svg>
-      <span class="sr">Your channel link</span>
-      <input id="channel" name="channel" type="text" inputmode="url" autocomplete="url" placeholder="youtube.com/@yourchannel" maxlength="200" spellcheck="false" autocapitalize="off">
-      <button class="btn-white" type="submit">Get started</button>
-    </label>
-    <span class="or">or</span>
-    <a class="btn-outline" href="#pricing">See pricing</a>
-  </form>
-
-  <div class="stage reveal">
-    <div class="bar" aria-hidden="true">
-      <svg class="ico"><use href="#i-link"/></svg>
-      <span class="typed"><span>youtube.com/live/saturday-stream</span></span>
-      <span class="get">Get clips</span>
-      <span class="pointer"></span>
-    </div>
-    <div class="studio" aria-hidden="true">
-      <div class="editor">
-        <div class="ed-head"><span class="live">LIVE</span><b>Saturday stream</b><span class="meta">5:42:10 &middot; 1.2K watching</span></div>
-        <div class="transcript"><p class="ln l1 hot"><span class="ts">00:48</span>no way… no WAY, he actually pulled it</p><p class="ln l2"><span class="ts">01:52</span>okay chat, last pack before the giveaway</p><p class="ln l3 hot"><span class="ts">03:10</span>wait for it… WAIT FOR IT</p><p class="ln l4 hot"><span class="ts">05:21</span>chat is going absolutely crazy right now</p></div>
-        <div class="tl"><svg class="wave" viewBox="0 0 700 32" preserveAspectRatio="none"><rect x="0" y="11.0" width="2.6" height="9.9" rx="1.3"/><rect x="5" y="10.6" width="2.6" height="10.8" rx="1.3"/><rect x="10" y="10.4" width="2.6" height="11.2" rx="1.3"/><rect x="15" y="9.8" width="2.6" height="12.4" rx="1.3"/><rect x="20" y="10.6" width="2.6" height="10.8" rx="1.3"/><rect x="25" y="9.9" width="2.6" height="12.2" rx="1.3"/><rect x="30" y="13.3" width="2.6" height="5.3" rx="1.3"/><rect x="35" y="11.7" width="2.6" height="8.7" rx="1.3"/><rect x="40" y="9.8" width="2.6" height="12.4" rx="1.3"/><rect x="45" y="10.9" width="2.6" height="10.1" rx="1.3"/><rect x="50" y="10.0" width="2.6" height="12.0" rx="1.3"/><rect x="55" y="13.0" width="2.6" height="6.0" rx="1.3"/><rect x="60" y="11.6" width="2.6" height="8.7" rx="1.3"/><rect x="65" y="12.5" width="2.6" height="7.0" rx="1.3"/><rect x="70" y="11.4" width="2.6" height="9.3" rx="1.3"/><rect x="75" y="11.2" width="2.6" height="9.5" rx="1.3"/><rect x="80" y="13.4" width="2.6" height="5.2" rx="1.3"/><rect x="85" y="12.6" width="2.6" height="6.9" rx="1.3"/><rect x="90" y="12.2" width="2.6" height="7.6" rx="1.3"/><rect x="95" y="9.4" width="2.6" height="13.2" rx="1.3"/><rect x="100" y="9.1" width="2.6" height="13.7" rx="1.3"/><rect x="105" y="9.9" width="2.6" height="12.3" rx="1.3"/><rect x="110" y="4.9" width="2.6" height="22.2" rx="1.3"/><rect x="115" y="4.5" width="2.6" height="23.1" rx="1.3"/><rect x="120" y="0.1" width="2.6" height="31.8" rx="1.3"/><rect x="125" y="1.0" width="2.6" height="30.1" rx="1.3"/><rect x="130" y="2.4" width="2.6" height="27.2" rx="1.3"/><rect x="135" y="1.5" width="2.6" height="28.9" rx="1.3"/><rect x="140" y="7.1" width="2.6" height="17.9" rx="1.3"/><rect x="145" y="9.6" width="2.6" height="12.9" rx="1.3"/><rect x="150" y="8.3" width="2.6" height="15.5" rx="1.3"/><rect x="155" y="9.5" width="2.6" height="12.9" rx="1.3"/><rect x="160" y="12.1" width="2.6" height="7.7" rx="1.3"/><rect x="165" y="9.7" width="2.6" height="12.6" rx="1.3"/><rect x="170" y="11.4" width="2.6" height="9.3" rx="1.3"/><rect x="175" y="10.8" width="2.6" height="10.3" rx="1.3"/><rect x="180" y="12.7" width="2.6" height="6.7" rx="1.3"/><rect x="185" y="9.8" width="2.6" height="12.3" rx="1.3"/><rect x="190" y="10.8" width="2.6" height="10.4" rx="1.3"/><rect x="195" y="9.7" width="2.6" height="12.5" rx="1.3"/><rect x="200" y="10.0" width="2.6" height="12.0" rx="1.3"/><rect x="205" y="12.3" width="2.6" height="7.4" rx="1.3"/><rect x="210" y="12.1" width="2.6" height="7.9" rx="1.3"/><rect x="215" y="12.8" width="2.6" height="6.4" rx="1.3"/><rect x="220" y="12.9" width="2.6" height="6.2" rx="1.3"/><rect x="225" y="13.2" width="2.6" height="5.6" rx="1.3"/><rect x="230" y="12.3" width="2.6" height="7.4" rx="1.3"/><rect x="235" y="11.1" width="2.6" height="9.8" rx="1.3"/><rect x="240" y="13.4" width="2.6" height="5.1" rx="1.3"/><rect x="245" y="10.8" width="2.6" height="10.3" rx="1.3"/><rect x="250" y="12.1" width="2.6" height="7.7" rx="1.3"/><rect x="255" y="12.2" width="2.6" height="7.5" rx="1.3"/><rect x="260" y="10.3" width="2.6" height="11.4" rx="1.3"/><rect x="265" y="11.6" width="2.6" height="8.8" rx="1.3"/><rect x="270" y="12.2" width="2.6" height="7.5" rx="1.3"/><rect x="275" y="11.6" width="2.6" height="8.8" rx="1.3"/><rect x="280" y="10.7" width="2.6" height="10.5" rx="1.3"/><rect x="285" y="13.2" width="2.6" height="5.6" rx="1.3"/><rect x="290" y="9.6" width="2.6" height="12.8" rx="1.3"/><rect x="295" y="13.0" width="2.6" height="6.1" rx="1.3"/><rect x="300" y="9.5" width="2.6" height="12.9" rx="1.3"/><rect x="305" y="7.8" width="2.6" height="16.4" rx="1.3"/><rect x="310" y="8.8" width="2.6" height="14.5" rx="1.3"/><rect x="315" y="2.9" width="2.6" height="26.2" rx="1.3"/><rect x="320" y="1.7" width="2.6" height="28.5" rx="1.3"/><rect x="325" y="0.0" width="2.6" height="32.0" rx="1.3"/><rect x="330" y="1.9" width="2.6" height="28.3" rx="1.3"/><rect x="335" y="3.8" width="2.6" height="24.3" rx="1.3"/><rect x="340" y="6.3" width="2.6" height="19.5" rx="1.3"/><rect x="345" y="6.0" width="2.6" height="20.0" rx="1.3"/><rect x="350" y="10.9" width="2.6" height="10.3" rx="1.3"/><rect x="355" y="9.8" width="2.6" height="12.4" rx="1.3"/><rect x="360" y="9.6" width="2.6" height="12.8" rx="1.3"/><rect x="365" y="9.7" width="2.6" height="12.5" rx="1.3"/><rect x="370" y="12.1" width="2.6" height="7.8" rx="1.3"/><rect x="375" y="12.1" width="2.6" height="7.9" rx="1.3"/><rect x="380" y="11.4" width="2.6" height="9.2" rx="1.3"/><rect x="385" y="10.5" width="2.6" height="11.1" rx="1.3"/><rect x="390" y="13.0" width="2.6" height="5.9" rx="1.3"/><rect x="395" y="10.6" width="2.6" height="10.9" rx="1.3"/><rect x="400" y="10.4" width="2.6" height="11.2" rx="1.3"/><rect x="405" y="10.1" width="2.6" height="11.7" rx="1.3"/><rect x="410" y="13.3" width="2.6" height="5.4" rx="1.3"/><rect x="415" y="9.8" width="2.6" height="12.4" rx="1.3"/><rect x="420" y="13.1" width="2.6" height="5.8" rx="1.3"/><rect x="425" y="12.1" width="2.6" height="7.7" rx="1.3"/><rect x="430" y="11.1" width="2.6" height="9.8" rx="1.3"/><rect x="435" y="9.9" width="2.6" height="12.2" rx="1.3"/><rect x="440" y="12.1" width="2.6" height="7.7" rx="1.3"/><rect x="445" y="9.9" width="2.6" height="12.2" rx="1.3"/><rect x="450" y="11.3" width="2.6" height="9.3" rx="1.3"/><rect x="455" y="12.2" width="2.6" height="7.5" rx="1.3"/><rect x="460" y="12.2" width="2.6" height="7.6" rx="1.3"/><rect x="465" y="12.8" width="2.6" height="6.5" rx="1.3"/><rect x="470" y="13.1" width="2.6" height="5.7" rx="1.3"/><rect x="475" y="12.9" width="2.6" height="6.3" rx="1.3"/><rect x="480" y="10.8" width="2.6" height="10.4" rx="1.3"/><rect x="485" y="9.6" width="2.6" height="12.8" rx="1.3"/><rect x="490" y="12.8" width="2.6" height="6.4" rx="1.3"/><rect x="495" y="13.2" width="2.6" height="5.5" rx="1.3"/><rect x="500" y="9.6" width="2.6" height="12.8" rx="1.3"/><rect x="505" y="11.3" width="2.6" height="9.4" rx="1.3"/><rect x="510" y="11.5" width="2.6" height="8.9" rx="1.3"/><rect x="515" y="11.6" width="2.6" height="8.8" rx="1.3"/><rect x="520" y="8.9" width="2.6" height="14.1" rx="1.3"/><rect x="525" y="5.9" width="2.6" height="20.2" rx="1.3"/><rect x="530" y="4.4" width="2.6" height="23.1" rx="1.3"/><rect x="535" y="1.7" width="2.6" height="28.5" rx="1.3"/><rect x="540" y="1.4" width="2.6" height="29.2" rx="1.3"/><rect x="545" y="0.0" width="2.6" height="32.0" rx="1.3"/><rect x="550" y="3.6" width="2.6" height="24.7" rx="1.3"/><rect x="555" y="4.8" width="2.6" height="22.4" rx="1.3"/><rect x="560" y="6.2" width="2.6" height="19.5" rx="1.3"/><rect x="565" y="11.0" width="2.6" height="10.1" rx="1.3"/><rect x="570" y="9.8" width="2.6" height="12.4" rx="1.3"/><rect x="575" y="9.5" width="2.6" height="13.0" rx="1.3"/><rect x="580" y="10.9" width="2.6" height="10.1" rx="1.3"/><rect x="585" y="10.4" width="2.6" height="11.2" rx="1.3"/><rect x="590" y="13.0" width="2.6" height="5.9" rx="1.3"/><rect x="595" y="11.8" width="2.6" height="8.5" rx="1.3"/><rect x="600" y="12.9" width="2.6" height="6.3" rx="1.3"/><rect x="605" y="10.2" width="2.6" height="11.6" rx="1.3"/><rect x="610" y="12.3" width="2.6" height="7.4" rx="1.3"/><rect x="615" y="11.7" width="2.6" height="8.6" rx="1.3"/><rect x="620" y="9.6" width="2.6" height="12.8" rx="1.3"/><rect x="625" y="10.2" width="2.6" height="11.7" rx="1.3"/><rect x="630" y="9.7" width="2.6" height="12.6" rx="1.3"/><rect x="635" y="11.7" width="2.6" height="8.6" rx="1.3"/><rect x="640" y="11.6" width="2.6" height="8.9" rx="1.3"/><rect x="645" y="10.6" width="2.6" height="10.7" rx="1.3"/><rect x="650" y="11.6" width="2.6" height="8.8" rx="1.3"/><rect x="655" y="12.3" width="2.6" height="7.4" rx="1.3"/><rect x="660" y="11.9" width="2.6" height="8.2" rx="1.3"/><rect x="665" y="12.9" width="2.6" height="6.2" rx="1.3"/><rect x="670" y="12.0" width="2.6" height="8.0" rx="1.3"/><rect x="675" y="9.6" width="2.6" height="12.7" rx="1.3"/><rect x="680" y="9.8" width="2.6" height="12.5" rx="1.3"/><rect x="685" y="11.0" width="2.6" height="9.9" rx="1.3"/><rect x="690" y="11.5" width="2.6" height="9.0" rx="1.3"/><rect x="695" y="12.1" width="2.6" height="7.7" rx="1.3"/></svg><span class="marks"><i class="m m1"><em>0:48</em></i><i class="m m2"><em>3:10</em></i><i class="m m3"><em>5:21</em></i></span><span class="scanhead"></span></div>
-        <div class="status"><span class="s1">Reading the transcript, finding the moments…</span><span class="s2">6 clips ready &middot; checked by a person</span></div>
-      </div>
-      <div class="phones">
-      <figure class="ph ph1">
-        <div class="scr">
-          <span class="ph-top"><span class="plat"><svg><use href="#p-yt"/></svg></span><span class="idx">1/6</span></span>
-          <p class="kc"><span data-i="0" class="w">NO</span> <span data-i="1" class="w">WAY</span> <span data-i="2" class="w">HE</span> <span data-i="3" class="w hi">PULLED</span> <span data-i="4" class="w">IT</span></p>
-          <span class="rail"><i></i><i></i><i></i></span>
-          <span class="bar-prog"><i></i></span>
-        </div>
-        <figcaption><span class="sc" data-to="97"><b></b><small>/100</small></span><span class="at">from 0:48</span></figcaption>
-      </figure>
-      <figure class="ph ph2">
-        <div class="scr">
-          <span class="ph-top"><span class="plat"><svg><use href="#p-tt"/></svg></span><span class="idx">2/6</span></span>
-          <p class="kc"><span data-i="0" class="w">WAIT</span> <span data-i="1" class="w">FOR</span> <span data-i="2" class="w hi">IT</span></p>
-          <span class="rail"><i></i><i></i><i></i></span>
-          <span class="bar-prog"><i></i></span>
-        </div>
-        <figcaption><span class="sc" data-to="91"><b></b><small>/100</small></span><span class="at">from 3:10</span></figcaption>
-      </figure>
-      <figure class="ph ph3">
-        <div class="scr">
-          <span class="ph-top"><span class="plat"><svg><use href="#p-ig"/></svg></span><span class="idx">3/6</span></span>
-          <p class="kc"><span data-i="0" class="w">CHAT</span> <span data-i="1" class="w">WENT</span> <span data-i="2" class="w hi">CRAZY</span></p>
-          <span class="rail"><i></i><i></i><i></i></span>
-          <span class="bar-prog"><i></i></span>
-        </div>
-        <figcaption><span class="sc" data-to="99"><b></b><small>/100</small></span><span class="at">from 5:21</span></figcaption>
-      </figure>
-      </div>
-    </div>
-    <span class="progress" aria-hidden="true"></span>
-    <button class="stage-toggle" id="motionToggle" type="button">Pause animations</button>
+<header class="hero" id="top" data-enter><div class="wrap hero-frame">
+  <div class="film-strip" aria-label="Examples of vertical social video">
+    <video controls preload="metadata" poster="/assets/video/opti-vertical-poster.webp"><source src="/assets/video/opti-vertical.mp4" type="video/mp4"></video>
+    <video controls preload="metadata" poster="/assets/video/opti-orbit-poster.webp"><source src="/assets/video/opti-orbit.mp4" type="video/mp4"></video>
+    <video controls preload="metadata" poster="/assets/video/opti-nutrients-poster.webp"><source src="/assets/video/opti-nutrients.mp4" type="video/mp4"></video>
   </div>
-
-  <ul class="chips" aria-label="What’s included">
-    <li><svg aria-hidden="true"><use href="#i-scissors"/></svg>Moment picking</li>
-    <li><svg aria-hidden="true"><use href="#i-cc"/></svg>Animated captions</li>
-    <li><svg aria-hidden="true"><use href="#i-crop"/></svg>9:16 reframe</li>
-    <li><svg aria-hidden="true"><use href="#i-vol"/></svg>Loudness fix</li>
-    <li><svg aria-hidden="true"><use href="#i-hash"/></svg>Titles &amp; hashtags</li>
-    <li><svg aria-hidden="true"><use href="#i-check"/></svg>Human check</li>
-  </ul>
-</header>
-
-<section class="works" aria-label="Works with">
-  <p class="works-title">Works with every kind of stream</p>
-  <div class="marquee">
-    <div class="track" id="marquee">
-      <span>YouTube Live</span><span>Twitch</span><span>Kick</span><span>Pack openings</span><span>FPS</span><span>IRL</span><span>Just chatting</span><span>Card breaks</span><span>Speedruns</span><span>Sports talk</span>
-    </div>
+  <div class="hero-copy">
+    <p class="eyebrow">Done-for-you stream clipping</p>
+    <h1>One stream in.<br>A week of clips out.</h1>
+    <p>Your 3–8 hour stream becomes captioned vertical clips for Shorts, TikTok and Reels. Every clip is checked by a person before it reaches you.</p>
+    <form class="channel-form" id="pilotForm"><label for="channel">Your channel link</label><div><input id="channel" name="channel" type="url" inputmode="url" autocomplete="url" placeholder="youtube.com/@yourchannel"><button type="submit">Get started</button></div></form>
   </div>
-</section>
+</div></header>
 
-<section class="sec" id="features">
-  <p class="eyebrow ico-eyebrow"><svg aria-hidden="true"><use href="#i-sparkle"/></svg>Built for streams</p>
-  <h2>Clipping that understands your stream</h2>
-  <p class="lede">Most AI clippers are made for two people at a desk. Streams are longer, louder and laid out differently, so Clipify is set up around yours.</p>
+<section class="position section"><div class="wrap position-grid">
+  <p class="eyebrow">Why Clipify exists</p>
+  <p class="position-line">You already made the content. The slow part is finding the moments, reframing them, fixing captions and packaging the batch.</p>
+</div></section>
 
-  <div class="duo reveal">
-    <article class="feature">
-      <div class="visual v-pick" aria-hidden="true">
-        <div class="vp-head"><b>Clip candidates</b><span>Saturday stream</span></div>
-        <div class="cand c-a">
-          <p class="q"><span class="ts">0:48</span>“no way… he actually pulled it”</p>
-          <div class="checks"><span class="ck k1">Hook</span><span class="ck k2">Payoff</span><span class="ck k3">No dead air</span><span class="verdict keep">Keep <b>97</b></span></div>
-        </div>
-        <div class="cand c-b">
-          <p class="q"><span class="ts">2:15</span>“uh… brb, grabbing a drink”</p>
-          <div class="checks"><span class="ck x k1">Hook</span><span class="ck x k2">Payoff</span><span class="verdict drop">Skipped</span></div>
-        </div>
-        <div class="cand c-c">
-          <p class="q"><span class="ts">3:10</span>“wait for it… WAIT FOR IT”</p>
-          <div class="checks"><span class="ck k1">Hook</span><span class="ck k2">Payoff</span><span class="ck k3">No dead air</span><span class="verdict keep">Keep <b>91</b></span></div>
-        </div>
-        <div class="cand c-d">
-          <p class="q"><span class="ts">5:21</span>“chat is going absolutely crazy”</p>
-          <div class="checks"><span class="ck k1">Hook</span><span class="ck k2">Payoff</span><span class="ck k3">No dead air</span><span class="verdict keep">Keep <b>99</b></span></div>
-        </div>
-        <p class="vp-foot">3 of 4 kept. Weak moments never become clips.</p>
-      </div>
-      <h3>Moments that stand on their own</h3>
-      <p>The whole stream is transcribed and every candidate is checked for a clear hook, a payoff and no dead air. Weak streams get fewer clips, never filler.</p>
-    </article>
-    <article class="feature">
-      <div class="visual v-frame" aria-hidden="true">
-        <div class="fr-wide">
-          <span class="fr-label">Your stream &middot; 16:9</span>
-          <div class="fr-screen">
-            <span class="scene"><span class="sc-sky"></span><span class="sc-hill h1"></span><span class="sc-hill h2"></span><span class="sc-ground"></span><span class="sc-crate"></span><span class="sc-target"></span><span class="sc-x"></span><span class="sc-map"></span><span class="sc-feed"><i></i><i></i></span><span class="sc-hp"><i></i></span><span class="sc-ammo"><i></i><i></i><i></i></span><span class="sc-cam"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 22c0-4.6 3.8-7.4 8.5-7.4s8.5 2.8 8.5 7.4z"/></svg></span></span>
-            <span class="fr-crop"><em>Centre crop</em></span>
-            <span class="fr-box fb-cam"><em>Face cam</em></span>
-            <span class="fr-box fb-act"><em>Action</em></span>
-          </div>
-        </div>
-        <div class="fr-outs">
-          <figure class="fr-out bad">
-            <div class="fr-phone"><span class="scene s-centre"><span class="sc-sky"></span><span class="sc-hill h1"></span><span class="sc-hill h2"></span><span class="sc-ground"></span><span class="sc-crate"></span><span class="sc-target"></span><span class="sc-x"></span><span class="sc-map"></span><span class="sc-feed"><i></i><i></i></span><span class="sc-hp"><i></i></span><span class="sc-ammo"><i></i><i></i><i></i></span><span class="sc-cam"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 22c0-4.6 3.8-7.4 8.5-7.4s8.5 2.8 8.5 7.4z"/></svg></span></span></div>
-            <figcaption><span class="mark">&#10005;</span>Blind centre crop<small>Face cut off, HUD lost</small></figcaption>
-          </figure>
-          <figure class="fr-out good">
-            <div class="fr-phone stack">
-              <span class="slot s-top"><span class="scene s-cam"><span class="sc-sky"></span><span class="sc-hill h1"></span><span class="sc-hill h2"></span><span class="sc-ground"></span><span class="sc-crate"></span><span class="sc-target"></span><span class="sc-x"></span><span class="sc-map"></span><span class="sc-feed"><i></i><i></i></span><span class="sc-hp"><i></i></span><span class="sc-ammo"><i></i><i></i><i></i></span><span class="sc-cam"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 22c0-4.6 3.8-7.4 8.5-7.4s8.5 2.8 8.5 7.4z"/></svg></span></span></span>
-              <span class="fr-cap">HE <em>PULLED</em> IT</span>
-              <span class="slot s-bot"><span class="scene s-act"><span class="sc-sky"></span><span class="sc-hill h1"></span><span class="sc-hill h2"></span><span class="sc-ground"></span><span class="sc-crate"></span><span class="sc-target"></span><span class="sc-x"></span><span class="sc-map"></span><span class="sc-feed"><i></i><i></i></span><span class="sc-hp"><i></i></span><span class="sc-ammo"><i></i><i></i><i></i></span><span class="sc-cam"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 22c0-4.6 3.8-7.4 8.5-7.4s8.5 2.8 8.5 7.4z"/></svg></span></span></span>
-            </div>
-            <figcaption><span class="mark">&#10003;</span>Clipify layout<small>Your face and the action</small></figcaption>
-          </figure>
-        </div>
-        <p class="vp-foot">Your layout is mapped once at setup, then every clip is stacked like this.</p>
-      </div>
-      <h3>Framed for your camera setup</h3>
-      <p>Face cam, pack cam, gameplay or screen: your layout is mapped once at setup, so every clip stacks the right parts instead of a blind centre crop.</p>
-    </article>
-  </div>
-</section>
-
-<section class="sec" id="how">
-  <p class="eyebrow ico-eyebrow"><svg aria-hidden="true"><use href="#i-sync"/></svg>Workflow on autopilot</p>
-  <h2>You stream. The rest happens overnight.</h2>
-  <p class="lede">No uploads, no editing app, no command prompt. Clips are waiting in your folder when you wake up.</p>
-
-  <ol class="steps reveal">
-    <li class="step">
-      <div class="step-ui ui-pick" aria-hidden="true">
-        <div class="row-head"><span class="off">Offline</span><b>Saturday stream</b><span class="when">23:41</span></div>
-        <div class="dl">
-          <div class="dl-top"><span><svg><use href="#i-down"/></svg>Collecting VOD</span><span class="dl-len">5:42:10</span></div>
-          <span class="dl-bar"><i></i></span>
-        </div>
-        <div class="srcs"><span class="on">YouTube</span><span>Twitch</span><span>Kick</span><span>Drop folder</span></div>
-      </div>
-      <h3>Auto pick-up</h3>
-      <p>Your VOD is collected from your channel after you go offline, or you drop the file in your shared folder.</p>
-    </li>
-    <li class="step">
-      <div class="step-ui ui-edit" aria-hidden="true">
-        <div class="mtl"><svg class="mwave" viewBox="0 0 420 28" preserveAspectRatio="none"><rect x="0" y="10.6" width="3" height="6.7" rx="1.5"/><rect x="6" y="9.6" width="3" height="8.8" rx="1.5"/><rect x="12" y="10.2" width="3" height="7.6" rx="1.5"/><rect x="18" y="9.4" width="3" height="9.3" rx="1.5"/><rect x="24" y="9.3" width="3" height="9.4" rx="1.5"/><rect x="30" y="11.3" width="3" height="5.5" rx="1.5"/><rect x="36" y="11.4" width="3" height="5.1" rx="1.5"/><rect x="42" y="8.5" width="3" height="10.9" rx="1.5"/><rect x="48" y="10.5" width="3" height="6.9" rx="1.5"/><rect x="54" y="10.5" width="3" height="7.0" rx="1.5"/><rect x="60" y="7.2" width="3" height="13.6" rx="1.5"/><rect x="66" y="7.3" width="3" height="13.3" rx="1.5"/><rect x="72" y="3.0" width="3" height="22.0" rx="1.5"/><rect x="78" y="1.1" width="3" height="25.9" rx="1.5"/><rect x="84" y="0.0" width="3" height="28.0" rx="1.5"/><rect x="90" y="3.3" width="3" height="21.3" rx="1.5"/><rect x="96" y="5.1" width="3" height="17.9" rx="1.5"/><rect x="102" y="6.8" width="3" height="14.4" rx="1.5"/><rect x="108" y="9.2" width="3" height="9.6" rx="1.5"/><rect x="114" y="8.8" width="3" height="10.4" rx="1.5"/><rect x="120" y="9.1" width="3" height="9.8" rx="1.5"/><rect x="126" y="11.3" width="3" height="5.5" rx="1.5"/><rect x="132" y="8.8" width="3" height="10.3" rx="1.5"/><rect x="138" y="9.4" width="3" height="9.2" rx="1.5"/><rect x="144" y="10.4" width="3" height="7.1" rx="1.5"/><rect x="150" y="11.4" width="3" height="5.3" rx="1.5"/><rect x="156" y="8.5" width="3" height="11.1" rx="1.5"/><rect x="162" y="9.8" width="3" height="8.3" rx="1.5"/><rect x="168" y="9.0" width="3" height="10.1" rx="1.5"/><rect x="174" y="8.4" width="3" height="11.2" rx="1.5"/><rect x="180" y="9.0" width="3" height="10.1" rx="1.5"/><rect x="186" y="8.1" width="3" height="11.8" rx="1.5"/><rect x="192" y="9.4" width="3" height="9.2" rx="1.5"/><rect x="198" y="6.4" width="3" height="15.2" rx="1.5"/><rect x="204" y="4.6" width="3" height="18.7" rx="1.5"/><rect x="210" y="0.0" width="3" height="28.0" rx="1.5"/><rect x="216" y="0.0" width="3" height="28.0" rx="1.5"/><rect x="222" y="3.3" width="3" height="21.5" rx="1.5"/><rect x="228" y="6.5" width="3" height="14.9" rx="1.5"/><rect x="234" y="8.9" width="3" height="10.1" rx="1.5"/><rect x="240" y="7.6" width="3" height="12.8" rx="1.5"/><rect x="246" y="9.9" width="3" height="8.3" rx="1.5"/><rect x="252" y="9.3" width="3" height="9.5" rx="1.5"/><rect x="258" y="10.4" width="3" height="7.1" rx="1.5"/><rect x="264" y="9.7" width="3" height="8.6" rx="1.5"/><rect x="270" y="10.1" width="3" height="7.7" rx="1.5"/><rect x="276" y="10.3" width="3" height="7.5" rx="1.5"/><rect x="282" y="9.4" width="3" height="9.1" rx="1.5"/><rect x="288" y="9.4" width="3" height="9.1" rx="1.5"/><rect x="294" y="8.3" width="3" height="11.4" rx="1.5"/><rect x="300" y="9.1" width="3" height="9.8" rx="1.5"/><rect x="306" y="8.2" width="3" height="11.6" rx="1.5"/><rect x="312" y="8.2" width="3" height="11.5" rx="1.5"/><rect x="318" y="7.0" width="3" height="14.1" rx="1.5"/><rect x="324" y="6.1" width="3" height="15.9" rx="1.5"/><rect x="330" y="4.6" width="3" height="18.8" rx="1.5"/><rect x="336" y="0.0" width="3" height="28.0" rx="1.5"/><rect x="342" y="0.0" width="3" height="28.0" rx="1.5"/><rect x="348" y="1.4" width="3" height="25.1" rx="1.5"/><rect x="354" y="6.0" width="3" height="16.1" rx="1.5"/><rect x="360" y="7.7" width="3" height="12.6" rx="1.5"/><rect x="366" y="10.4" width="3" height="7.2" rx="1.5"/><rect x="372" y="8.5" width="3" height="11.0" rx="1.5"/><rect x="378" y="9.5" width="3" height="9.1" rx="1.5"/><rect x="384" y="10.5" width="3" height="7.0" rx="1.5"/><rect x="390" y="11.3" width="3" height="5.5" rx="1.5"/><rect x="396" y="8.5" width="3" height="11.0" rx="1.5"/><rect x="402" y="8.0" width="3" height="12.0" rx="1.5"/><rect x="408" y="11.2" width="3" height="5.7" rx="1.5"/><rect x="414" y="8.7" width="3" height="10.6" rx="1.5"/></svg><i class="mk k1"></i><i class="mk k2"></i><i class="mk k3"></i></div>
-        <div class="mphones">
-          <span class="mp yt"><b>NO WAY HE <em>PULLED</em> IT</b></span>
-          <span class="mp tt"><b>WAIT FOR <em>IT</em></b></span>
-          <span class="mp ig"><b>CHAT WENT <em>CRAZY</em></b></span>
-        </div>
-      </div>
-      <h3>Auto edit</h3>
-      <p>Moments are picked, cut tight, reframed, captioned in your style and levelled for phone speakers.</p>
-    </li>
-    <li class="step">
-      <div class="step-ui ui-deliver" aria-hidden="true">
-        <div class="push"><span class="app"><svg><use href="#i-scissors"/></svg></span><span class="push-txt"><b>Clipify</b>6 clips ready to post</span><span class="when">07:00</span></div>
-        <ul class="files">
-          <li><span class="th yt"></span><span class="f-txt"><b>No way he pulled it</b><small>#pokemon #packopening</small></span><span class="ok"><svg><use href="#i-check"/></svg></span></li>
-          <li><span class="th tt"></span><span class="f-txt"><b>Wait for it…</b><small>#gaming #clutch</small></span><span class="ok"><svg><use href="#i-check"/></svg></span></li>
-          <li><span class="th ig"></span><span class="f-txt"><b>Chat went crazy</b><small>#live #streamer</small></span><span class="ok"><svg><use href="#i-check"/></svg></span></li>
-        </ul>
-      </div>
-      <h3>Checked &amp; delivered</h3>
-      <p>Each clip passes a quality check, then lands in your folder with a title, description, hashtags and posting order.</p>
-    </li>
+<section class="how section" id="how"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">From VOD to folder</p><h2>Four steps from stream to folder.</h2></div>
+  <ol class="workflow">
+    <li><span>01</span><h3>Share the recording</h3><p>I collect the saved VOD from your channel, or you drop the file into a shared folder.</p></li>
+    <li><span>02</span><h3>Find the moments</h3><p>The stream is transcribed and cut around moments with a clear hook and payoff.</p></li>
+    <li><span>03</span><h3>Finish every clip</h3><p>Each cut is reframed to 9:16, captioned in your style and checked for audio and timing.</p></li>
+    <li><span>04</span><h3>Open your folder</h3><p>You get ready-to-post files, titles, descriptions, hashtags and a suggested order.</p></li>
   </ol>
-</section>
+</div></section>
 
-<section class="sec" id="compare">
-  <p class="eyebrow">Your options</p>
-  <h2>Why a service, not another app?</h2>
-  <div class="cmp reveal" role="table" aria-label="Clipify compared with AI apps and freelance editors">
-    <div class="row head" role="row"><span role="columnheader"></span><span role="columnheader">AI clipping app</span><span role="columnheader" class="us">Clipify</span><span role="columnheader">Freelance editor</span></div>
-    <div class="row" role="row"><span role="rowheader">Who does the work</span><span role="cell">You: upload, pick, fix, export</span><span role="cell" class="us">Done for you, overnight</span><span role="cell">Done for you, in days</span></div>
-    <div class="row" role="row"><span role="rowheader">Long streams (4–8 h)</span><span role="cell">Often capped by plan</span><span role="cell" class="us">Yes, full VOD</span><span role="cell">Yes, billed by time</span></div>
-    <div class="row" role="row"><span role="rowheader">Your camera layout</span><span role="cell">Generic crops</span><span role="cell" class="us">Set up for your stream</span><span role="cell">Yes</span></div>
-    <div class="row" role="row"><span role="rowheader">Human check</span><span role="cell">No</span><span role="cell" class="us">Every clip</span><span role="cell">Yes</span></div>
-    <div class="row" role="row"><span role="rowheader">~30 clips a month</span><span role="cell">~R500–R1,400 + your time</span><span role="cell" class="us">R1,500</span><span role="cell">R8,000+</span></div>
+<section class="deliverables section"><div class="wrap deliver-grid">
+  <div class="deliver-copy"><p class="eyebrow">What arrives</p><h2>Not a pile of rough cuts.</h2><p>A complete batch, organised so you can post from your phone without reopening an editor.</p></div>
+  <div class="folder-ui" aria-label="Example Clipify delivery folder">
+    <div class="folder-top"><strong>APRIL / WEEK 03</strong><span>12 clips</span></div>
+    <div class="folder-row"><b>01</b><span>The giveaway finally lands</span><em>00:34</em><i>Ready</i></div>
+    <div class="folder-row"><b>02</b><span>Chat called it too early</span><em>00:28</em><i>Ready</i></div>
+    <div class="folder-row"><b>03</b><span>Last pack, best pull</span><em>00:41</em><i>Ready</i></div>
+    <div class="folder-bottom"><span>captions.css</span><span>titles.txt</span><span>posting-order.pdf</span></div>
   </div>
-  <p class="note">App and freelance figures are typical published 2026 rates, converted at about R17 to the US dollar.</p>
-</section>
+</div></section>
 
-<section class="sec" id="pricing">
-  <p class="eyebrow">Pricing</p>
-  <h2>Pick your plan.</h2>
-  <p class="lede">Month-to-month on every plan. Cancel anytime.</p>
-  <div class="plans three reveal">
-    <div class="plan">
-      <p class="plan-name">Starter</p>
-      <p class="price">R899 <small>/ month</small></p>
-      <p class="per">About R75 per clip</p>
-      <a class="btn-outline full" href="#contact" data-enquiry="Clipify Starter">Get started</a>
-      <ul>
-        <li>1 stream a week</li>
-        <li>Around 12 clips a month</li>
-        <li>Captions and branding on every clip</li>
-        <li class="no">No titles, descriptions or hashtags</li>
-        <li>Delivered within 48 hours</li>
-      </ul>
-    </div>
-    <div class="plan pro">
-      <p class="plan-name">Creator <span class="badge">Most popular</span></p>
-      <p class="price">R1,499 <small>/ month</small></p>
-      <p class="per">About R50 per clip, best value</p>
-      <a class="btn-white full" href="#contact" data-enquiry="Clipify Creator">Get started</a>
-      <ul>
-        <li>Up to 2 streams a week, plus the odd long-form video</li>
-        <li>Around 30 clips a month, and only strong moments: no filler</li>
-        <li>Captions and branding on every clip</li>
-        <li>Titles, descriptions and hashtags for every clip</li>
-        <li>Ready by the next morning</li>
-      </ul>
-    </div>
-    <div class="plan">
-      <p class="plan-name">Pro</p>
-      <p class="price">R2,499 <small>/ month</small></p>
-      <p class="per">About R55 per clip</p>
-      <a class="btn-outline full" href="#contact" data-enquiry="Clipify Pro">Get started</a>
-      <ul>
-        <li>Up to 3 streams a week</li>
-        <li>Around 45 clips a month</li>
-        <li>Everything in Creator</li>
-        <li>A posting schedule planned for you</li>
-        <li>Monthly report on which clips performed</li>
-      </ul>
-    </div>
+<section class="pricing section" id="pricing"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">Founding-streamer rates</p><h2>Choose the size of your stream week.</h2><p>R3,000 once-off setup on every plan. Month-to-month after that.</p></div>
+  <div class="plans">
+    <article class="plan"><p class="plan-name">Starter</p><p class="price">R899 <span>/ month</span></p><ul><li>1 stream a week</li><li>Around 12 clips a month</li><li>Delivered within 48 hours</li></ul><a href="#contact" data-enquiry="Clipify Starter">Choose Starter</a></article>
+    <article class="plan featured"><p class="plan-name">Creator</p><p class="price">R1,499 <span>/ month</span></p><ul><li>Up to 2 streams a week</li><li>Around 30 clips a month</li><li>Ready by the next morning</li></ul><a href="#contact" data-enquiry="Clipify Creator">Choose Creator</a></article>
+    <article class="plan"><p class="plan-name">Pro</p><p class="price">R2,499 <span>/ month</span></p><ul><li>Up to 3 streams a week</li><li>Around 45 clips a month</li><li>Monthly performance report</li></ul><a href="#contact" data-enquiry="Clipify Pro">Choose Pro</a></article>
   </div>
-  <p class="setup reveal"><b>R3,000 once-off setup on every plan:</b> your caption style, title bar and branding saved for every batch, a layout built for your camera setup, and a shared delivery folder.</p>
-  <p class="note"><b>Founding-streamer rates</b> for my first few channels. Ask before you sign up.</p>
+</div></section>
 
-  <div class="billing reveal">
-    <div><h3>How billing works</h3><p>You pay setup once, before work starts. After that, the monthly fee is billed in advance on the same date each month. No contract, no lock-in.</p></div>
-    <div><h3>Ways to pay</h3><p>EFT against a monthly invoice. Card and Instant EFT through a secure payment link <span class="soon">coming soon</span></p></div>
-    <div><h3>Currency</h3><p>Prices are in South African Rand. Outside South Africa? Ask for a quote in USD.</p></div>
+<section class="faq section" id="faq"><div class="wrap faq-grid">
+  <div class="section-head"><p class="eyebrow">Questions</p><h2>Before you send a VOD.</h2></div>
+  <div class="qa-list">
+    <div class="qa"><button type="button" aria-expanded="false" aria-controls="cf1">Do I install anything?</button><div class="ans" id="cf1" hidden><p>No. Clipify runs on my side. You stream as normal and open the finished folder on your phone or computer.</p></div></div>
+    <div class="qa"><button type="button" aria-expanded="false" aria-controls="cf2">Which platforms work?</button><div class="ans" id="cf2" hidden><p>Any English stream with a saved VOD or recording, including YouTube, Twitch and Kick.</p></div></div>
+    <div class="qa"><button type="button" aria-expanded="false" aria-controls="cf3">What if I dislike a clip?</button><div class="ans" id="cf3" hidden><p>Tell me why. I will re-cut it or replace it, and add the note to your channel preferences.</p></div></div>
+    <div class="qa"><button type="button" aria-expanded="false" aria-controls="cf4">Can I cancel?</button><div class="ans" id="cf4" hidden><p>Yes. It is month-to-month; tell me before your next billing date and that month is your last.</p></div></div>
   </div>
-</section>
+</div></section>
 
-<section class="sec" id="faq">
-  <h2>Got questions?</h2>
-  <div class="faq reveal">
-    <div class="qa">
-      <button type="button" aria-expanded="false" aria-controls="cf1">Do I need to install anything?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
-      <div class="ans" id="cf1" hidden><p>No. Clipify runs on my side. You stream as normal, and clips arrive in a shared folder you can open on your phone.</p></div>
-    </div>
-    <div class="qa">
-      <button type="button" aria-expanded="false" aria-controls="cf2">Do you post the clips for me?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
-      <div class="ans" id="cf2" hidden><p>By default you post them, using the titles and hashtags I supply. If you’d rather I upload them, you can give me Editor access to your YouTube channel and we’ll agree a schedule.</p></div>
-    </div>
-    <div class="qa">
-      <button type="button" aria-expanded="false" aria-controls="cf3">What if I don’t like a clip?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
-      <div class="ans" id="cf3" hidden><p>Tell me which one and why. I’ll re-cut it or swap it, and save the note to your preferences so the next batch gets it right.</p></div>
-    </div>
-    <div class="qa">
-      <button type="button" aria-expanded="false" aria-controls="cf4">Can I cancel?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
-      <div class="ans" id="cf4" hidden><p>Yes. It’s month-to-month: tell me before your next billing date and that month is your last.</p></div>
-    </div>
-    <div class="qa">
-      <button type="button" aria-expanded="false" aria-controls="cf5">Which platforms and games work?<svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
-      <div class="ans" id="cf5" hidden><p>Any stream with a saved VOD or recording: YouTube, Twitch or Kick, in English. Games, IRL, pack openings and just-chatting all work; the layout is set up per channel.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="reviews" hidden>
-  <h2>What clients say</h2>
-  <ul class="tm-list" id="tmList">
-    <!-- Add only approved quotes, each with the client's permission:
-         <li><blockquote>"Their words."</blockquote><cite>First name</cite></li>
-         The section shows once there are three or more. -->
-  </ul>
-</section>
-
-<section class="sec" id="feedback">
-  <h2>How is Clipify working for you?</h2>
-  <p class="lede">Already a client? Tell me what to keep and what to change: the clips, the captions or the service.</p>
-  <form class="fb-form" id="feedbackForm">
-    <label for="fb-name">Your name</label>
-    <input id="fb-name" name="name" autocomplete="name" maxlength="120" required>
-    <label for="fb-email">Your email (so I can reply)</label>
-    <input id="fb-email" name="email" type="email" autocomplete="email" maxlength="200" required>
-    <label for="fb-message">Your feedback</label>
-    <textarea id="fb-message" name="details" minlength="5" maxlength="4000" required placeholder="e.g. Loved the timing on the clips, captions were small on my phone"></textarea>
-    <label class="fb-consent"><input id="fb-consent" name="consent" type="checkbox"> You can publish my comment on this page, with my first name only.</label>
-    <input class="hp-field" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <p class="consent">By sending, you agree to the <a href="/privacy.html">Privacy Notice</a>.</p>
-    <button class="btn-white" type="submit">Send feedback</button>
-    <p class="dialog-status" id="feedbackStatus" role="status"></p>
-  </form>
-</section>
-
-<section class="final" id="contact">
-  <h2>Your next stream could be clipped by tomorrow morning.</h2>
-  <p class="lede">Tell me where you stream and how often. Within 24 hours you’ll get a reply with a start date.</p>
-  <div class="final-cta">
-    <a class="btn-white" href="mailto:dana.automates@gmail.com" data-enquiry="Clipify">Get started</a>
-    <a class="btn-outline" href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%27d%20like%20to%20try%20Clipify." target="_blank" rel="noopener">WhatsApp me</a>
-  </div>
-</section>
-
+<section class="final section" id="contact"><div class="wrap final-grid"><div><p class="eyebrow">Founding channels</p><h2>Send one stream and see what Clipify finds.</h2></div><div><p>Share your channel link and usual schedule. I will reply with the right plan and next available setup slot.</p><a class="final-button" href="mailto:dana.automates@gmail.com" data-enquiry="Clipify">Get started</a><a class="back-link" href="/">Back to Dana Automates</a></div></div></section>
 </main>
 
-<dialog class="enquiry" id="enquiry" aria-labelledby="dialogTitle">
-  <div class="dialog-head"><h2 id="dialogTitle">Get started with Clipify</h2><button class="dialog-close" type="button" aria-label="Close">×</button></div>
-  <p class="intro">Tell me your channel and how often you stream.</p>
+<footer><div class="wrap"><p><strong>Clipify</strong> by Dana Automates</p><p>© 2026 Dana Theron · South Africa</p></div></footer>
+
+<dialog class="enquiry" id="enquiry" aria-labelledby="dialogTitle"><div class="dialog-head"><h2 id="dialogTitle">Get started with Clipify</h2><button class="dialog-close" type="button" aria-label="Close">×</button></div>
+  <p>Tell me where you stream and what a normal week looks like.</p>
   <form id="leadForm">
-    <label for="f-name">Your name</label>
-    <input id="f-name" name="name" autocomplete="name" maxlength="120" required>
-    <label for="f-email">Your email</label>
-    <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" placeholder="you@channel.com" spellcheck="false" autocapitalize="off" required>
-    <label for="f-phone">Your WhatsApp number <span class="opt">(optional)</span></label>
-    <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" placeholder="e.g. 082 123 4567">
-    <label for="f-service">What do you need?</label>
-    <input id="f-service" name="service" maxlength="160" placeholder="e.g. Clipify">
-    <label for="f-details">Channel link and streaming schedule</label>
-    <textarea id="f-details" name="details" minlength="5" maxlength="4000" required placeholder="e.g. youtube.com/@mychannel, 2 streams a week, 4–6 hours each"></textarea>
-    <input class="hp-field" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <p class="consent">Email is only needed for "Send request". By sending, you agree to the <a href="/privacy.html">Privacy Notice</a>.</p>
-    <div class="dialog-actions">
-      <button class="btn-white" type="submit">Send request</button>
-      <button class="btn-outline wa-btn" type="button" id="sendWhatsApp"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Send on WhatsApp</button>
-      <button class="btn-outline" type="button" id="openEmail" aria-expanded="false" aria-controls="emailChooser">Email me instead</button>
-    </div>
+    <label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" maxlength="120" required>
+    <label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" required>
+    <label for="f-phone">WhatsApp number (optional)</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" maxlength="30">
+    <label for="f-service">Plan</label><input id="f-service" name="service" maxlength="160">
+    <label for="f-details">Channel and schedule</label><textarea id="f-details" name="details" minlength="5" maxlength="4000" required></textarea>
+    <label class="hp" aria-hidden="true">Company<input name="company" tabindex="-1" autocomplete="off"></label>
+    <div class="dialog-actions"><button class="action-button" type="submit">Send request</button><button class="outline-button" type="button" id="sendWhatsApp">Use WhatsApp</button><button class="outline-button" type="button" id="openEmail" aria-expanded="false" aria-controls="emailChooser">Use email</button></div>
   </form>
-  <div class="email-chooser" id="emailChooser" hidden>
-    <p class="chooser-label">Which email do you use?</p>
-    <div class="chooser-btns">
-      <button type="button" class="btn-outline" data-provider="gmail">Gmail</button>
-      <button type="button" class="btn-outline" data-provider="outlook">Outlook</button>
-      <button type="button" class="btn-outline" data-provider="yahoo">Yahoo</button>
-      <button type="button" class="btn-outline" data-provider="default">Other / mail app</button>
-    </div>
-  </div>
+  <div class="email-chooser" id="emailChooser" hidden><p>Open in</p><button type="button" data-provider="gmail">Gmail</button><button type="button" data-provider="outlook">Outlook</button><button type="button" data-provider="yahoo">Yahoo</button><button type="button" data-provider="default">Mail app</button></div>
   <p class="dialog-status" id="dialogStatus" role="status"></p>
 </dialog>
-
-<footer class="foot">
-  <div class="foot-card">
-    <div class="foot-cols">
-      <div>
-        <p class="foot-h">Clipify</p>
-        <a href="#features">Features</a>
-        <a href="#how">How it works</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
-      </div>
-      <div>
-        <p class="foot-h">Contact</p>
-        <a href="mailto:dana.automates@gmail.com">dana.automates@gmail.com</a>
-        <a href="https://wa.me/27765606016?text=Hi%20Dana%2C%20I%27d%20like%20to%20try%20Clipify." target="_blank" rel="noopener">WhatsApp</a>
-      </div>
-      <div>
-        <p class="foot-h">Dana Automates</p>
-        <a href="/">Home</a>
-        <a href="/#services">Other services</a>
-      </div>
-      <div>
-        <p class="foot-h">Trust and legal</p>
-        <a href="/privacy.html">Privacy Notice</a>
-        <a href="/privacy.html#terms">Terms</a>
-      </div>
-    </div>
-    <div class="foot-base">
-      <span>© 2026 Clipify by Dana Theron. Based in South Africa.</span>
-      <a href="#top">Back to top ↑</a>
-    </div>
-  </div>
-</footer>
-</body>
-</html>
+</body></html>
