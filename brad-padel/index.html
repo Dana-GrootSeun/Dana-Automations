@@ -16,16 +16,16 @@
   <meta name="twitter:image" content="https://dana-automates.therondana65.workers.dev/brad-padel/share.jpg">
   <link rel="canonical" href="https://dana-automates.therondana65.workers.dev/brad-padel/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <meta name="theme-color" content="#f4f8fa">
+  <meta name="theme-color" content="#bfe8fa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400..700&family=Red+Hat+Text:wght@400..600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Red+Hat+Text:wght@400..600&family=Syne:wght@400..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/system.css">
   <link rel="stylesheet" href="assets/ui/cards.css">
   <link rel="stylesheet" href="assets/motion/motion.css">
   <link rel="stylesheet" href="assets/layout/layout.css">
   <link rel="stylesheet" href="assets/icons/icon.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=hero-diagonal-all">
   <script src="boot.js"></script>
   <link rel="modulepreload" href="assets/moments/moments.js">
   <link rel="modulepreload" href="assets/moments/lib.js">
@@ -35,7 +35,8 @@
 <!-- type: service
      deal: hero split, nav mega, close type, footer dark, rhythm surface-pairs, buttons tonal, mark dots
      moment: word-highlight in the coaching-method statement
-     motion: hero entrance names the offer first; every link answers; the method statement focuses the point -->
+     palette: baby blue, white and black; gold pinstripes and neon green are restrained detail colours
+     motion: hero heading enters word by word; headings react on hover, tap and anchor navigation; every link answers; the method statement focuses the point -->
   <header class="nav">
     <div class="wrap nav__bar">
       <a class="skip-link" href="#top">Skip to content</a>
@@ -71,12 +72,13 @@
           <div class="btn-row"><a class="btn btn--primary" href="#book">Book a session<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" data-whatsapp href="https://wa.me/?text=Hi%20Brad%2C%20I%27m%20interested%20in%20padel%20coaching.">Open WhatsApp</a></div>
         </div>
         <div class="hero__media span-6 start-7">
-          <img src="assets/club/sunset-court-900.webp" srcset="assets/club/sunset-court-500.webp 500w, assets/club/sunset-court-900.webp 900w" sizes="(max-width: 1023px) 100vw, 50vw" width="900" height="1350" alt="Padel player on court beneath a red sunset" fetchpriority="high" decoding="async" data-source="client" data-subject="club court">
+          <img src="assets/club/court-gate-sunset-900.webp" srcset="assets/club/court-gate-sunset-500.webp 500w, assets/club/court-gate-sunset-900.webp 900w" sizes="(max-width: 1023px) 100vw, 50vw" width="900" height="1200" alt="Floodlit padel court seen through an open gate at sunset" fetchpriority="high" decoding="async" data-source="client" data-subject="club court">
         </div>
       </div></div>
     </section>
 
     <section class="section ground-surface" id="coaching" aria-labelledby="coaching-h">
+      <div class="ball-field ball-field--coaching" aria-hidden="true"><span></span><span></span><span></span></div>
       <div class="wrap grid grid--middle">
         <div class="span-5">
           <div class="section-head"><h2 id="coaching-h">Coaching sessions</h2><p>Choose the format that matches the part of your game you want to work on.</p></div>
@@ -94,6 +96,7 @@
     </section>
 
     <section class="section kids-section" id="kids" data-screen="free" aria-labelledby="kids-h">
+      <div class="ball-field ball-field--kids" aria-hidden="true"><span></span><span></span><span></span></div>
       <div class="wrap grid grid--middle kids-grid">
         <div class="span-5">
           <p class="t-label">Coaching for young players</p>
@@ -134,7 +137,7 @@
       </div>
     </section>
 
-    <section class="section statement" id="method" data-screen="free" data-moment="word-highlight" aria-labelledby="method-h">
+    <section class="section statement" id="method" data-screen="free" data-moment="word-highlight" data-moment-opts='{"staticOnTouch":true}' aria-labelledby="method-h">
       <div class="wrap">
         <h2 id="method-h" class="sr-only">The coaching method</h2>
         <p class="t-label" aria-hidden="true">The coaching method</p>
@@ -147,7 +150,7 @@
         <div class="section-head"><h2 id="courts-h">Work inside the point</h2><p>Sessions move from a clear technical cue into the positions and choices that appear during a match.</p></div>
         <div class="grid court-pair">
           <figure class="frame frame--photo span-6"><img class="frame__img" src="assets/club/night-match-900.webp" srcset="assets/club/night-match-500.webp 500w, assets/club/night-match-900.webp 900w" sizes="(max-width: 1023px) 100vw, 50vw" width="900" height="1200" alt="Four players contesting a point under the court lights" loading="lazy" decoding="async" data-source="client" data-subject="club match"></figure>
-          <figure class="frame frame--photo span-6"><img class="frame__img" src="assets/club/mountain-court-900.webp" srcset="assets/club/mountain-court-500.webp 500w, assets/club/mountain-court-900.webp 900w" sizes="(max-width: 1023px) 100vw, 50vw" width="900" height="1200" alt="Green padel court with mountains beyond the glass" loading="lazy" decoding="async" data-source="client" data-subject="club court"></figure>
+          <figure class="frame frame--photo span-6"><img class="frame__img" src="assets/club/venue-sunset-900.webp" srcset="assets/club/venue-sunset-500.webp 500w, assets/club/venue-sunset-900.webp 900w" sizes="(max-width: 1023px) 100vw, 50vw" width="900" height="750" alt="Sunset over the Lourensford padel courts and clubhouse seating" loading="lazy" decoding="async" data-source="client" data-subject="club venue at sunset"></figure>
         </div>
       </div>
     </section>
@@ -160,6 +163,38 @@
         </div>
         <div class="sponsor-brand" aria-label="LŌK — Play with accent">
           <img src="assets/sponsor/lok-wordmark-1000.webp" width="1000" height="250" alt="LŌK — Play with accent" loading="lazy" decoding="async" data-source="client" data-subject="sponsor logo">
+        </div>
+        <div class="sponsor-products">
+          <div class="sponsor-products__head">
+            <h3>Explore LŌK gear</h3>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="https://loksports.com/en/">Visit the official LŌK shop <span aria-hidden="true">↗</span></a>
+              <a class="btn btn--secondary" href="https://virginactivepadelclub.co.za/collections/lok-padel-rackets">Shop at Virgin Active Padel Club <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <ul class="sponsor-products__grid">
+            <li>
+              <a class="sponsor-product" href="https://loksports.com/en/padel-rackets/244-lok-carbon-on-hype-2-racket-franco-dal-bianco-8435739406144.html">
+                <img src="assets/sponsor/lok-carb-on-hype-2.webp" width="520" height="717" alt="" loading="lazy" decoding="async" data-source="LŌK Sports" data-subject="Carb-On Hype 2">
+                <span class="sponsor-product__caption"><strong>Carb-On Hype 2</strong><small>Franco Dal Bianco edition</small></span>
+                <span class="sponsor-product__arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a class="sponsor-product" href="https://loksports.com/en/padel-bags/232-racket-bag-lok-gen-2-black-grey-and-green-lime-8435739406687.html">
+                <img src="assets/sponsor/lok-racket-bag-gen-2.webp" width="520" height="717" alt="" loading="lazy" decoding="async" data-source="LŌK Sports" data-subject="Gen 2 Racket Bag">
+                <span class="sponsor-product__caption"><strong>Gen 2 Racket Bag</strong><small>Black, grey and lime</small></span>
+                <span class="sponsor-product__arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a class="sponsor-product" href="https://loksports.com/en/balls/15-accent-balls-lok-8436548249540.html">
+                <img src="assets/sponsor/lok-accent-balls.webp" width="520" height="717" alt="" loading="lazy" decoding="async" data-source="LŌK Sports" data-subject="Accent Padel Balls">
+                <span class="sponsor-product__caption"><strong>Accent Padel Balls</strong><small>Pressurised padel balls</small></span>
+                <span class="sponsor-product__arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+          </ul>
         </div>
         <div class="grid sponsor-gallery">
           <figure class="frame frame--photo sponsor-photo sponsor-photo--brad span-7"><img class="frame__img" src="assets/sponsor/brad-lok-800.webp" width="800" height="1067" alt="Brad smiling on court while holding a LŌK padel racket" loading="lazy" decoding="async" data-source="client" data-subject="sponsored coach"></figure>
@@ -202,7 +237,29 @@
             </fieldset>
             <label>Preferred time of day<select name="timeOfDay" required><option value="">Choose what suits you</option><option>Morning · 08:00–11:00</option><option>Midday · 11:00–14:00</option><option>Afternoon · 14:00–17:00</option><option>Weekend · arrange a time with Brad</option><option>Flexible during the day</option></select></label>
             <label>Session type<select name="session" required><option value="">Choose a format</option><option>One-to-one coaching</option><option>Pairs coaching</option><option>Small-group coaching</option><option>Kids coaching</option><option>Match review</option><option>Leveling session · four players</option></select></label>
-            <label>Child’s age <small>Only needed for kids coaching</small><input type="text" name="childAge" inputmode="numeric" placeholder="For example: 10"></label>
+            <label data-child-age hidden>
+              Child’s age
+              <select name="childAge" disabled>
+                <option value="">Select an age</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+              </select>
+            </label>
             <label>Playing level<select name="level"><option value="Not supplied">Choose if known</option><option>New to padel · under 1</option><option>Beginner · 0–1.5</option><option>Intermediate · 1.5–3</option><option>Advanced · 3–4</option></select></label>
             <label>What would you like to improve?<textarea name="focus" rows="3" placeholder="For example: defending the glass or court positioning"></textarea></label>
             <button class="btn btn--primary booking-submit" type="submit">Send preferences on WhatsApp<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
@@ -229,6 +286,6 @@
   <nav class="actionbar" aria-label="Quick booking"><a class="btn btn--primary" href="#book">Book a session</a></nav>
   <script type="module" src="assets/system.js"></script>
   <script type="module" src="assets/layout/layout.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=booking-age"></script>
 </body>
 </html>

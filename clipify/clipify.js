@@ -177,3 +177,46 @@ leadForm?.addEventListener('submit', () => {
   const details = leadForm.elements.details;
   if (phone && !details.value.includes(phone)) details.value += `\nWhatsApp: ${phone}`;
 }, true);
+
+// Reviews: show the section only once there are three approved quotes (edit the list in index.html).
+const tmList = document.getElementById('tmList');
+if (tmList && tmList.querySelectorAll('li').length >= 3) document.getElementById('reviews').hidden = false;
+
+// Feedback form: same lead endpoint as main.js (LEAD_ENDPOINT, loaded first), tagged as feedback,
+// with the publish permission written into the message.
+const feedbackForm = document.getElementById('feedbackForm');
+if (feedbackForm) {
+  const fbStatus = document.getElementById('feedbackStatus');
+  const say = (msg, kind = '') => { fbStatus.textContent = msg; fbStatus.className = `dialog-status ${kind}`; };
+  feedbackForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const f = feedbackForm.elements;
+    const btn = feedbackForm.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    say('Sending…');
+    try {
+      const res = await fetch(LEAD_ENDPOINT, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          name: f.name.value.trim(),
+          email: f.email.value.trim(),
+          service: 'Clipify feedback',
+          details: `${f.details.value.trim()}\n\nPublish OK: ${f.consent.checked ? 'yes' : 'no'}`,
+          company: f.company.value.trim(), // honeypot
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        say('Thanks, that helps. I read every note.', 'ok');
+        feedbackForm.reset();
+      } else {
+        say(data.error || 'Something went wrong. Try again in a bit.', 'err');
+      }
+    } catch {
+      say('Network issue. Try again in a bit.', 'err');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+}

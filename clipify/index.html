@@ -352,6 +352,33 @@
   </div>
 </section>
 
+<section class="sec" id="reviews" hidden>
+  <h2>What clients say</h2>
+  <ul class="tm-list" id="tmList">
+    <!-- Add only approved quotes, each with the client's permission:
+         <li><blockquote>"Their words."</blockquote><cite>First name</cite></li>
+         The section shows once there are three or more. -->
+  </ul>
+</section>
+
+<section class="sec" id="feedback">
+  <h2>How is Clipify working for you?</h2>
+  <p class="lede">Already a client? Tell me what to keep and what to change: the clips, the captions or the service.</p>
+  <form class="fb-form" id="feedbackForm">
+    <label for="fb-name">Your name</label>
+    <input id="fb-name" name="name" autocomplete="name" maxlength="120" required>
+    <label for="fb-email">Your email (so I can reply)</label>
+    <input id="fb-email" name="email" type="email" autocomplete="email" maxlength="200" required>
+    <label for="fb-message">Your feedback</label>
+    <textarea id="fb-message" name="details" minlength="5" maxlength="4000" required placeholder="e.g. Loved the timing on the clips, captions were small on my phone"></textarea>
+    <label class="fb-consent"><input id="fb-consent" name="consent" type="checkbox"> You can publish my comment on this page, with my first name only.</label>
+    <input class="hp-field" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <p class="consent">By sending, you agree to the <a href="/privacy.html">Privacy Notice</a>.</p>
+    <button class="btn-white" type="submit">Send feedback</button>
+    <p class="dialog-status" id="feedbackStatus" role="status"></p>
+  </form>
+</section>
+
 <section class="final" id="contact">
   <h2>Your next stream could be clipped by tomorrow morning.</h2>
   <p class="lede">Tell me where you stream and how often. Within 24 hours you’ll get a reply with a start date.</p>

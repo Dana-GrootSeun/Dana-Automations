@@ -19,7 +19,11 @@ export default function (root, opts, lib) {
   if (!text) return {};
   root.classList.add('mo-wh');
   const words = lib.split(text, 'words').map(i => i.parentElement);
-  if (lib.reduced()) { words.forEach(w => w.classList.add('is-on')); root.classList.add('is-done'); return {}; }
+  if (lib.reduced() || (opts.staticOnTouch && (lib.phone() || lib.coarse()))) {
+    words.forEach(word => word.classList.add('is-on'));
+    root.classList.add('is-done');
+    return {};
+  }
   const from = opts.from ?? 0.85, to = opts.to ?? 0.45;
   let n = -1;
   const s = lib.scrub(text, (p, r) => {
